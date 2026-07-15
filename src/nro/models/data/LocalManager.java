@@ -101,7 +101,7 @@ public class LocalManager {
     public static LocalResultSet executeQuery(final String query) throws Exception {
         try {
             Connection con = getConnection();
-            try (PreparedStatement ps = con.prepareStatement(query)) {
+            try (PreparedStatement ps = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (LocalManager.LOG_QUERY) {
                         Logger.log(Logger.GREEN, "Thực thi thành công câu lệnh: " + ps.toString() + "\n");
@@ -120,7 +120,7 @@ public class LocalManager {
     }
 
     public static LocalResultSet executeQuery(final String query, final Object... objs) throws Exception {
-        try (final Connection con = getConnection(); final PreparedStatement ps = con.prepareStatement(query)) {
+        try (final Connection con = getConnection(); final PreparedStatement ps = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
             for (int i = 0; i < objs.length; ++i) {
                 ps.setObject(i + 1, objs[i]);
             }

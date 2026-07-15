@@ -864,7 +864,7 @@ public class Controller implements IMessageHandler {
                 int hair = msg.reader().readByte();
                 if (name.length() >= 5 && name.length() <= 10) {
                     rs = LocalManager.executeQuery("select * from player where name = ?", name);
-                    if (rs.first()) {
+                    if (rs.next()) {
                         Service.gI().sendThongBaoOK(session, "Tên nhân vật đã tồn tại");
                     } else {
                         if (Util.haveSpecialCharacter(name)) {

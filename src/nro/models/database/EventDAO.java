@@ -30,7 +30,7 @@ public class EventDAO {
         try (Connection con = LocalManager.getConnection();) {
             PreparedStatement ps = con.prepareStatement("SELECT `data` FROM `event` WHERE `name` = 'international_womens_day'");
             ResultSet rs = ps.executeQuery();
-            if (rs.first()) {
+            if (rs.next()) {
                 Gson gson = new Gson();
                 JsonObject jsonObject = gson.fromJson(String.valueOf(rs.getString("data")), JsonObject.class);
                 remainingTimeToIncreaseDame = jsonObject.getAsJsonPrimitive("damePrecent").getAsLong();

@@ -63,7 +63,7 @@ public class MrBlue {
         Player plInGame;
         try {
             rs = LocalManager.executeQuery("select * from account where username = ? and password = ?", session.uu, session.pp);
-            if (rs.first()) {
+            if (rs.next()) {
                 session.userId = rs.getInt("account.id");
                 session.isAdmin = rs.getBoolean("is_admin");
                 session.lastTimeLogout = rs.getTimestamp("last_time_logout").getTime();
@@ -102,7 +102,7 @@ public class MrBlue {
                         Service.gI().sendWaitToLogin(session, Manager.SECOND_WAIT_LOGIN - secondsPass);
                     } else {
                         rs = LocalManager.executeQuery("select * from player where account_id = ? limit 1", session.userId);
-                        if (!rs.first()) {
+                        if (!rs.next()) {
                             //-28 -4 version data game
                             DataGame.sendVersionGame(session);
                             //-31 data item background
@@ -154,7 +154,7 @@ public class MrBlue {
         LocalResultSet rs = null;
         try {
             rs = LocalManager.executeQuery("select * from player where id = ? limit 1", id);
-            if (rs.first() && (player = loadPlayer(rs, true)) != null) {
+            if (rs.next() && (player = loadPlayer(rs, true)) != null) {
                 player.isOffline = true;
                 player.idMark.setLoadedAllDataPlayer(true);
             }

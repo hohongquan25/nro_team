@@ -32,7 +32,7 @@ public class SuperRankDAO {
             int rand = random(rank);
             if (rand != -1) {
                 LocalResultSet rs = LocalManager.executeQuery("SELECT * FROM super_rank WHERE rank = ? LIMIT 1", rand);
-                if (rs.first()) {
+                if (rs.next()) {
                     list.add(readData(rs));
                 }
             }
@@ -156,7 +156,7 @@ public class SuperRankDAO {
     public static void loadData(Player player) {
         try {
             LocalResultSet rs = LocalManager.executeQuery("SELECT * FROM super_rank WHERE player_id = " + player.id);
-            if (rs.first()) {
+            if (rs.next()) {
                 player.superRank.rank = rs.getInt("rank");
                 player.superRank.lastPKTime = rs.getLong("last_pk_time");
                 player.superRank.lastRewardTime = rs.getLong("last_reward_time");
@@ -188,7 +188,7 @@ public class SuperRankDAO {
     public static int getRank(int playerId) {
         try {
             LocalResultSet rs = LocalManager.executeQuery("SELECT rank FROM super_rank WHERE player_id = " + playerId);
-            if (rs.first()) {
+            if (rs.next()) {
                 return rs.getInt("rank");
             }
         } catch (Exception e) {
@@ -199,7 +199,7 @@ public class SuperRankDAO {
     public static int getCurrentHighestRank() {
         try {
             LocalResultSet rs = LocalManager.executeQuery("SELECT rank FROM super_rank ORDER BY rank DESC LIMIT 1");
-            if (rs.first()) {
+            if (rs.next()) {
                 return rs.getInt("rank");
             }
         } catch (Exception e) {
