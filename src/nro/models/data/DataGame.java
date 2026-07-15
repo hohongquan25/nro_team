@@ -356,7 +356,7 @@ public class DataGame {
     public static void sendTileSetInfo(MySession session) {
         Message msg;
         try {
-            final byte[] data = FileIO.readFile("data/map/tile_set_info");
+            final byte[] data = FileIO.readFile("data/map/tile_set_Info");
             msg = new Message(-82);
             msg.writer().write(data);
             session.sendMessage(msg);
