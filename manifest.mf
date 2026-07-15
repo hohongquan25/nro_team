@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: nro.models.server.ServerManager
+Class-Path: lib/HikariCP-5.1.0.jar lib/apache-commons-lang.jar lib/bson-5.1.3.jar lib/gson-2.8.2.jar lib/java-json.jar lib/json-simple-1.1.jar lib/log4j-1.2.17.jar lib/lombok.jar lib/mongodb-driver-core-5.1.3.jar lib/mongodb-driver-sync-5.1.3.jar lib/mysql-connector-java8-5.1.23.jar lib/slf4j-api-2.0.0-alpha1.jar lib/slf4j-simple-2.0.0-alpha1.jar
+

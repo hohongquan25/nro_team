@@ -1,0 +1,22 @@
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+nbproject/private/
+
+# Compiled class files
+*.class
+build/
+dist/
+
+# Logs
+logs/
+*.log
+
+# Database backups
+*.sql
+
+# OS generated files
+.DS_Store
+Thumbs.db
