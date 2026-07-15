@@ -179,7 +179,7 @@ public class LocalManager {
     private static HikariConfig createConfig(String poolName, String databaseName) {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName(DRIVER);
-        config.setJdbcUrl(String.format("jdbc:mysql://%s:%s/%s?useUnicode=yes&characterEncoding=UTF-8",
+        config.setJdbcUrl(String.format("jdbc:mysql://%s:%s/%s?useInformationSchema=true&useUnicode=yes&characterEncoding=UTF-8&useSSL=false",
                 DB_HOST, DB_PORT, databaseName));
         config.setUsername(DB_USER);
         config.setPassword(DB_PASSWORD);

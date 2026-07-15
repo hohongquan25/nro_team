@@ -258,7 +258,7 @@ public class ServerManager {
     }
 
     public void resetNhanQuaHangNgay() {
-        String url = "jdbc:mysql://localhost:3306/ngocrong";
+        String url = "jdbc:mysql://localhost:3306/ngocrong?useInformationSchema=true&useSSL=false";
         String username = "root";
         String password = "";
         String resetJson = "[1,1,\"1970-01-01T00:00:00\"]";
