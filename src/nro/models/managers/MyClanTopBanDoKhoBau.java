@@ -1,6 +1,6 @@
 package nro.models.managers;
 
-import com.mysql.jdbc.log.Log;
+
 import nro.models.data.LocalManager;
 import nro.models.database.PlayerDAO;
 import nro.models.item.Item;

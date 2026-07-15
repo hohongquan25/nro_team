@@ -1,6 +1,6 @@
 package nro.models.clan;
 
-import com.mysql.jdbc.log.Log;
+
 import nro.models.data.LocalManager;
 import nro.models.map.phoban.RedRibbonHQ;
 import nro.models.services.ClanService;
