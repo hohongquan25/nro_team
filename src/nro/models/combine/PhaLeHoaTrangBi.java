@@ -65,23 +65,23 @@ public class PhaLeHoaTrangBi {
     public static float getRatio(int star) {
         switch (star) {
             case 0:
-                return 50f;
+                return 100f;
             case 1:
-                return 20f;
+                return 90f;
             case 2:
-                return 10f;
+                return 80f;
             case 3:
-                return 5f;
+                return 70f;
             case 4:
-                return 1f;
+                return 60f;
             case 5:
-                return 0.7f;
+                return 50f;
             case 6:
-                return 0.5f;
+                return 45f;
             case 7:
-                return 0.1f;
+                return 42f;
             case 8:
-                return 0.1f;
+                return 41f;
         }
 
         return 0;
@@ -90,23 +90,23 @@ public class PhaLeHoaTrangBi {
     private static int getFakeRatio(int star) {
         return switch (star) {
             case 0 ->
-                80;
+                100;
             case 1 ->
-                40;
+                90;
             case 2 ->
-                30;
+                80;
             case 3 ->
-                20;
+                70;
             case 4 ->
-                10;
+                60;
             case 5 ->
-                5;
+                50;
             case 6 ->
-                3;
+                45;
             case 7 ->
-                2;
+                42;
             case 8 ->
-                1;
+                41;
             default ->
                 0;
         };

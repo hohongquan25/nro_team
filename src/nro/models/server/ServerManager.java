@@ -117,7 +117,7 @@ public class ServerManager {
             new Thread(DeathOrAliveArenaManager.gI(), "Update Võ Đài Sinh Tử").start();
             new Thread(WorldMartialArtsTournamentManager.gI(), "Update WMAT").start();
             new Thread(AutoMaintenance.gI(), "Update Bảo Trì Tự Động").start();
-            AutoMaintenance.AutoMaintenance = true;
+            AutoMaintenance.AutoMaintenance = false;
             AutoMaintenance.gI().start();
             new Thread(ShenronEventManager.gI(), "Update Shenron").start();
 
