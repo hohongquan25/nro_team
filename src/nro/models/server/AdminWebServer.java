@@ -275,7 +275,7 @@ public class AdminWebServer {
                 } else {
                     if (type == 1) {
                         player.inventory.gold += amount;
-                        if (player.inventory.gold > 2000000000) player.inventory.gold = 2000000000;
+                        if (player.inventory.gold > nro.models.player.Inventory.LIMIT_GOLD) player.inventory.gold = nro.models.player.Inventory.LIMIT_GOLD;
                     } else if (type == 2) {
                         player.inventory.gem += amount;
                     } else if (type == 3) {

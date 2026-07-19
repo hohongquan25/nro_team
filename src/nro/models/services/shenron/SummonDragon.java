@@ -76,7 +76,7 @@ public class SummonDragon {
     private final Map pl_dragonStar;
     private long lastTimeShenronAppeared;
     private long lastTimeShenronWait;
-    private final int timeResummonShenron = 600000;
+    private final int timeResummonShenron = 120000;
     private boolean isShenronAppear;
     private final int timeShenronWait = 300000;
 
@@ -291,7 +291,7 @@ public class SummonDragon {
             case ConstNpc.SHENRON_1_1:
                 switch (this.select) {
                     case 0: //20 tr vàng
-                        this.playerSummonShenron.inventory.gold = 2000000000;
+                        this.playerSummonShenron.inventory.gold = Inventory.LIMIT_GOLD;
                         PlayerService.gI().sendInfoHpMpMoney(this.playerSummonShenron);
                         break;
                     case 1: //găng tay đang đeo lên 1 cấp
@@ -435,7 +435,7 @@ public class SummonDragon {
                         Service.gI().addSMTN(this.playerSummonShenron, (byte) 2, 20000000, false);
                         break;
                     case 2: //2 tr vàng
-                        if (this.playerSummonShenron.inventory.gold > 1800000000) {
+                        if (this.playerSummonShenron.inventory.gold > (Inventory.LIMIT_GOLD - 200000000)) {
                             this.playerSummonShenron.inventory.gold = Inventory.LIMIT_GOLD;
                         } else {
                             this.playerSummonShenron.inventory.gold += 200000000;
@@ -454,7 +454,7 @@ public class SummonDragon {
                         Service.gI().addSMTN(this.playerSummonShenron, (byte) 2, 2000000, false);
                         break;
                     case 2: //200k vàng
-                        if (this.playerSummonShenron.inventory.gold > (2000000000 - 20000000)) {
+                        if (this.playerSummonShenron.inventory.gold > (Inventory.LIMIT_GOLD - 20000000)) {
                             this.playerSummonShenron.inventory.gold = Inventory.LIMIT_GOLD;
                         } else {
                             this.playerSummonShenron.inventory.gold += 20000000;

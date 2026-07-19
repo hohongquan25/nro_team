@@ -38,7 +38,7 @@ public class ShenronEvent {
     public static final byte DRAGON_EVENT = 1;
 
     public long lastTimeShenronWait;
-    public static int timeResummonShenron = 300000;
+    public static int timeResummonShenron = 120000;
     public static int timeShenronWait = 300000;
 
     public static final String SHENRON_SAY

@@ -46,8 +46,8 @@ public class Shenron_Event {
     public static final byte DRAGON_EVENT = 1;
 
     public long lastTimeShenronWait;
-    public static int timeResummonShenron = 60000;
-    public static int timeShenronWait = 60000;
+    public static int timeResummonShenron = 120000;
+    public static int timeShenronWait = 120000;
 
     public static final String SHENRONEVENT_SAY
             = "Ta sẽ ban cho người 1 điều ước, ngươi có 5 phút, hãy chọn đi:\n1) Đổi skill 3, 4 đệ tử (có thể trùng skill trước đó).\n2) Thay đổi nội tại.\n3) Cải trang siêu thần HSD 90 ngày.\n4) Cải trang Black Gohan Rose HSD 90 ngày.";

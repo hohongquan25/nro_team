@@ -202,7 +202,7 @@ public class ChangeMapService {
             }
         } else {
             NpcService.gI().createTutorial(pl, -1, "Chưa thể chuyển khu vực lúc này vui lòng chờ "
-                    + TimeUtil.getTimeLeft(pl.idMark.getLastTimeChangeZone(), 10) + " nữa");
+                    + TimeUtil.getTimeLeft(pl.idMark.getLastTimeChangeZone(), 5) + " nữa");
         }
     }
 
