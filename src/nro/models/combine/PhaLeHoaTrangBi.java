@@ -67,21 +67,21 @@ public class PhaLeHoaTrangBi {
             case 0:
                 return 100f;
             case 1:
-                return 90f;
+                return 95f;
             case 2:
-                return 80f;
+                return 90f;
             case 3:
-                return 70f;
+                return 85f;
             case 4:
-                return 60f;
+                return 80f;
             case 5:
-                return 50f;
+                return 78f;
             case 6:
-                return 45f;
+                return 75f;
             case 7:
-                return 42f;
+                return 72f;
             case 8:
-                return 41f;
+                return 70f;
         }
 
         return 0;
@@ -92,21 +92,21 @@ public class PhaLeHoaTrangBi {
             case 0 ->
                 100;
             case 1 ->
-                90;
+                95;
             case 2 ->
-                80;
+                90;
             case 3 ->
-                70;
+                85;
             case 4 ->
-                60;
+                80;
             case 5 ->
-                50;
+                78;
             case 6 ->
-                45;
+                75;
             case 7 ->
-                42;
+                72;
             case 8 ->
-                41;
+                70;
             default ->
                 0;
         };
