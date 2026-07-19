@@ -52,7 +52,7 @@ public class CuongHoaLoSaoPhaLe {
                         npcSay += io.getOptionString() + "\n";
                     }
                     npcSay += "Cường hóa\n" + " Ô sao pha lê thứ 8 hoặc 9\n" + item.template.name
-                            + "\nTỉ lệ thành công: 50%\n"
+                            + "\nTỉ lệ thành công: 70%\n"
                             + "|7| Cần 1 " + Hematite.template.name
                             + "\n|7| Cần 1 " + DuiDuc.template.name
                             + "\nCần " + Util.numberToMoney(COST) + " vàng";
@@ -134,7 +134,7 @@ public class CuongHoaLoSaoPhaLe {
             return;
         }
 
-        boolean success = Util.isTrue(50, 200);
+        boolean success = Util.isTrue(70, 100);
         player.inventory.gold -= COST;
 
         if (star == 8) {

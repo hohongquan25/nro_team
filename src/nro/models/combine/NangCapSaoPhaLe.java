@@ -18,7 +18,7 @@ public class NangCapSaoPhaLe {
 
     private static final int GOLD_NANG_CAP = 200_000_000;
     private static final int GEM_NANG_CAP = 10;
-    private static final int RATIO_NANG_CAP = 50;
+    private static final int RATIO_NANG_CAP = 70;
 
     public static void showInfoCombine(Player player) {
         if (player.combineNew.itemsCombine.size() == 2) {
