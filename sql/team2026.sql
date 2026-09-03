@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 06, 2025 lúc 05:39 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.0.30
+-- Host: localhost
+-- Generation Time: Sep 03, 2026 at 04:30 PM
+-- Server version: 5.7.17-log
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -18,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `a`
+-- Database: `team2026`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `account`
+-- Table structure for table `account`
 --
 
 CREATE TABLE `account` (
@@ -32,62 +31,65 @@ CREATE TABLE `account` (
   `username` varchar(20) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `create_time` timestamp NULL DEFAULT current_timestamp(),
-  `update_time` timestamp NULL DEFAULT current_timestamp(),
-  `ban` tinyint(1) NOT NULL DEFAULT 0,
-  `is_admin` tinyint(1) NOT NULL DEFAULT 0,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `ban` tinyint(1) NOT NULL DEFAULT '0',
+  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
   `last_time_login` timestamp NOT NULL DEFAULT '2002-07-30 17:00:00',
   `last_time_logout` timestamp NOT NULL DEFAULT '2002-07-30 17:00:00',
   `ip_address` varchar(50) DEFAULT NULL,
-  `active` int(11) NOT NULL DEFAULT 1,
-  `thoi_vang` int(11) NOT NULL DEFAULT 0,
-  `server_login` int(11) NOT NULL DEFAULT -1,
-  `bd_player` double DEFAULT 1,
-  `is_gift_box` tinyint(1) DEFAULT 0,
+  `active` int(11) NOT NULL DEFAULT '1',
+  `thoi_vang` int(11) NOT NULL DEFAULT '0',
+  `server_login` int(11) NOT NULL DEFAULT '-1',
+  `bd_player` double DEFAULT '1',
+  `is_gift_box` tinyint(1) DEFAULT '0',
   `gift_time` varchar(255) DEFAULT '0',
-  `reward` longtext DEFAULT NULL,
-  `vnd` int(11) NOT NULL DEFAULT 0,
-  `tongnap` int(11) NOT NULL DEFAULT 0,
+  `reward` longtext,
+  `vnd` int(11) NOT NULL DEFAULT '0',
+  `tongnap` int(11) NOT NULL DEFAULT '0',
   `token` text NOT NULL,
   `xsrf_token` text NOT NULL,
   `newpass` text NOT NULL,
-  `luotquay` int(11) NOT NULL DEFAULT 0,
-  `vang` bigint(20) NOT NULL DEFAULT 0,
-  `event_point` int(11) NOT NULL DEFAULT 0,
-  `vip` int(11) NOT NULL DEFAULT 0,
-  `tichdiem` int(11) NOT NULL DEFAULT 0,
-  `point_post` int(11) NOT NULL DEFAULT 0,
-  `last_post` int(11) NOT NULL DEFAULT 0,
+  `luotquay` int(11) NOT NULL DEFAULT '0',
+  `vang` bigint(20) NOT NULL DEFAULT '0',
+  `event_point` int(11) NOT NULL DEFAULT '0',
+  `vip` int(11) NOT NULL DEFAULT '0',
+  `tichdiem` int(11) NOT NULL DEFAULT '0',
+  `point_post` int(11) NOT NULL DEFAULT '0',
+  `last_post` int(11) NOT NULL DEFAULT '0',
   `gioithieu` int(11) DEFAULT NULL,
-  `xacnhan_gioitheu` int(11) NOT NULL DEFAULT 0,
-  `baiviet` int(11) NOT NULL DEFAULT 0,
-  `xacminh` int(11) NOT NULL DEFAULT 0,
-  `admin` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `xacnhan_gioitheu` int(11) NOT NULL DEFAULT '0',
+  `baiviet` int(11) NOT NULL DEFAULT '0',
+  `xacminh` int(11) NOT NULL DEFAULT '0',
+  `admin` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `account`
+-- Dumping data for table `account`
 --
 
 INSERT INTO `account` (`id`, `username`, `password`, `email`, `create_time`, `update_time`, `ban`, `is_admin`, `last_time_login`, `last_time_logout`, `ip_address`, `active`, `thoi_vang`, `server_login`, `bd_player`, `is_gift_box`, `gift_time`, `reward`, `vnd`, `tongnap`, `token`, `xsrf_token`, `newpass`, `luotquay`, `vang`, `event_point`, `vip`, `tichdiem`, `point_post`, `last_post`, `gioithieu`, `xacnhan_gioitheu`, `baiviet`, `xacminh`, `admin`) VALUES
-(3728, 'a', 'a', '', '2025-09-05 13:38:39', '2025-09-05 13:38:39', 0, 1, '2025-09-06 15:30:25', '2025-09-06 15:37:20', '127.0.0.1', 1, 0, -1, 1, 0, '0', NULL, 9890000, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0);
+(3728, 'a', 'a', '', '2025-09-05 13:38:39', '2025-09-05 13:38:39', 0, 1, '2026-07-22 13:44:45', '2026-07-22 13:45:05', '171.224.181.51', 1, 0, -1, 1, 0, '0', NULL, 9890000, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0),
+(3729, 'quan1', '1', '', '2026-07-16 12:12:50', '2026-07-16 12:12:50', 0, 0, '2026-07-24 15:24:45', '2026-07-22 17:09:07', '171.224.181.51', 1, 0, -1, 1, 0, '0', NULL, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0),
+(3730, 'dungnm', '1234', '', '2026-07-16 12:44:07', '2026-07-16 12:44:07', 0, 0, '2026-07-22 15:36:28', '2026-07-22 16:50:07', '27.79.249.35', 1, 0, -1, 1, 0, '0', NULL, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0),
+(3731, 'quan2', '1', '', '2026-07-21 11:54:59', '2026-07-21 11:54:59', 0, 0, '2026-07-21 12:36:49', '2026-07-21 13:19:12', '171.224.181.51', 1, 0, -1, 1, 0, '0', NULL, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achievement_template`
+-- Table structure for table `achievement_template`
 --
 
 CREATE TABLE `achievement_template` (
   `id` int(11) NOT NULL,
-  `info1` text NOT NULL,
-  `info2` text NOT NULL,
+  `info1` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `info2` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `money` int(11) NOT NULL,
   `max_count` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `achievement_template`
+-- Dumping data for table `achievement_template`
 --
 
 INSERT INTO `achievement_template` (`id`, `info1`, `info2`, `money`, `max_count`) VALUES
@@ -115,21 +117,21 @@ INSERT INTO `achievement_template` (`id`, `info1`, `info2`, `money`, `max_count`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `adminpanel`
+-- Table structure for table `adminpanel`
 --
 
 CREATE TABLE `adminpanel` (
-  `domain` text DEFAULT NULL,
-  `title` text DEFAULT NULL,
-  `tenmaychu` text DEFAULT NULL,
-  `logo` text DEFAULT NULL,
+  `domain` text,
+  `title` text,
+  `tenmaychu` text,
+  `logo` text,
   `trangthai` text NOT NULL,
-  `android` text DEFAULT NULL,
-  `iphone` text DEFAULT NULL,
-  `windows` text DEFAULT NULL,
-  `java` text DEFAULT NULL,
-  `apikey` text DEFAULT NULL,
-  `giatri` int(11) NOT NULL DEFAULT 1,
+  `android` text,
+  `iphone` text,
+  `windows` text,
+  `java` text,
+  `apikey` text,
+  `giatri` int(11) NOT NULL DEFAULT '1',
   `userlogin` varchar(20) DEFAULT NULL,
   `stk` varchar(20) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -138,10 +140,10 @@ CREATE TABLE `adminpanel` (
   `deviceId` varchar(255) DEFAULT NULL,
   `token` varchar(255) DEFAULT NULL,
   `time` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `adminpanel`
+-- Dumping data for table `adminpanel`
 --
 
 INSERT INTO `adminpanel` (`domain`, `title`, `tenmaychu`, `logo`, `trangthai`, `android`, `iphone`, `windows`, `java`, `apikey`, `giatri`, `userlogin`, `stk`, `name`, `password`, `sessionId`, `deviceId`, `token`, `time`) VALUES
@@ -150,16 +152,16 @@ INSERT INTO `adminpanel` (`domain`, `title`, `tenmaychu`, `logo`, `trangthai`, `
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `array_head_2_frames`
+-- Table structure for table `array_head_2_frames`
 --
 
 CREATE TABLE `array_head_2_frames` (
   `id` int(11) NOT NULL,
   `data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `array_head_2_frames`
+-- Dumping data for table `array_head_2_frames`
 --
 
 INSERT INTO `array_head_2_frames` (`id`, `data`) VALUES
@@ -219,7 +221,7 @@ INSERT INTO `array_head_2_frames` (`id`, `data`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bank_transfers`
+-- Table structure for table `bank_transfers`
 --
 
 CREATE TABLE `bank_transfers` (
@@ -227,17 +229,17 @@ CREATE TABLE `bank_transfers` (
   `transaction_id` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `amount` decimal(15,2) NOT NULL,
-  `description` text DEFAULT NULL,
+  `description` text,
   `status` varchar(50) NOT NULL,
   `sender_bank_name` varchar(255) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `is_credited` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_credited` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bg_item_template`
+-- Table structure for table `bg_item_template`
 --
 
 CREATE TABLE `bg_item_template` (
@@ -246,10 +248,10 @@ CREATE TABLE `bg_item_template` (
   `layer` int(11) NOT NULL,
   `dx` int(11) NOT NULL,
   `dy` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `bg_item_template`
+-- Dumping data for table `bg_item_template`
 --
 
 INSERT INTO `bg_item_template` (`id`, `image_id`, `layer`, `dx`, `dy`) VALUES
@@ -854,7 +856,7 @@ INSERT INTO `bg_item_template` (`id`, `image_id`, `layer`, `dx`, `dy`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `clan`
+-- Table structure for table `clan`
 --
 
 CREATE TABLE `clan` (
@@ -862,29 +864,30 @@ CREATE TABLE `clan` (
   `NAME` varchar(255) NOT NULL,
   `NAME_2` varchar(4) NOT NULL,
   `slogan` varchar(255) NOT NULL DEFAULT '',
-  `img_id` int(11) NOT NULL DEFAULT 0,
-  `power_point` bigint(20) NOT NULL DEFAULT 0,
-  `max_member` smallint(6) NOT NULL DEFAULT 10,
-  `clan_point` int(11) NOT NULL DEFAULT 0,
-  `LEVEL` int(11) NOT NULL DEFAULT 1,
+  `img_id` int(11) NOT NULL DEFAULT '0',
+  `power_point` bigint(20) NOT NULL DEFAULT '0',
+  `max_member` smallint(6) NOT NULL DEFAULT '10',
+  `clan_point` int(11) NOT NULL DEFAULT '0',
+  `LEVEL` int(11) NOT NULL DEFAULT '1',
   `members` text NOT NULL,
   `tops` text NOT NULL,
-  `create_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `thanhTichBDKB` varchar(255) NOT NULL DEFAULT '[0,0]',
   `thongTinLeader` varchar(255) NOT NULL DEFAULT '[0,0,0,0,0]'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `clan`
+-- Dumping data for table `clan`
 --
 
 INSERT INTO `clan` (`id`, `NAME`, `NAME_2`, `slogan`, `img_id`, `power_point`, `max_member`, `clan_point`, `LEVEL`, `members`, `tops`, `create_time`, `thanhTichBDKB`, `thongTinLeader`) VALUES
-(0, 'abc', '', '', 20, 0, 10, 0, 1, '[\"{\\\"role\\\":0,\\\"receive_donate\\\":0,\\\"member_point\\\":0,\\\"body\\\":1859,\\\"join_time\\\":1757157060,\\\"leg\\\":1860,\\\"head\\\":1866,\\\"ask_pea_time\\\":0,\\\"name\\\":\\\"admin\\\",\\\"clan_point\\\":0,\\\"id\\\":1367,\\\"donate\\\":0,\\\"power\\\":60000007968}\"]', 'cc', '2025-09-06 11:11:00', '[0,0]', '[1367,admin,383,384,385]');
+(0, 'abc', '', '', 20, 0, 10, 0, 1, '[\"{\\\"role\\\":0,\\\"receive_donate\\\":0,\\\"member_point\\\":0,\\\"body\\\":1859,\\\"join_time\\\":1757157060,\\\"leg\\\":1860,\\\"head\\\":1866,\\\"ask_pea_time\\\":0,\\\"name\\\":\\\"admin\\\",\\\"clan_point\\\":0,\\\"id\\\":1367,\\\"donate\\\":0,\\\"power\\\":60000007968}\"]', 'cc', '2025-09-06 11:11:00', '[0,0]', '[1367,admin,383,384,385]'),
+(1, 'roc', '', '', 69, 0, 10, 1, 1, '[\"{\\\"role\\\":0,\\\"receive_donate\\\":0,\\\"member_point\\\":0,\\\"body\\\":157,\\\"join_time\\\":1784205409,\\\"leg\\\":158,\\\"head\\\":64,\\\"ask_pea_time\\\":1784209677317,\\\"name\\\":\\\"hohongquan\\\",\\\"clan_point\\\":0,\\\"id\\\":1368,\\\"donate\\\":0,\\\"power\\\":50735097267}\",\"{\\\"role\\\":1,\\\"receive_donate\\\":0,\\\"member_point\\\":1,\\\"body\\\":1450,\\\"join_time\\\":1784209659,\\\"leg\\\":1451,\\\"head\\\":1449,\\\"ask_pea_time\\\":1784635601394,\\\"name\\\":\\\"admin22\\\",\\\"clan_point\\\":1,\\\"id\\\":1369,\\\"donate\\\":0,\\\"power\\\":49464807685}\",\"{\\\"role\\\":1,\\\"receive_donate\\\":0,\\\"member_point\\\":0,\\\"body\\\":16,\\\"join_time\\\":1784635637,\\\"leg\\\":17,\\\"head\\\":27,\\\"ask_pea_time\\\":0,\\\"name\\\":\\\"123bum\\\",\\\"clan_point\\\":0,\\\"id\\\":1370,\\\"donate\\\":0,\\\"power\\\":3714160}\"]', 'cc', '2026-07-16 12:36:49', '[0,0]', '[1368,hohongquan,64,157,158]');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `clan_task_template`
+-- Table structure for table `clan_task_template`
 --
 
 CREATE TABLE `clan_task_template` (
@@ -895,10 +898,10 @@ CREATE TABLE `clan_task_template` (
   `max_count_lv3` varchar(255) NOT NULL,
   `max_count_lv4` varchar(255) NOT NULL,
   `max_count_lv5` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `clan_task_template`
+-- Dumping data for table `clan_task_template`
 --
 
 INSERT INTO `clan_task_template` (`id`, `NAME`, `max_count_lv1`, `max_count_lv2`, `max_count_lv3`, `max_count_lv4`, `max_count_lv5`) VALUES
@@ -965,7 +968,7 @@ INSERT INTO `clan_task_template` (`id`, `NAME`, `max_count_lv1`, `max_count_lv2`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -973,16 +976,16 @@ CREATE TABLE `comments` (
   `post_id` int(11) NOT NULL,
   `nguoidung` varchar(255) NOT NULL,
   `traloi` text NOT NULL,
-  `gender` int(11) NOT NULL DEFAULT 0,
-  `admin` int(11) NOT NULL DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `binhluan` int(11) NOT NULL DEFAULT 0,
+  `gender` int(11) NOT NULL DEFAULT '0',
+  `admin` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `binhluan` int(11) NOT NULL DEFAULT '0',
   `image` varchar(255) DEFAULT NULL,
-  `server` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `server` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `comments`
+-- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `post_id`, `nguoidung`, `traloi`, `gender`, `admin`, `created_at`, `binhluan`, `image`, `server`) VALUES
@@ -991,19 +994,19 @@ INSERT INTO `comments` (`id`, `post_id`, `nguoidung`, `traloi`, `gender`, `admin
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `data_badges`
+-- Table structure for table `data_badges`
 --
 
 CREATE TABLE `data_badges` (
   `id` int(11) NOT NULL,
   `idEffect` int(11) NOT NULL,
   `idItem` int(11) NOT NULL,
-  `NAME` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `NAME` text CHARACTER SET utf8 NOT NULL,
   `Options` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `data_badges`
+-- Dumping data for table `data_badges`
 --
 
 INSERT INTO `data_badges` (`id`, `idEffect`, `idItem`, `NAME`, `Options`) VALUES
@@ -1027,20 +1030,20 @@ INSERT INTO `data_badges` (`id`, `idEffect`, `idItem`, `NAME`, `Options`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `flag_bag`
+-- Table structure for table `flag_bag`
 --
 
 CREATE TABLE `flag_bag` (
   `id` int(11) NOT NULL,
   `icon_data` varchar(1000) NOT NULL,
   `NAME` varchar(255) NOT NULL DEFAULT 'flag_bag',
-  `gold` int(11) NOT NULL DEFAULT -1,
-  `gem` int(11) NOT NULL DEFAULT -1,
-  `icon_id` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `gold` int(11) NOT NULL DEFAULT '-1',
+  `gem` int(11) NOT NULL DEFAULT '-1',
+  `icon_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `flag_bag`
+-- Dumping data for table `flag_bag`
 --
 
 INSERT INTO `flag_bag` (`id`, `icon_data`, `NAME`, `gold`, `gem`, `icon_id`) VALUES
@@ -1204,7 +1207,7 @@ INSERT INTO `flag_bag` (`id`, `icon_data`, `NAME`, `gold`, `gem`, `icon_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `giftcode`
+-- Table structure for table `giftcode`
 --
 
 CREATE TABLE `giftcode` (
@@ -1212,12 +1215,12 @@ CREATE TABLE `giftcode` (
   `code` text NOT NULL,
   `count_left` int(11) NOT NULL,
   `detail` text NOT NULL,
-  `datecreate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `datecreate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `expired` timestamp NOT NULL DEFAULT '2037-12-31 17:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `giftcode`
+-- Dumping data for table `giftcode`
 --
 
 INSERT INTO `giftcode` (`id`, `code`, `count_left`, `detail`, `datecreate`, `expired`) VALUES
@@ -1226,16 +1229,16 @@ INSERT INTO `giftcode` (`id`, `code`, `count_left`, `detail`, `datecreate`, `exp
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `head_avatar`
+-- Table structure for table `head_avatar`
 --
 
 CREATE TABLE `head_avatar` (
   `head_id` int(11) NOT NULL,
   `avatar_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `head_avatar`
+-- Dumping data for table `head_avatar`
 --
 
 INSERT INTO `head_avatar` (`head_id`, `avatar_id`) VALUES
@@ -1707,7 +1710,7 @@ INSERT INTO `head_avatar` (`head_id`, `avatar_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `history_transaction`
+-- Table structure for table `history_transaction`
 --
 
 CREATE TABLE `history_transaction` (
@@ -1720,23 +1723,31 @@ CREATE TABLE `history_transaction` (
   `bag_2_before_tran` text NOT NULL,
   `bag_1_after_tran` text NOT NULL,
   `bag_2_after_tran` text NOT NULL,
-  `time_tran` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `time_tran` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `history_transaction`
+--
+
+INSERT INTO `history_transaction` (`id`, `player_1`, `player_2`, `item_player_1`, `item_player_2`, `bag_1_before_tran`, `bag_2_before_tran`, `bag_1_after_tran`, `bag_2_after_tran`, `time_tran`) VALUES
+(1026, 'admin22 (1369)', 'hohongquan (1368)', 'Gold: 0, ', 'Gold: 0, Sao pha lê lục (x50),', 'Viên Capsule đặc biệt (x1),Cuồng nộ 2 (x73),Giáp Xên bọ hung 2 (x73),Bổ huyết 2 (x73),Đậu thần cấp 10 (x287),Bông tai Porata (x1),Tự động luyện tập (x1),Ngọc Rồng 1 sao (x83),Ngọc Rồng 2 sao (x83),Ngọc Rồng 3 sao (x23),Ngọc Rồng 4 sao (x95),Ngọc Rồng 5 sao (x88),Ngọc Rồng 6 sao (x420),Ngọc Rồng 7 sao (x387),Thỏi vàng (x100),Quả Trứng (x1),Bình hút năng lượng (x1),Bình hút năng lượng (x1),Dùi đục (x83),Hematite (x79),Đá mài (x98),Sách tuyệt kỹ 1 (x1),Hộp quà sự kiện VIP (x19990),Hộp quà sự kiện (x85),Hộp quà Cađíc VIP (x80),Hộp quà Goku Day VIP (x60),Trứng vàng rồng nhí (x90),Hộp quà thiếu nhi (x93),Kem que đôi (x23),Mảnh giấy có chữ MA (x10),Ngọc rồng băng 1 sao (x10),Ngọc rồng băng 2 sao (x10),Ngọc rồng băng 3 sao (x10),Ngọc rồng băng 4 sao (x10),Ngọc rồng băng 5 sao (x10),Ngọc rồng băng 6 sao (x10),Ngọc rồng băng 7 sao (x10),Kẹo táo (x24),Tayaki (x135),Mochi (x23),Ramen (x19),Giáp tập luyện cấp 4 (x1),Sao pha lê lục (x2),Sao pha lê lam (x1),Quần sợi len (x1),Găng sợi len (x1),Giầy sợi len (x1),Rada cấp 1 (x1),Phiếu thức ăn (x2),Vệ tinh sinh lực (x1),Giáp tập luyện cấp 4 (x1),Mảnh đá vụn (x2),Áo sợi len (x1),', 'Ngọc Rồng 6 sao (x387),Khúc mía (x218),Tayaki (x217),Ngọc Rồng 7 sao (x352),Kẹo táo (x229),Sao pha lê đỏ (x67),Kem que đôi (x232),Mảnh đá vụn (x29),Sao pha lê lam (x59),Sao pha lê cam (x54),Sao pha lê lục (x74),Gói 10 viên Capsule (x30),Viên Capsule đặc biệt (x3),Sao pha lê vàng (x73),Ngọc Rồng 5 sao (x21),Ngọc Rồng 1 sao (x7),Ngọc Rồng 2 sao (x7),Ngọc Rồng 3 sao (x7),Ngọc Rồng 4 sao (x17),Thỏi vàng (x100),Avatar (x1),Tự động luyện tập (x1),Vệ tinh trí tuệ (x2),Vệ tinh trí lực (x2),Vệ tinh sinh lực (x3),Vệ tinh phòng thủ (x2),Mochi (x33),Ramen (x23),Đậu thần cấp 10 (x197),Sao pha lê tím (x44),Sao pha lê hồng (x37),Cápsule Kích hoạt 1 món tự chọn (x26),', 'Viên Capsule đặc biệt (x1),Cuồng nộ 2 (x73),Giáp Xên bọ hung 2 (x73),Bổ huyết 2 (x73),Đậu thần cấp 10 (x287),Bông tai Porata (x1),Tự động luyện tập (x1),Ngọc Rồng 1 sao (x83),Ngọc Rồng 2 sao (x83),Ngọc Rồng 3 sao (x23),Ngọc Rồng 4 sao (x95),Ngọc Rồng 5 sao (x88),Ngọc Rồng 6 sao (x420),Ngọc Rồng 7 sao (x387),Thỏi vàng (x100),Quả Trứng (x1),Bình hút năng lượng (x1),Bình hút năng lượng (x1),Dùi đục (x83),Hematite (x79),Đá mài (x98),Sách tuyệt kỹ 1 (x1),Hộp quà sự kiện VIP (x19990),Hộp quà sự kiện (x85),Hộp quà Cađíc VIP (x80),Hộp quà Goku Day VIP (x60),Trứng vàng rồng nhí (x90),Hộp quà thiếu nhi (x93),Kem que đôi (x23),Mảnh giấy có chữ MA (x10),Ngọc rồng băng 1 sao (x10),Ngọc rồng băng 2 sao (x10),Ngọc rồng băng 3 sao (x10),Ngọc rồng băng 4 sao (x10),Ngọc rồng băng 5 sao (x10),Ngọc rồng băng 6 sao (x10),Ngọc rồng băng 7 sao (x10),Kẹo táo (x24),Tayaki (x135),Mochi (x23),Ramen (x19),Giáp tập luyện cấp 4 (x1),Sao pha lê lục (x52),Sao pha lê lam (x1),Quần sợi len (x1),Găng sợi len (x1),Giầy sợi len (x1),Rada cấp 1 (x1),Phiếu thức ăn (x2),Vệ tinh sinh lực (x1),Giáp tập luyện cấp 4 (x1),Mảnh đá vụn (x2),Áo sợi len (x1),', 'Ngọc Rồng 6 sao (x387),Khúc mía (x218),Tayaki (x217),Ngọc Rồng 7 sao (x352),Kẹo táo (x229),Sao pha lê đỏ (x67),Kem que đôi (x232),Mảnh đá vụn (x29),Sao pha lê lam (x59),Sao pha lê cam (x54),Sao pha lê lục (x24),Gói 10 viên Capsule (x30),Viên Capsule đặc biệt (x3),Sao pha lê vàng (x73),Ngọc Rồng 5 sao (x21),Ngọc Rồng 1 sao (x7),Ngọc Rồng 2 sao (x7),Ngọc Rồng 3 sao (x7),Ngọc Rồng 4 sao (x17),Thỏi vàng (x100),Avatar (x1),Tự động luyện tập (x1),Vệ tinh trí tuệ (x2),Vệ tinh trí lực (x2),Vệ tinh sinh lực (x3),Vệ tinh phòng thủ (x2),Mochi (x33),Ramen (x23),Đậu thần cấp 10 (x197),Sao pha lê tím (x44),Sao pha lê hồng (x37),Cápsule Kích hoạt 1 món tự chọn (x26),', '2026-07-19 15:15:42'),
+(1027, 'hohongquan (1368)', 'admin22 (1369)', 'Gold: 0, ', 'Gold: 0, Quả Trứng (x1),', 'Ngọc Rồng 6 sao (x387),Khúc mía (x218),Tayaki (x217),Ngọc Rồng 7 sao (x352),Kẹo táo (x229),Sao pha lê đỏ (x67),Kem que đôi (x232),Mảnh đá vụn (x29),Sao pha lê lam (x59),Sao pha lê cam (x54),Sao pha lê lục (x24),Gói 10 viên Capsule (x30),Viên Capsule đặc biệt (x3),Sao pha lê vàng (x73),Ngọc Rồng 5 sao (x21),Ngọc Rồng 1 sao (x7),Ngọc Rồng 2 sao (x7),Ngọc Rồng 3 sao (x7),Ngọc Rồng 4 sao (x17),Thỏi vàng (x100),Avatar (x1),Tự động luyện tập (x1),Vệ tinh trí tuệ (x2),Vệ tinh trí lực (x2),Vệ tinh sinh lực (x3),Vệ tinh phòng thủ (x2),Mochi (x33),Ramen (x23),Đậu thần cấp 10 (x197),Sao pha lê tím (x44),Sao pha lê hồng (x37),Cápsule Kích hoạt 1 món tự chọn (x25),Giày cao su đế dày (x1),', 'Viên Capsule đặc biệt (x1),Cuồng nộ 2 (x73),Giáp Xên bọ hung 2 (x73),Bổ huyết 2 (x73),Đậu thần cấp 10 (x287),Bông tai Porata (x1),Tự động luyện tập (x1),Ngọc Rồng 1 sao (x83),Ngọc Rồng 2 sao (x83),Ngọc Rồng 3 sao (x23),Ngọc Rồng 4 sao (x95),Ngọc Rồng 5 sao (x88),Ngọc Rồng 6 sao (x420),Ngọc Rồng 7 sao (x387),Thỏi vàng (x100),Quả Trứng (x1),Bình hút năng lượng (x1),Bình hút năng lượng (x1),Dùi đục (x83),Hematite (x79),Đá mài (x98),Sách tuyệt kỹ 1 (x1),Hộp quà sự kiện VIP (x19990),Hộp quà sự kiện (x85),Hộp quà Cađíc VIP (x80),Hộp quà Goku Day VIP (x60),Trứng vàng rồng nhí (x90),Hộp quà thiếu nhi (x93),Kem que đôi (x23),Mảnh giấy có chữ MA (x10),Ngọc rồng băng 1 sao (x10),Ngọc rồng băng 2 sao (x10),Ngọc rồng băng 3 sao (x10),Ngọc rồng băng 4 sao (x10),Ngọc rồng băng 5 sao (x10),Ngọc rồng băng 6 sao (x10),Ngọc rồng băng 7 sao (x10),Kẹo táo (x24),Tayaki (x135),Mochi (x23),Ramen (x19),Giáp tập luyện cấp 4 (x1),Sao pha lê lục (x52),Sao pha lê lam (x1),Quần sợi len (x1),Găng sợi len (x1),Giầy sợi len (x1),Rada cấp 1 (x1),Phiếu thức ăn (x2),Vệ tinh sinh lực (x1),Giáp tập luyện cấp 4 (x1),Mảnh đá vụn (x2),Áo sợi len (x1),', 'Ngọc Rồng 6 sao (x387),Khúc mía (x218),Tayaki (x217),Ngọc Rồng 7 sao (x352),Kẹo táo (x229),Sao pha lê đỏ (x67),Kem que đôi (x232),Mảnh đá vụn (x29),Sao pha lê lam (x59),Sao pha lê cam (x54),Sao pha lê lục (x24),Gói 10 viên Capsule (x30),Viên Capsule đặc biệt (x3),Sao pha lê vàng (x73),Ngọc Rồng 5 sao (x21),Ngọc Rồng 1 sao (x7),Ngọc Rồng 2 sao (x7),Ngọc Rồng 3 sao (x7),Ngọc Rồng 4 sao (x17),Thỏi vàng (x100),Avatar (x1),Tự động luyện tập (x1),Vệ tinh trí tuệ (x2),Vệ tinh trí lực (x2),Vệ tinh sinh lực (x3),Vệ tinh phòng thủ (x2),Mochi (x33),Ramen (x23),Đậu thần cấp 10 (x197),Sao pha lê tím (x44),Sao pha lê hồng (x37),Cápsule Kích hoạt 1 món tự chọn (x25),Giày cao su đế dày (x1),Quả Trứng (x1),', 'Viên Capsule đặc biệt (x1),Cuồng nộ 2 (x73),Giáp Xên bọ hung 2 (x73),Bổ huyết 2 (x73),Đậu thần cấp 10 (x287),Bông tai Porata (x1),Tự động luyện tập (x1),Ngọc Rồng 1 sao (x83),Ngọc Rồng 2 sao (x83),Ngọc Rồng 3 sao (x23),Ngọc Rồng 4 sao (x95),Ngọc Rồng 5 sao (x88),Ngọc Rồng 6 sao (x420),Ngọc Rồng 7 sao (x387),Thỏi vàng (x100),Bình hút năng lượng (x1),Bình hút năng lượng (x1),Dùi đục (x83),Hematite (x79),Đá mài (x98),Sách tuyệt kỹ 1 (x1),Hộp quà sự kiện VIP (x19990),Hộp quà sự kiện (x85),Hộp quà Cađíc VIP (x80),Hộp quà Goku Day VIP (x60),Trứng vàng rồng nhí (x90),Hộp quà thiếu nhi (x93),Kem que đôi (x23),Mảnh giấy có chữ MA (x10),Ngọc rồng băng 1 sao (x10),Ngọc rồng băng 2 sao (x10),Ngọc rồng băng 3 sao (x10),Ngọc rồng băng 4 sao (x10),Ngọc rồng băng 5 sao (x10),Ngọc rồng băng 6 sao (x10),Ngọc rồng băng 7 sao (x10),Kẹo táo (x24),Tayaki (x135),Mochi (x23),Ramen (x19),Giáp tập luyện cấp 4 (x1),Sao pha lê lục (x52),Sao pha lê lam (x1),Quần sợi len (x1),Găng sợi len (x1),Giầy sợi len (x1),Rada cấp 1 (x1),Phiếu thức ăn (x2),Vệ tinh sinh lực (x1),Giáp tập luyện cấp 4 (x1),Mảnh đá vụn (x2),Áo sợi len (x1),', '2026-07-19 15:16:18');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `img_by_name`
+-- Table structure for table `img_by_name`
 --
 
 CREATE TABLE `img_by_name` (
   `id` int(11) NOT NULL,
   `NAME` varchar(55) NOT NULL,
   `n_frame` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `img_by_name`
+-- Dumping data for table `img_by_name`
 --
 
 INSERT INTO `img_by_name` (`id`, `NAME`, `n_frame`) VALUES
@@ -1890,22 +1901,22 @@ INSERT INTO `img_by_name` (`id`, `NAME`, `n_frame`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `intrinsic`
+-- Table structure for table `intrinsic`
 --
 
 CREATE TABLE `intrinsic` (
   `id` int(11) NOT NULL,
   `NAME` varchar(255) NOT NULL,
-  `param_from_1` int(11) NOT NULL DEFAULT 0,
-  `param_to_1` int(11) NOT NULL DEFAULT 0,
-  `param_from_2` int(11) NOT NULL DEFAULT 0,
-  `param_to_2` int(11) NOT NULL DEFAULT 0,
-  `icon` int(11) NOT NULL DEFAULT 0,
-  `gender` smallint(6) NOT NULL DEFAULT 3
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `param_from_1` int(11) NOT NULL DEFAULT '0',
+  `param_to_1` int(11) NOT NULL DEFAULT '0',
+  `param_from_2` int(11) NOT NULL DEFAULT '0',
+  `param_to_2` int(11) NOT NULL DEFAULT '0',
+  `icon` int(11) NOT NULL DEFAULT '0',
+  `gender` smallint(6) NOT NULL DEFAULT '3'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `intrinsic`
+-- Dumping data for table `intrinsic`
 --
 
 INSERT INTO `intrinsic` (`id`, `NAME`, `param_from_1`, `param_to_1`, `param_from_2`, `param_to_2`, `icon`, `gender`) VALUES
@@ -2121,16 +2132,16 @@ INSERT INTO `intrinsic` (`id`, `NAME`, `param_from_1`, `param_to_1`, `param_from
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `item_option_template`
+-- Table structure for table `item_option_template`
 --
 
 CREATE TABLE `item_option_template` (
   `id` int(11) NOT NULL,
   `NAME` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `item_option_template`
+-- Dumping data for table `item_option_template`
 --
 
 INSERT INTO `item_option_template` (`id`, `NAME`) VALUES
@@ -2389,23 +2400,23 @@ INSERT INTO `item_option_template` (`id`, `NAME`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `item_shop`
+-- Table structure for table `item_shop`
 --
 
 CREATE TABLE `item_shop` (
   `id` int(11) NOT NULL,
   `tab_id` int(11) NOT NULL,
   `temp_id` int(11) NOT NULL,
-  `is_new` tinyint(1) NOT NULL DEFAULT 1,
-  `is_sell` tinyint(1) NOT NULL DEFAULT 1,
-  `type_sell` int(11) DEFAULT 1,
-  `cost` int(11) DEFAULT 0,
-  `icon_spec` int(11) DEFAULT 0,
-  `create_time` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `is_new` tinyint(1) NOT NULL DEFAULT '1',
+  `is_sell` tinyint(1) NOT NULL DEFAULT '1',
+  `type_sell` int(11) DEFAULT '1',
+  `cost` int(11) DEFAULT '0',
+  `icon_spec` int(11) DEFAULT '0',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `item_shop`
+-- Dumping data for table `item_shop`
 --
 
 INSERT INTO `item_shop` (`id`, `tab_id`, `temp_id`, `is_new`, `is_sell`, `type_sell`, `cost`, `icon_spec`, `create_time`) VALUES
@@ -3239,7 +3250,7 @@ INSERT INTO `item_shop` (`id`, `tab_id`, `temp_id`, `is_new`, `is_sell`, `type_s
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `item_shop_option`
+-- Table structure for table `item_shop_option`
 --
 
 CREATE TABLE `item_shop_option` (
@@ -3247,10 +3258,10 @@ CREATE TABLE `item_shop_option` (
   `item_shop_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
   `param` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `item_shop_option`
+-- Dumping data for table `item_shop_option`
 --
 
 INSERT INTO `item_shop_option` (`id`, `item_shop_id`, `option_id`, `param`) VALUES
@@ -4678,7 +4689,7 @@ INSERT INTO `item_shop_option` (`id`, `item_shop_id`, `option_id`, `param`) VALU
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `item_template`
+-- Table structure for table `item_template`
 --
 
 CREATE TABLE `item_template` (
@@ -4687,20 +4698,20 @@ CREATE TABLE `item_template` (
   `gender` smallint(6) NOT NULL,
   `NAME` varchar(255) NOT NULL,
   `description` varchar(75) DEFAULT NULL,
-  `level` int(11) NOT NULL DEFAULT 0,
+  `level` int(11) NOT NULL DEFAULT '0',
   `icon_id` int(11) NOT NULL,
   `part` int(11) NOT NULL,
   `is_up_to_up` tinyint(1) NOT NULL,
   `power_require` int(11) NOT NULL,
-  `gold` int(11) NOT NULL DEFAULT 0,
-  `gem` int(11) NOT NULL DEFAULT 0,
-  `head` int(11) NOT NULL DEFAULT -1,
-  `body` int(11) NOT NULL DEFAULT -1,
-  `leg` int(11) NOT NULL DEFAULT -1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `gold` int(11) NOT NULL DEFAULT '0',
+  `gem` int(11) NOT NULL DEFAULT '0',
+  `head` int(11) NOT NULL DEFAULT '-1',
+  `body` int(11) NOT NULL DEFAULT '-1',
+  `leg` int(11) NOT NULL DEFAULT '-1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `item_template`
+-- Dumping data for table `item_template`
 --
 
 INSERT INTO `item_template` (`id`, `TYPE`, `gender`, `NAME`, `description`, `level`, `icon_id`, `part`, `is_up_to_up`, `power_require`, `gold`, `gem`, `head`, `body`, `leg`) VALUES
@@ -6711,28 +6722,28 @@ INSERT INTO `item_template` (`id`, `TYPE`, `gender`, `NAME`, `description`, `lev
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `map_template`
+-- Table structure for table `map_template`
 --
 
 CREATE TABLE `map_template` (
   `id` int(11) NOT NULL,
   `NAME` varchar(55) NOT NULL,
-  `zones` int(11) NOT NULL DEFAULT 1,
-  `max_player` int(11) NOT NULL DEFAULT 15,
+  `zones` int(11) NOT NULL DEFAULT '1',
+  `max_player` int(11) NOT NULL DEFAULT '15',
   `data` varchar(1000) NOT NULL DEFAULT '[]',
-  `type` int(11) NOT NULL DEFAULT 1,
-  `planet_id` int(11) NOT NULL DEFAULT 1,
-  `bg_type` int(11) NOT NULL DEFAULT 1,
-  `tile_id` int(11) NOT NULL DEFAULT 1,
-  `bg_id` int(11) NOT NULL DEFAULT 1,
+  `type` int(11) NOT NULL DEFAULT '1',
+  `planet_id` int(11) NOT NULL DEFAULT '1',
+  `bg_type` int(11) NOT NULL DEFAULT '1',
+  `tile_id` int(11) NOT NULL DEFAULT '1',
+  `bg_id` int(11) NOT NULL DEFAULT '1',
   `waypoints` text NOT NULL,
   `mobs` text NOT NULL,
   `npcs` text NOT NULL,
-  `is_map_double` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `is_map_double` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `map_template`
+-- Dumping data for table `map_template`
 --
 
 INSERT INTO `map_template` (`id`, `NAME`, `zones`, `max_player`, `data`, `type`, `planet_id`, `bg_type`, `tile_id`, `bg_id`, `waypoints`, `mobs`, `npcs`, `is_map_double`) VALUES
@@ -6907,7 +6918,7 @@ INSERT INTO `map_template` (`id`, `NAME`, `zones`, `max_player`, `data`, `type`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `mob_template`
+-- Table structure for table `mob_template`
 --
 
 CREATE TABLE `mob_template` (
@@ -6918,12 +6929,12 @@ CREATE TABLE `mob_template` (
   `range_move` smallint(6) NOT NULL,
   `speed` smallint(6) NOT NULL,
   `dart_Type` smallint(6) NOT NULL,
-  `percent_dame` smallint(6) NOT NULL DEFAULT 5,
-  `percent_tiem_nang` smallint(6) NOT NULL DEFAULT 50
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `percent_dame` smallint(6) NOT NULL DEFAULT '5',
+  `percent_tiem_nang` smallint(6) NOT NULL DEFAULT '50'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `mob_template`
+-- Dumping data for table `mob_template`
 --
 
 INSERT INTO `mob_template` (`id`, `TYPE`, `NAME`, `hp`, `range_move`, `speed`, `dart_Type`, `percent_dame`, `percent_tiem_nang`) VALUES
@@ -7050,7 +7061,7 @@ INSERT INTO `mob_template` (`id`, `TYPE`, `NAME`, `hp`, `range_move`, `speed`, `
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `napthe`
+-- Table structure for table `napthe`
 --
 
 CREATE TABLE `napthe` (
@@ -7062,11 +7073,11 @@ CREATE TABLE `napthe` (
   `amount` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `request_id` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `napthe`
+-- Dumping data for table `napthe`
 --
 
 INSERT INTO `napthe` (`id`, `user_nap`, `telco`, `serial`, `code`, `amount`, `status`, `request_id`, `created_at`) VALUES
@@ -7075,19 +7086,19 @@ INSERT INTO `napthe` (`id`, `user_nap`, `telco`, `serial`, `code`, `amount`, `st
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `notify`
+-- Table structure for table `notify`
 --
 
 CREATE TABLE `notify` (
   `id` int(11) NOT NULL,
   `name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `text` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `npc_template`
+-- Table structure for table `npc_template`
 --
 
 CREATE TABLE `npc_template` (
@@ -7096,11 +7107,11 @@ CREATE TABLE `npc_template` (
   `head` int(11) NOT NULL,
   `body` int(11) NOT NULL,
   `leg` int(11) NOT NULL,
-  `avatar` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `avatar` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `npc_template`
+-- Dumping data for table `npc_template`
 --
 
 INSERT INTO `npc_template` (`id`, `NAME`, `head`, `body`, `leg`, `avatar`) VALUES
@@ -7201,17 +7212,17 @@ INSERT INTO `npc_template` (`id`, `NAME`, `head`, `body`, `leg`, `avatar`) VALUE
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `part`
+-- Table structure for table `part`
 --
 
 CREATE TABLE `part` (
   `id` int(11) NOT NULL,
   `TYPE` int(11) NOT NULL,
   `DATA` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `part`
+-- Dumping data for table `part`
 --
 
 INSERT INTO `part` (`id`, `TYPE`, `DATA`) VALUES
@@ -9323,7 +9334,7 @@ INSERT INTO `part` (`id`, `TYPE`, `DATA`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `payments`
+-- Table structure for table `payments`
 --
 
 CREATE TABLE `payments` (
@@ -9337,16 +9348,16 @@ CREATE TABLE `payments` (
   `api_declared_value` int(11) DEFAULT NULL,
   `detected_value` int(11) DEFAULT NULL,
   `received_amount_from_api` int(11) DEFAULT NULL,
-  `final_credited_amount` int(11) DEFAULT 0,
+  `final_credited_amount` int(11) DEFAULT '0',
   `status_text` varchar(255) NOT NULL,
   `api_status_code` varchar(50) NOT NULL,
-  `api_message` text DEFAULT NULL,
+  `api_message` text,
   `card_telco` varchar(50) DEFAULT NULL,
-  `is_credited` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `is_credited` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `payments`
+-- Dumping data for table `payments`
 --
 
 INSERT INTO `payments` (`id`, `name`, `refNo`, `date`, `card_serial`, `card_pin`, `declared_amount`, `api_declared_value`, `detected_value`, `received_amount_from_api`, `final_credited_amount`, `status_text`, `api_status_code`, `api_message`, `card_telco`, `is_credited`) VALUES
@@ -9358,30 +9369,30 @@ INSERT INTO `payments` (`id`, `name`, `refNo`, `date`, `card_serial`, `card_pin`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `phongchat`
+-- Table structure for table `phongchat`
 --
 
 CREATE TABLE `phongchat` (
   `id` int(11) NOT NULL,
   `id_user` int(11) DEFAULT NULL,
   `noidung` text NOT NULL,
-  `ngaytao` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `ngaytao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `player`
+-- Table structure for table `player`
 --
 
 CREATE TABLE `player` (
   `id` int(11) NOT NULL,
   `account_id` int(11) DEFAULT NULL,
   `name` varchar(20) NOT NULL,
-  `head` int(11) NOT NULL DEFAULT 102,
+  `head` int(11) NOT NULL DEFAULT '102',
   `gender` int(11) NOT NULL,
-  `have_tennis_space_ship` tinyint(1) DEFAULT 0,
-  `clan_id` int(11) NOT NULL DEFAULT -1,
+  `have_tennis_space_ship` tinyint(1) DEFAULT '0',
+  `clan_id` int(11) NOT NULL DEFAULT '-1',
   `data_inventory` text NOT NULL,
   `data_location` text NOT NULL,
   `data_point` text NOT NULL,
@@ -9403,40 +9414,40 @@ CREATE TABLE `player` (
   `pet` text NOT NULL,
   `data_black_ball` text NOT NULL,
   `data_side_task` text NOT NULL,
-  `create_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `notify` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notify` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `baovetaikhoan` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '[]',
   `captcha` varchar(1000) NOT NULL DEFAULT '[]',
   `data_card` varchar(10000) NOT NULL DEFAULT '[]',
-  `lasttimepkcommeson` bigint(20) NOT NULL DEFAULT 0,
+  `lasttimepkcommeson` bigint(20) NOT NULL DEFAULT '0',
   `bandokhobau` varchar(250) NOT NULL DEFAULT '[]',
-  `doanhtrai` bigint(20) NOT NULL DEFAULT 0,
+  `doanhtrai` bigint(20) NOT NULL DEFAULT '0',
   `conduongrandoc` varchar(255) NOT NULL DEFAULT '[]',
   `masterDoesNotAttack` text NOT NULL,
   `nhanthoivang` varchar(200) NOT NULL DEFAULT '[]',
   `ruonggo` varchar(255) NOT NULL DEFAULT '[]',
   `sieuthanthuy` varchar(255) NOT NULL DEFAULT '[]',
   `vodaisinhtu` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '[]',
-  `rongxuong` bigint(20) NOT NULL DEFAULT 0,
+  `rongxuong` bigint(20) NOT NULL DEFAULT '0',
   `data_item_event` varchar(1000) NOT NULL DEFAULT '[]',
   `data_luyentap` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `data_clan_task` varchar(255) NOT NULL DEFAULT '[]',
-  `data_vip` text DEFAULT NULL,
-  `rank` int(11) NOT NULL DEFAULT 0,
+  `data_vip` text,
+  `rank` int(11) NOT NULL DEFAULT '0',
   `data_achievement` text NOT NULL,
   `giftcode` text NOT NULL,
-  `event_point` int(11) NOT NULL DEFAULT 0,
-  `data_event` text DEFAULT NULL,
-  `dataBadges` text DEFAULT NULL,
-  `dataTaskBadges` text DEFAULT NULL,
-  `firstTimeLogin` timestamp NOT NULL DEFAULT current_timestamp(),
-  `BoughtSkill` text DEFAULT NULL,
-  `LearnSkill` text DEFAULT NULL,
+  `event_point` int(11) NOT NULL DEFAULT '0',
+  `data_event` text,
+  `dataBadges` text,
+  `dataTaskBadges` text,
+  `firstTimeLogin` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `BoughtSkill` text,
+  `LearnSkill` text,
   `dailyGift` text NOT NULL,
-  `point_sukien` int(11) NOT NULL DEFAULT 0,
-  `thachdauwhis` int(11) NOT NULL DEFAULT 0,
-  `point_sukien1` int(11) NOT NULL DEFAULT 0,
-  `point_maydam` int(11) NOT NULL DEFAULT 0,
+  `point_sukien` int(11) NOT NULL DEFAULT '0',
+  `thachdauwhis` int(11) NOT NULL DEFAULT '0',
+  `point_sukien1` int(11) NOT NULL DEFAULT '0',
+  `point_maydam` int(11) NOT NULL DEFAULT '0',
   `total_damage_maydam` bigint(20) NOT NULL,
   `data_duahau_egg` text NOT NULL,
   `checkNhanQua` varchar(255) NOT NULL DEFAULT '[1,1,"1970-01-01T00:00:00"]',
@@ -9444,20 +9455,23 @@ CREATE TABLE `player` (
   `thanhTichKhiGas` varchar(255) NOT NULL DEFAULT '[0,0,0,0]',
   `thanhTichCDRD` varchar(255) NOT NULL DEFAULT '[0,0,0,0]',
   `nhiem_vu_kol` text NOT NULL,
-  `point_sukien2` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `point_sukien2` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `player`
+-- Dumping data for table `player`
 --
 
 INSERT INTO `player` (`id`, `account_id`, `name`, `head`, `gender`, `have_tennis_space_ship`, `clan_id`, `data_inventory`, `data_location`, `data_point`, `data_magic_tree`, `items_body`, `items_bag`, `items_box`, `items_box_lucky_round`, `items_daban`, `friends`, `enemies`, `data_intrinsic`, `data_item_time`, `data_task`, `data_mabu_egg`, `data_charm`, `skills`, `skills_shortcut`, `pet`, `data_black_ball`, `data_side_task`, `create_time`, `notify`, `baovetaikhoan`, `captcha`, `data_card`, `lasttimepkcommeson`, `bandokhobau`, `doanhtrai`, `conduongrandoc`, `masterDoesNotAttack`, `nhanthoivang`, `ruonggo`, `sieuthanthuy`, `vodaisinhtu`, `rongxuong`, `data_item_event`, `data_luyentap`, `data_clan_task`, `data_vip`, `rank`, `data_achievement`, `giftcode`, `event_point`, `data_event`, `dataBadges`, `dataTaskBadges`, `firstTimeLogin`, `BoughtSkill`, `LearnSkill`, `dailyGift`, `point_sukien`, `thachdauwhis`, `point_sukien1`, `point_maydam`, `total_damage_maydam`, `data_duahau_egg`, `checkNhanQua`, `thanhTichBang`, `thanhTichKhiGas`, `thanhTichCDRD`, `nhiem_vu_kol`, `point_sukien2`) VALUES
-(1367, 3728, 'admin', 31, 0, 1, 0, '[1864097696,705670,60008,1000,0]', '[84,501,336]', '[0,60000007968,600007968,1000,1000,200000000,100000000,1000000000,0,0,0,0,230000034,115000000]', '[1,5,0,1757080274399,1757079582056]', '[\"[0,1,\\\"[\\\\\\\"[47,2]\\\\\\\"]\\\",1757079582056]\",\"[6,1,\\\"[\\\\\\\"[6,30]\\\\\\\"]\\\",1757079582056]\",\"[-1,0,\\\"[]\\\",1757172625671]\",\"[-1,0,\\\"[]\\\",1757172625671]\",\"[12,1,\\\"[\\\\\\\"[14,1]\\\\\\\"]\\\",1757079582057]\",\"[1817,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757081303005]\",\"[-1,0,\\\"[]\\\",1757172625671]\",\"[-1,0,\\\"[]\\\",1757172625671]\",\"[1713,1,\\\"[\\\\\\\"[50,18]\\\\\\\",\\\\\\\"[77,15]\\\\\\\",\\\\\\\"[103,15]\\\\\\\",\\\\\\\"[226,3]\\\\\\\",\\\\\\\"[236,15]\\\\\\\",\\\\\\\"[30,0]\\\\\\\",\\\\\\\"[93,7]\\\\\\\"]\\\",1757172801371]\",\"[-1,0,\\\"[]\\\",1757172625671]\",\"[-1,0,\\\"[]\\\",1757172625671]\"]', '[\"[63,9,\\\"[\\\\\\\"[2,8]\\\\\\\"]\\\",1757079582056]\",\"[13,5,\\\"[\\\\\\\"[48,100]\\\\\\\"]\\\",1757079596853]\",\"[1816,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757081299084]\",\"[1818,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757081307192]\",\"[442,1,\\\"[\\\\\\\"[96,5]\\\\\\\"]\\\",1757085759132]\",\"[1819,1,\\\"[\\\\\\\"[77,11]\\\\\\\",\\\\\\\"[103,8]\\\\\\\",\\\\\\\"[72,3]\\\\\\\"]\\\",1757156961748]\",\"[194,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757156980933]\",\"[933,1,\\\"[\\\\\\\"[31,89901]\\\\\\\"]\\\",1757157993280]\",\"[934,1,\\\"[\\\\\\\"[31,99306]\\\\\\\"]\\\",1757158010564]\",\"[457,900,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757158044240]\",\"[935,18,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757158104234]\",\"[1820,1,\\\"[\\\\\\\"[31,39205]\\\\\\\"]\\\",1757165683656]\",\"[457,100,\\\"[\\\\\\\"[30,0]\\\\\\\"]\\\",1757171889194]\",\"[718,110,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757171899949]\",\"[18,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757171950403]\",\"[445,2,\\\"[\\\\\\\"[98,3]\\\\\\\"]\\\",1757172250047]\",\"[1802,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757172287757]\",\"[1229,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757172290518]\",\"[20,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757172817032]\",\"[-1,0,\\\"[]\\\",1757173017166]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\"]', '[\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\",\"[-1,0,\\\"[]\\\",1757172625672]\"]', '[]', '[]', '[]', '[]', '[0,0,0,0,false,0,0,0]', '[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]', '[14,0,0,0]', '[]', '[1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058]', '[\"[0,1,1757172840641,0]\",\"[1,0,0,0]\",\"[6,0,0,0]\",\"[9,0,0,0]\",\"[10,0,0,0]\",\"[20,0,0,0]\",\"[22,0,0,0]\",\"[19,0,0,0]\"]', '[-1,0,-1,-1,-1,-1,-1,-1,-1,-1]', '[\"[0,2,\\\"$Đệ tử\\\",0,0,1]\",\"[0,810296,3176,868,1000,2760,2280,101,45,0,2729,2077]\",\"[\\\"[-1,0,\\\\\\\"[]\\\\\\\",1757172625673]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1757172625673]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1757172625673]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1757172625673]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1757172625673]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1757172625673]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1757172625673]\\\"]\",\"[\\\"[2,1,1757165736381,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\"]\"]', '[\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\"]', '[-1,0,0,0,10,0]', '2025-09-05 13:39:42', 'null', '[0,false,1757079582481]', '[]', '[]', 0, '[0,1757079582481]', 0, '[false,0,false,false]', '0', '[false,0]', '[0,50000000,100,1757079582481,0]', '[false,0,false]', '[false,0,0,0]', 0, '[0,0,0,0,0,0]', '[0,false,-1,4067,1757173039966,0,0,0,0,0]', '[-1,0,0,0,5,0]', '[0,0,false,false,false,0,0,0]', 1329, '[\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[1753,false]\",\"[2,false]\",\"[1,false]\",\"[5492000,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[9,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[4,false]\"]', '[]', 71, '[0,0,0,0,0,0,false,false,false,false]', '[]', '[{\"id\":\"1\",\"count\":\"110000\",\"countMax\":\"1000000\",\"idBadgesReward\":\"218\"},{\"id\":\"2\",\"count\":\"0\",\"countMax\":\"100\",\"idBadgesReward\":\"219\"},{\"id\":\"3\",\"count\":\"3\",\"countMax\":\"300\",\"idBadgesReward\":\"220\"},{\"id\":\"4\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"221\"},{\"id\":\"5\",\"count\":\"0\",\"countMax\":\"1\",\"idBadgesReward\":\"222\"},{\"id\":\"6\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"223\"},{\"id\":\"7\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"1286\"},{\"id\":\"8\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"1287\"},{\"id\":\"9\",\"count\":\"7\",\"countMax\":\"500\",\"idBadgesReward\":\"224\"},{\"id\":\"10\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"225\"},{\"id\":\"11\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"1300\"},{\"id\":\"12\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"240\"},{\"id\":\"13\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"242\"},{\"id\":\"14\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"243\"},{\"id\":\"15\",\"count\":\"0\",\"countMax\":\"500\",\"idBadgesReward\":\"247\"},{\"id\":\"16\",\"count\":\"110000\",\"countMax\":\"2000000\",\"idBadgesReward\":\"253\"},{\"id\":\"17\",\"count\":\"0\",\"countMax\":\"7\",\"idBadgesReward\":\"256\"},{\"id\":\"18\",\"count\":\"0\",\"countMax\":\"1\",\"idBadgesReward\":\"226\"}]', '2025-09-06 11:05:10', '[0]', '[-1,-1,0]', '[{\"id\":\"0\",\"daNhan\":\"false\"},{\"id\":\"1\",\"daNhan\":\"false\"}]', 0, 0, 0, 130, 567265749, '[]', '[0,1,\"2025-09-06T22:18:09.194838400\"]', '[0,0,0,0]', '[0,0,0,0]', '[0,0,0,0]', '{\"kolQuestStage\":0,\"kolVIPQuestStage\":0,\"destronGas70CompletionCount\":0,\"martialArtsTournamentWins\":0,\"dailySuperHardQuestCompletionCount\":0,\"bossBabyDefeatParticipationCount\":0,\"monsterKillCountAutoTrain\":8}', 0);
+(1367, 3728, 'admin', 31, 0, 1, 0, '[1864126431,705669,60008,1000,0]', '[126,669,360]', '[0,60000007968,600007968,1000,1000,200000000,100000000,1000000000,0,0,0,0,195600034,100000000]', '[1,5,0,1757080274399,1757079582056]', '[\"[0,1,\\\"[\\\\\\\"[47,2]\\\\\\\"]\\\",1757079582056]\",\"[6,1,\\\"[\\\\\\\"[6,30]\\\\\\\"]\\\",1757079582056]\",\"[-1,0,\\\"[]\\\",1784727884669]\",\"[-1,0,\\\"[]\\\",1784727884669]\",\"[12,1,\\\"[\\\\\\\"[14,1]\\\\\\\"]\\\",1757079582057]\",\"[1817,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757081303005]\",\"[-1,0,\\\"[]\\\",1784727884669]\",\"[-1,0,\\\"[]\\\",1784727884669]\",\"[-1,0,\\\"[]\\\",1784727884669]\",\"[-1,0,\\\"[]\\\",1784727884669]\",\"[-1,0,\\\"[]\\\",1784727884669]\"]', '[\"[1816,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757081299084]\",\"[1818,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757081307192]\",\"[442,1,\\\"[\\\\\\\"[96,5]\\\\\\\"]\\\",1757085759132]\",\"[1819,1,\\\"[\\\\\\\"[77,11]\\\\\\\",\\\\\\\"[103,8]\\\\\\\",\\\\\\\"[72,3]\\\\\\\"]\\\",1757156961748]\",\"[194,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757156980933]\",\"[933,1,\\\"[\\\\\\\"[31,89901]\\\\\\\"]\\\",1757157993280]\",\"[934,1,\\\"[\\\\\\\"[31,99306]\\\\\\\"]\\\",1757158010564]\",\"[457,900,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757158044240]\",\"[935,18,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757158104234]\",\"[1820,1,\\\"[\\\\\\\"[31,39205]\\\\\\\"]\\\",1757165683656]\",\"[457,100,\\\"[\\\\\\\"[30,0]\\\\\\\"]\\\",1757171889194]\",\"[718,110,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757171899949]\",\"[18,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757171950403]\",\"[445,2,\\\"[\\\\\\\"[98,3]\\\\\\\"]\\\",1757172250047]\",\"[1802,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757172287757]\",\"[1229,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757172290518]\",\"[20,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1757172817032]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\"]', '[\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\",\"[-1,0,\\\"[]\\\",1784727884670]\"]', '[]', '[]', '[]', '[]', '[0,0,0,0,false,0,0,0]', '[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]', '[14,0,0,0]', '[]', '[1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058,1757079582058]', '[\"[0,1,1784215982992,0]\",\"[1,0,0,0]\",\"[6,0,0,0]\",\"[9,0,0,0]\",\"[10,0,0,0]\",\"[20,0,0,0]\",\"[22,0,0,0]\",\"[19,0,0,0]\"]', '[-1,0,-1,-1,-1,-1,-1,-1,-1,-1]', '[\"[0,2,\\\"$Đệ tử\\\",0,0,1]\",\"[0,813890,190,990,1000,2760,2320,101,45,0,0,0]\",\"[\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727884672]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727884672]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727884672]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727884672]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727884672]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727884673]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727884673]\\\"]\",\"[\\\"[2,1,1784727898073,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\"]\"]', '[\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\"]', '[-1,0,0,0,10,0]', '2025-09-05 13:39:42', 'null', '[0,false,1757079582481]', '[]', '[]', 0, '[0,1757079582481]', 0, '[false,0,false,false]', '0', '[false,0]', '[0,50000000,100,1757079582481,0]', '[false,0,false]', '[false,0,0,0]', 0, '[0,0,0,0,0,0]', '[0,false,-1,40628,1784727904626,0,0,0,0,0]', '[-1,0,0,0,5,0]', '[0,0,false,false,false,0,0,0]', 1329, '[\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[3133,false]\",\"[2,false]\",\"[1,false]\",\"[7254000,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[1,false]\",\"[0,false]\",\"[9,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[4,false]\"]', '[]', 71, '[0,0,0,0,0,0,false,false,false,false]', '[]', '[{\"id\":\"1\",\"count\":\"0\",\"countMax\":\"1000000\",\"idBadgesReward\":\"218\"},{\"id\":\"2\",\"count\":\"0\",\"countMax\":\"100\",\"idBadgesReward\":\"219\"},{\"id\":\"3\",\"count\":\"0\",\"countMax\":\"300\",\"idBadgesReward\":\"220\"},{\"id\":\"4\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"221\"},{\"id\":\"5\",\"count\":\"0\",\"countMax\":\"1\",\"idBadgesReward\":\"222\"},{\"id\":\"6\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"223\"},{\"id\":\"7\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"1286\"},{\"id\":\"8\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"1287\"},{\"id\":\"9\",\"count\":\"0\",\"countMax\":\"500\",\"idBadgesReward\":\"224\"},{\"id\":\"10\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"225\"},{\"id\":\"11\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"1300\"},{\"id\":\"12\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"240\"},{\"id\":\"13\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"242\"},{\"id\":\"14\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"243\"},{\"id\":\"15\",\"count\":\"0\",\"countMax\":\"500\",\"idBadgesReward\":\"247\"},{\"id\":\"16\",\"count\":\"0\",\"countMax\":\"2000000\",\"idBadgesReward\":\"253\"},{\"id\":\"17\",\"count\":\"0\",\"countMax\":\"7\",\"idBadgesReward\":\"256\"},{\"id\":\"18\",\"count\":\"0\",\"countMax\":\"1\",\"idBadgesReward\":\"226\"}]', '2026-07-22 13:44:44', '[0]', '[-1,-1,0]', '[{\"id\":\"0\",\"daNhan\":\"false\"},{\"id\":\"1\",\"daNhan\":\"false\"}]', 0, 0, 0, 130, 598050519, '[]', '[1,1,null]', '[0,0,0,0]', '[0,0,0,0]', '[0,0,0,0]', '{\"kolQuestStage\":0,\"kolVIPQuestStage\":0,\"destronGas70CompletionCount\":0,\"martialArtsTournamentWins\":0,\"dailySuperHardQuestCompletionCount\":0,\"bossBabyDefeatParticipationCount\":0,\"monsterKillCountAutoTrain\":8}', 0),
+(1368, 3729, 'hohongquan', 64, 0, 0, 1, '[754779585,104963359,0,0,0]', '[96,607,312]', '[6,51533480813,4765203837,1000,1000,450000,450000,24000,0,4,0,0,714601,541620]', '[10,18,0,1784739680302,1784204834534]', '[\"[232,1,\\\"[\\\\\\\"[47,300]\\\\\\\",\\\\\\\"[129,1]\\\\\\\",\\\\\\\"[141,1]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784473789728]\",\"[244,1,\\\"[\\\\\\\"[6,22000]\\\\\\\",\\\\\\\"[27,3500]\\\\\\\",\\\\\\\"[129,1]\\\\\\\",\\\\\\\"[141,1]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784473835755]\",\"[257,1,\\\"[\\\\\\\"[0,2420]\\\\\\\",\\\\\\\"[129,1]\\\\\\\",\\\\\\\"[141,1]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[72,1]\\\\\\\"]\\\",1784473848632]\",\"[266,1,\\\"[\\\\\\\"[7,9000]\\\\\\\",\\\\\\\"[28,1500]\\\\\\\",\\\\\\\"[129,1]\\\\\\\",\\\\\\\"[141,1]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784474216563]\",\"[281,1,\\\"[\\\\\\\"[14,12]\\\\\\\",\\\\\\\"[129,1]\\\\\\\",\\\\\\\"[141,1]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784474258903]\",\"[640,1,\\\"[\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[77,18]\\\\\\\",\\\\\\\"[103,18]\\\\\\\",\\\\\\\"[38,0]\\\\\\\",\\\\\\\"[93,40]\\\\\\\"]\\\",1784727909853]\",\"[1716,1,\\\"[\\\\\\\"[77,10]\\\\\\\",\\\\\\\"[94,3]\\\\\\\",\\\\\\\"[9,113]\\\\\\\"]\\\",1784460444750]\",\"[1771,1,\\\"[\\\\\\\"[50,18]\\\\\\\",\\\\\\\"[5,9]\\\\\\\",\\\\\\\"[14,10]\\\\\\\",\\\\\\\"[30,0]\\\\\\\",\\\\\\\"[93,13]\\\\\\\"]\\\",1784727909853]\",\"[-1,0,\\\"[]\\\",1784727909853]\",\"[795,1,\\\"[\\\\\\\"[170,22]\\\\\\\",\\\\\\\"[84,0]\\\\\\\",\\\\\\\"[148,25]\\\\\\\"]\\\",1784210180191]\",\"[-1,0,\\\"[]\\\",1784727909853]\"]', '[\"[19,1677,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784204903681]\",\"[1612,1094,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784204907721]\",\"[1798,1100,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784204910529]\",\"[20,1620,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784204912445]\",\"[1799,911,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784204926665]\",\"[441,304,\\\"[\\\\\\\"[95,5]\\\\\\\"]\\\",1784205006808]\",\"[1800,864,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784205042481]\",\"[225,71,\\\"[\\\\\\\"[74,0]\\\\\\\"]\\\",1784205102676]\",\"[442,291,\\\"[\\\\\\\"[96,5]\\\\\\\"]\\\",1784205116371]\",\"[445,291,\\\"[\\\\\\\"[98,3]\\\\\\\"]\\\",1784205135384]\",\"[447,248,\\\"[\\\\\\\"[101,5]\\\\\\\"]\\\",1784205160511]\",\"[194,3,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784205204203]\",\"[446,301,\\\"[\\\\\\\"[100,5]\\\\\\\"]\\\",1784205331235]\",\"[18,58,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206023614]\",\"[14,4,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206074309]\",\"[15,4,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206079701]\",\"[16,159,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206083021]\",\"[17,62,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206086233]\",\"[457,200,\\\"[\\\\\\\"[30,0]\\\\\\\"]\\\",1784206865710]\",\"[521,1,\\\"[\\\\\\\"[1,926]\\\\\\\"]\\\",1784210551834]\",\"[343,2,\\\"[\\\\\\\"[83,20]\\\\\\\"]\\\",1784210607550]\",\"[342,2,\\\"[\\\\\\\"[81,5]\\\\\\\"]\\\",1784210608498]\",\"[345,3,\\\"[\\\\\\\"[80,5]\\\\\\\"]\\\",1784210610430]\",\"[344,2,\\\"[\\\\\\\"[82,20]\\\\\\\"]\\\",1784210614342]\",\"[1801,197,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784211419234]\",\"[1802,140,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784211539676]\",\"[595,247,\\\"[\\\\\\\"[2,256]\\\\\\\"]\\\",1784215645396]\",\"[444,296,\\\"[\\\\\\\"[99,3]\\\\\\\"]\\\",1784462756244]\",\"[443,275,\\\"[\\\\\\\"[97,5]\\\\\\\"]\\\",1784463056803]\",\"[1422,100,\\\"[\\\\\\\"[101,10]\\\\\\\"]\\\",1784474521472]\",\"[1423,188,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784475039312]\",\"[1438,188,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784475047279]\",\"[1150,191,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784475541584]\",\"[1825,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784476809721]\",\"[1778,900,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784476911946]\",\"[1824,980,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784476934615]\",\"[934,1,\\\"[\\\\\\\"[31,56636]\\\\\\\"]\\\",1784477799654]\",\"[933,1,\\\"[\\\\\\\"[31,2]\\\\\\\"]\\\",1784477805613]\",\"[1805,4,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784551040087]\",\"[428,1,\\\"[\\\\\\\"[50,15]\\\\\\\",\\\\\\\"[154,0]\\\\\\\"]\\\",1784558910164]\",\"[1819,1,\\\"[\\\\\\\"[50,15]\\\\\\\",\\\\\\\"[50,5]\\\\\\\",\\\\\\\"[72,3]\\\\\\\"]\\\",1784728120793]\",\"[935,66,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784728195977]\",\"[-1,0,\\\"[]\\\",1784739453886]\",\"[-1,0,\\\"[]\\\",1784738911715]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\"]', '[\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\",\"[-1,0,\\\"[]\\\",1784727909854]\"]', '[\"[189,49000,\\\"[]\\\",1784727909854]\",\"[189,6000,\\\"[]\\\",1784727909854]\",\"[189,18000,\\\"[]\\\",1784727909854]\",\"[189,8000,\\\"[]\\\",1784727909854]\",\"[884,1,\\\"[\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[77,1]\\\\\\\",\\\\\\\"[103,8]\\\\\\\",\\\\\\\"[5,18]\\\\\\\",\\\\\\\"[154,0]\\\\\\\",\\\\\\\"[93,15]\\\\\\\"]\\\",1784727909854]\",\"[189,23000,\\\"[]\\\",1784727909854]\",\"[469,1,\\\"[\\\\\\\"[81,8]\\\\\\\",\\\\\\\"[30,0]\\\\\\\",\\\\\\\"[93,28]\\\\\\\"]\\\",1784727909854]\",\"[189,11000,\\\"[]\\\",1784727909854]\",\"[189,42000,\\\"[]\\\",1784727909854]\",\"[189,8000,\\\"[]\\\",1784727909854]\"]', '[\"[1802,2,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784205709859]\",\"[443,2,\\\"[\\\\\\\"[97,5]\\\\\\\"]\\\",1784205709860]\",\"[444,9,\\\"[\\\\\\\"[99,3]\\\\\\\"]\\\",1784205612526]\",\"[1801,2,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784205519219]\",\"[203,1,\\\"[\\\\\\\"[56,0]\\\\\\\"]\\\",1784210186231]\"]', '[]', '[]', '[6,146,0,0,false,0,0,0]', '[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]', '[23,1,0,0]', '[]', '[1786800447434,1786796853734,1786796854453,1786796855102,1786800455746,1786796856389,1786796857078,1786796857886,1786796859206,1786796860741]', '[\"[0,6,1784738350905,0]\",\"[1,7,1784637365889,0]\",\"[6,7,1784637356981,0]\",\"[9,7,1784558832539,0]\",\"[10,7,1784563887175,0]\",\"[20,7,1784637333905,0]\",\"[22,7,1784637371297,0]\",\"[19,7,1784637250058,0]\"]', '[9,1,6,-1,10,20,22,19,-1,-1]', '[\"[1,0,\\\"$Mabư\\\",0,0,2]\",\"[7,54416093976,1529656,926,1000,516300,515800,24012,491,1,655701,472356]\",\"[\\\"[0,1,\\\\\\\"[\\\\\\\\\\\\\\\"[47,2]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[107,1]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[101,10000]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[102,1]\\\\\\\\\\\\\\\"]\\\\\\\",1784475772630]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727909855]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727909855]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727909855]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727909855]\\\",\\\"[1743,2,\\\\\\\"[\\\\\\\\\\\\\\\"[50,27]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[77,27]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[103,27]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[106,0]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[104,19]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[108,5]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[101,14]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[93,1]\\\\\\\\\\\\\\\"]\\\\\\\",1784727909855]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784727909855]\\\"]\",\"[\\\"[2,1,1784740145955,0]\\\",\\\"[1,1,1784740147069,0]\\\",\\\"[8,1,1784739070808,0]\\\",\\\"[12,1,1784739790067,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\"]\"]', '[\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\"]', '[-1,0,0,0,10,0]', '2026-07-16 12:13:22', 'null', '[0,false,1784204636381]', '[]', '[]', 0, '[0,1784204636382]', 0, '[false,0,false,false]', '0', '[false,0]', '[0,50000,2,1784204636382,1784474827546]', '[false,0,false]', '[false,80,1784474827045,0]', 0, '[0,0,0,0,0,0]', '[0,false,50,3233934,1784740147359,0,0,0,0,0]', '[-1,0,0,0,5,0]', '[0,0,false,false,false,0,0,0]', 1, '[\"[50010000000,true]\",\"[50010000000,true]\",\"[10,true]\",\"[0,false]\",\"[2400,false]\",\"[25709,false]\",\"[276,false]\",\"[10,false]\",\"[122230000,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[1,false]\",\"[34,false]\",\"[39,false]\",\"[28,false]\",\"[50010000000,true]\",\"[0,false]\",\"[0,false]\",\"[12,false]\"]', '[]', 65, '[0,0,0,0,0,0,false,false,false,false]', '[{\"idBadGes\":\"224\",\"timeofUseBadges\":\"1786803411205\",\"isUse\":\"false\"},{\"idBadGes\":\"224\",\"timeofUseBadges\":\"1786803411205\",\"isUse\":\"false\"},{\"idBadGes\":\"222\",\"timeofUseBadges\":\"1787052383726\",\"isUse\":\"true\"},{\"idBadGes\":\"222\",\"timeofUseBadges\":\"1787052383726\",\"isUse\":\"true\"}]', '[{\"id\":\"1\",\"count\":\"0\",\"countMax\":\"1000000\",\"idBadgesReward\":\"218\"},{\"id\":\"2\",\"count\":\"0\",\"countMax\":\"100\",\"idBadgesReward\":\"219\"},{\"id\":\"3\",\"count\":\"0\",\"countMax\":\"300\",\"idBadgesReward\":\"220\"},{\"id\":\"4\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"221\"},{\"id\":\"5\",\"count\":\"1\",\"countMax\":\"1\",\"idBadgesReward\":\"222\"},{\"id\":\"6\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"223\"},{\"id\":\"7\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"1286\"},{\"id\":\"8\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"1287\"},{\"id\":\"9\",\"count\":\"0\",\"countMax\":\"500\",\"idBadgesReward\":\"224\"},{\"id\":\"10\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"225\"},{\"id\":\"11\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"1300\"},{\"id\":\"12\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"240\"},{\"id\":\"13\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"242\"},{\"id\":\"14\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"243\"},{\"id\":\"15\",\"count\":\"0\",\"countMax\":\"500\",\"idBadgesReward\":\"247\"},{\"id\":\"16\",\"count\":\"0\",\"countMax\":\"2000000\",\"idBadgesReward\":\"253\"},{\"id\":\"17\",\"count\":\"0\",\"countMax\":\"7\",\"idBadgesReward\":\"256\"},{\"id\":\"18\",\"count\":\"0\",\"countMax\":\"1\",\"idBadgesReward\":\"226\"}]', '2026-07-22 13:45:09', '[0,67,68,69,70,71,95,96,97,98,99,100,496,497,498,499,500,501,116,117,118,119,120,121,308,309,310,311,312,313,435,436,437,438,439,440,301,302,303,304,305,306,489,490,491,492,493,494]', '[-1,-1,0]', '[{\"id\":\"0\",\"daNhan\":\"false\"},{\"id\":\"1\",\"daNhan\":\"false\"}]', 0, 0, 0, 50, 1248065624, '[]', '[1,1,null]', '[0,0,0,0]', '[0,0,0,0]', '[0,0,0,0]', '{\"kolQuestStage\":3,\"kolVIPQuestStage\":3,\"destronGas70CompletionCount\":0,\"martialArtsTournamentWins\":0,\"dailySuperHardQuestCompletionCount\":0,\"bossBabyDefeatParticipationCount\":0,\"monsterKillCountAutoTrain\":7165}', 1),
+(1369, 3730, 'admin22', 29, 1, 1, 1, '[73709426036,1233870441,1233977344,0,2]', '[154,764,312]', '[9,78719476343,27038807091,1000,1000,575000,575000,10102,1800,4,4,0,1793876,1304403]', '[10,23,0,1784720186458,1784207754558]', '[\"[652,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738607420]\",\"[653,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738621806]\",\"[659,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738630130]\",\"[660,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738642910]\",\"[656,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738651656]\",\"[1745,1,\\\"[\\\\\\\"[50,27]\\\\\\\",\\\\\\\"[77,27]\\\\\\\",\\\\\\\"[103,27]\\\\\\\",\\\\\\\"[97,11]\\\\\\\",\\\\\\\"[80,25]\\\\\\\",\\\\\\\"[108,5]\\\\\\\",\\\\\\\"[94,3]\\\\\\\",\\\\\\\"[93,3]\\\\\\\"]\\\",1784735035769]\",\"[1716,1,\\\"[\\\\\\\"[77,10]\\\\\\\",\\\\\\\"[94,3]\\\\\\\",\\\\\\\"[9,241]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784206750227]\",\"[1765,1,\\\"[\\\\\\\"[50,18]\\\\\\\",\\\\\\\"[5,5]\\\\\\\",\\\\\\\"[14,10]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[93,14]\\\\\\\"]\\\",1784733996656]\",\"[1806,1,\\\"[\\\\\\\"[50,15]\\\\\\\",\\\\\\\"[77,18]\\\\\\\",\\\\\\\"[103,15]\\\\\\\",\\\\\\\"[5,9]\\\\\\\",\\\\\\\"[28,5]\\\\\\\",\\\\\\\"[30,0]\\\\\\\",\\\\\\\"[93,19]\\\\\\\"]\\\",1784726774495]\",\"[532,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206319754]\",\"[1279,1,\\\"[\\\\\\\"[175,1]\\\\\\\",\\\\\\\"[77,3]\\\\\\\",\\\\\\\"[50,5]\\\\\\\",\\\\\\\"[21,40]\\\\\\\",\\\\\\\"[30,0]\\\\\\\",\\\\\\\"[87,0]\\\\\\\",\\\\\\\"[219,0]\\\\\\\",\\\\\\\"[212,1000]\\\\\\\"]\\\",1784463454469]\"]', '[\"[194,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206577131]\",\"[1150,53,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206586532]\",\"[1153,55,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206598787]\",\"[1152,57,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206606397]\",\"[595,212,\\\"[\\\\\\\"[2,256]\\\\\\\"]\\\",1784207758360]\",\"[921,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784209844575]\",\"[14,70,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206219399]\",\"[15,72,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206216071]\",\"[16,95,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206212565]\",\"[17,117,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206207469]\",\"[18,126,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206202257]\",\"[19,1626,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206197112]\",\"[20,1611,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784206179159]\",\"[1795,1,\\\"[\\\\\\\"[250,35]\\\\\\\"]\\\",1784212919998]\",\"[925,81,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784466058242]\",\"[926,81,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784466071939]\",\"[927,81,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784466078862]\",\"[928,81,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784466083300]\",\"[929,81,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784466087110]\",\"[930,81,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784466092078]\",\"[931,81,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784466094657]\",\"[1612,587,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784474451305]\",\"[992,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784554064060]\",\"[521,1,\\\"[\\\\\\\"[1,33316]\\\\\\\"]\\\",1784555121639]\",\"[595,100,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784636245160]\",\"[561,1,\\\"[\\\\\\\"[14,17]\\\\\\\",\\\\\\\"[21,18]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784640701605]\",\"[1613,197,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784642760893]\",\"[663,1013,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784643818027]\",\"[664,1008,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784643829984]\",\"[665,1007,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784643946786]\",\"[666,10,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784643949723]\",\"[667,9,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784644294312]\",\"[1,1,\\\"[\\\\\\\"[47,2]\\\\\\\",\\\\\\\"[107,8]\\\\\\\",\\\\\\\"[101,7000]\\\\\\\",\\\\\\\"[102,7]\\\\\\\"]\\\",1784636510852]\",\"[7,1,\\\"[\\\\\\\"[6,20]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[101,7000]\\\\\\\",\\\\\\\"[102,7]\\\\\\\"]\\\",1784638412758]\",\"[1070,100000,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784693289302]\",\"[1757,84,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784734943037]\",\"[224,79672,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784735248530]\",\"[987,99838,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784735343347]\",\"[1800,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738350317]\",\"[1799,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738381634]\",\"[1229,1998,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738428795]\",\"[557,1,\\\"[\\\\\\\"[47,654]\\\\\\\",\\\\\\\"[21,15]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784550712855]\",\"[558,1,\\\"[\\\\\\\"[22,60]\\\\\\\",\\\\\\\"[27,10124]\\\\\\\",\\\\\\\"[21,15]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784641134313]\",\"[564,1,\\\"[\\\\\\\"[0,6404]\\\\\\\",\\\\\\\"[21,17]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[72,7]\\\\\\\"]\\\",1784641231557]\",\"[565,1,\\\"[\\\\\\\"[23,66]\\\\\\\",\\\\\\\"[28,10301]\\\\\\\",\\\\\\\"[21,14]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784641308805]\",\"[561,1,\\\"[\\\\\\\"[14,17]\\\\\\\",\\\\\\\"[21,18]\\\\\\\",\\\\\\\"[30,1]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[95,1000]\\\\\\\",\\\\\\\"[96,1000]\\\\\\\"]\\\",1784641309421]\",\"[457,99464,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738681692]\",\"[1083,99999,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738717149]\",\"[1066,99999,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738732632]\",\"[1068,99999,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738741773]\",\"[1067,99999,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738745890]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738796942]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738810102]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738810478]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738810790]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738811105]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738811474]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738811994]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738812342]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738812677]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738813010]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738813338]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738813626]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738814078]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738814422]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738814763]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738815096]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738816526]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738816882]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738817233]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738817610]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738817978]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738818326]\",\"[1085,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738818710]\",\"[1072,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738855342]\",\"[1083,1,\\\"[\\\\\\\"[30,1]\\\\\\\"]\\\",1784738937990]\",\"[1069,999,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784738972624]\",\"[-1,0,\\\"[]\\\",1784738931938]\",\"[-1,0,\\\"[]\\\",1784738930251]\"]', '[\"[22,1,\\\"[\\\\\\\"[0,3]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[101,7000]\\\\\\\",\\\\\\\"[102,7]\\\\\\\"]\\\",1784638415125]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[447,99,\\\"[\\\\\\\"[96,1000]\\\\\\\"]\\\",1784637198549]\",\"[441,99,\\\"[\\\\\\\"[95,1000]\\\\\\\"]\\\",1784637180181]\",\"[442,65,\\\"[\\\\\\\"[101,1000]\\\\\\\"]\\\",1784636601788]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\",\"[-1,0,\\\"[]\\\",1784734588146]\"]', '[\"[860,1,\\\"[\\\\\\\"[50,10]\\\\\\\",\\\\\\\"[77,14]\\\\\\\",\\\\\\\"[117,15]\\\\\\\",\\\\\\\"[154,0]\\\\\\\",\\\\\\\"[93,3]\\\\\\\"]\\\",1784734588146]\",\"[189,47000,\\\"[]\\\",1784734588146]\",\"[745,1,\\\"[\\\\\\\"[103,7]\\\\\\\",\\\\\\\"[30,0]\\\\\\\",\\\\\\\"[93,25]\\\\\\\"]\\\",1784734588146]\",\"[189,24000,\\\"[]\\\",1784734588146]\",\"[956,1,\\\"[]\\\",1784734588146]\",\"[804,1,\\\"[\\\\\\\"[94,6]\\\\\\\",\\\\\\\"[30,0]\\\\\\\",\\\\\\\"[93,5]\\\\\\\"]\\\",1784734588146]\",\"[189,33000,\\\"[]\\\",1784734588146]\",\"[189,12000,\\\"[]\\\",1784734588146]\",\"[189,39000,\\\"[]\\\",1784734588146]\",\"[189,10000,\\\"[]\\\",1784734588146]\",\"[189,12000,\\\"[]\\\",1784734588146]\",\"[189,45000,\\\"[]\\\",1784734588146]\",\"[189,42000,\\\"[]\\\",1784734588146]\",\"[1208,1,\\\"[\\\\\\\"[50,24]\\\\\\\",\\\\\\\"[77,22]\\\\\\\",\\\\\\\"[103,22]\\\\\\\",\\\\\\\"[154,0]\\\\\\\",\\\\\\\"[93,13]\\\\\\\"]\\\",1784734588146]\",\"[189,25000,\\\"[]\\\",1784734588146]\",\"[189,14000,\\\"[]\\\",1784734588146]\",\"[189,10000,\\\"[]\\\",1784734588146]\",\"[189,27000,\\\"[]\\\",1784734588146]\",\"[189,48000,\\\"[]\\\",1784734588146]\",\"[189,8000,\\\"[]\\\",1784734588146]\",\"[189,6000,\\\"[]\\\",1784734588146]\"]', '[\"[1713,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784464260027]\",\"[1631,1,\\\"[\\\\\\\"[50,7]\\\\\\\",\\\\\\\"[77,8]\\\\\\\",\\\\\\\"[103,8]\\\\\\\",\\\\\\\"[236,10]\\\\\\\",\\\\\\\"[101,10]\\\\\\\",\\\\\\\"[30,0]\\\\\\\"]\\\",1784219147233]\",\"[1747,99,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784464390771]\",\"[1228,99,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784464408779]\",\"[1,1,\\\"[\\\\\\\"[47,2]\\\\\\\"]\\\",1784637088390]\",\"[273,1,\\\"[\\\\\\\"[7,25000]\\\\\\\",\\\\\\\"[28,3200]\\\\\\\",\\\\\\\"[107,9]\\\\\\\",\\\\\\\"[50,21]\\\\\\\",\\\\\\\"[102,9]\\\\\\\",\\\\\\\"[218,0]\\\\\\\",\\\\\\\"[228,9]\\\\\\\",\\\\\\\"[50,3]\\\\\\\",\\\\\\\"[50,3]\\\\\\\"]\\\",1784209338231]\"]', '[]', '[]', '[13,25,0,0,false,0,0,0]', '[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1395224,0,0]', '[27,0,0,0]', '[]', '[1789393699860,1789390099116,1789390098230,1787135065756,1789390097237,1789393695752,1789390094356,1789390092580,1789390090876,1789390088924]', '[\"[2,7,1784737487353,0]\",\"[3,7,1784719947663,0]\",\"[7,7,1784639925646,0]\",\"[11,7,1784473548368,0]\",\"[12,7,1784737349380,0]\",\"[17,7,1784738484417,0]\",\"[18,7,1784737468221,0]\",\"[19,7,1784737445437,0]\",\"[26,1,0,0]\"]', '[26,3,7,11,12,17,18,19,-1,-1]', '[\"[1,1,\\\"$Mabư\\\",8,0,4]\",\"[9,90012941400,177698,493,1000,303380,301840,13820,1170,4,506244,464616]\",\"[\\\"[557,1,\\\\\\\"[\\\\\\\\\\\\\\\"[47,653]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[21,15]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[30,1]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[107,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,21]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[102,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[218,0]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[228,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\"]\\\\\\\",1784640645785]\\\",\\\"[558,1,\\\\\\\"[\\\\\\\\\\\\\\\"[22,59]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[27,9205]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[21,15]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[30,1]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[107,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,21]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[102,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[218,0]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[228,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\"]\\\\\\\",1784550710578]\\\",\\\"[564,1,\\\\\\\"[\\\\\\\\\\\\\\\"[0,6378]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[21,17]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[30,1]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[107,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,21]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[102,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[218,0]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[228,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[72,7]\\\\\\\\\\\\\\\"]\\\\\\\",1784641018557]\\\",\\\"[565,1,\\\\\\\"[\\\\\\\\\\\\\\\"[23,64]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[28,10117]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[21,14]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[30,1]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[107,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,21]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[102,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[218,0]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[228,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\"]\\\\\\\",1784641005558]\\\",\\\"[561,1,\\\\\\\"[\\\\\\\\\\\\\\\"[14,17]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[21,18]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[30,1]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[107,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,21]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[102,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[218,0]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[228,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\"]\\\\\\\",1784641134661]\\\",\\\"[1744,1,\\\\\\\"[\\\\\\\\\\\\\\\"[50,27]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[77,27]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[103,27]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[104,21]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[108,4]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[8,4]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[81,13]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[93,3]\\\\\\\\\\\\\\\"]\\\\\\\",1784734997946]\\\",\\\"[1716,1,\\\\\\\"[\\\\\\\\\\\\\\\"[77,10]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[94,3]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[9,0]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[107,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,21]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[102,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[218,0]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[228,9]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[50,3]\\\\\\\\\\\\\\\"]\\\\\\\",1784642139093]\\\"]\",\"[\\\"[2,7,1784736031873,0]\\\",\\\"[1,7,1784736031067,0]\\\",\\\"[6,7,1784736019871,0]\\\",\\\"[12,7,1784735570066,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\"]\"]', '[\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\"]', '[-1,0,0,0,10,0]', '2026-07-16 12:44:54', 'null', '[0,false,1784205894492]', '[]', '[]', 1784219388975, '[0,1784205894492]', 0, '[false,1784465420529,false,false]', '0', '[false,0]', '[0,50000000,100,1784205894492,1784473848368]', '[false,1784465700244,false]', '[false,190,1784473847867,17]', 1784639315884, '[0,0,0,0,0,0]', '[6,false,-1,10000000,1784739007406,1,3705,1784738484405,0,0]', '[-1,0,0,0,5,0]', '[0,0,false,false,false,0,0,0]', 1330, '[\"[1021636554,true]\",\"[1021636554,true]\",\"[10,true]\",\"[0,false]\",\"[6365,false]\",\"[39674,false]\",\"[294,false]\",\"[16,false]\",\"[162643000,false]\",\"[0,false]\",\"[1,false]\",\"[0,false]\",\"[4,false]\",\"[59,false]\",\"[623,false]\",\"[78,false]\",\"[1021636554,true]\",\"[0,false]\",\"[0,false]\",\"[38,false]\"]', '[]', 234, '[0,0,0,0,0,0,false,false,false,false]', '[{\"idBadGes\":\"224\",\"timeofUseBadges\":\"1786806013837\",\"isUse\":\"false\"},{\"idBadGes\":\"224\",\"timeofUseBadges\":\"1786806013837\",\"isUse\":\"false\"},{\"idBadGes\":\"226\",\"timeofUseBadges\":\"1787120975357\",\"isUse\":\"true\"},{\"idBadGes\":\"226\",\"timeofUseBadges\":\"1787120975357\",\"isUse\":\"true\"}]', '[{\"id\":\"1\",\"count\":\"0\",\"countMax\":\"1000000\",\"idBadgesReward\":\"218\"},{\"id\":\"2\",\"count\":\"4\",\"countMax\":\"100\",\"idBadgesReward\":\"219\"},{\"id\":\"3\",\"count\":\"11\",\"countMax\":\"300\",\"idBadgesReward\":\"220\"},{\"id\":\"4\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"221\"},{\"id\":\"5\",\"count\":\"0\",\"countMax\":\"1\",\"idBadgesReward\":\"222\"},{\"id\":\"6\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"223\"},{\"id\":\"7\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"1286\"},{\"id\":\"8\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"1287\"},{\"id\":\"9\",\"count\":\"500\",\"countMax\":\"500\",\"idBadgesReward\":\"224\"},{\"id\":\"10\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"225\"},{\"id\":\"11\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"1300\"},{\"id\":\"12\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"240\"},{\"id\":\"13\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"242\"},{\"id\":\"14\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"243\"},{\"id\":\"15\",\"count\":\"0\",\"countMax\":\"500\",\"idBadgesReward\":\"247\"},{\"id\":\"16\",\"count\":\"0\",\"countMax\":\"2000000\",\"idBadgesReward\":\"253\"},{\"id\":\"17\",\"count\":\"0\",\"countMax\":\"7\",\"idBadgesReward\":\"256\"},{\"id\":\"18\",\"count\":\"0\",\"countMax\":\"1\",\"idBadgesReward\":\"226\"}]', '2026-07-22 01:16:43', '[2,482,483,484,485,486,487,102,103,104,105,106,107,336,337,338,339,340,341,123,124,125,126,127,128,435,436,437,438,439,440,475,476,477,478,479,480,329,330,331,332,333,334,80,81,82,83,84,86]', '[-1,-1,0]', '[{\"id\":\"0\",\"daNhan\":\"false\"},{\"id\":\"1\",\"daNhan\":\"false\"}]', 7, 1, 52, 1000, 11621471473, '[]', '[0,1,null]', '[0,0,0,0]', '[0,0,0,0]', '[0,0,0,0]', '{\"kolQuestStage\":1,\"kolVIPQuestStage\":1,\"destronGas70CompletionCount\":0,\"martialArtsTournamentWins\":0,\"dailySuperHardQuestCompletionCount\":0,\"bossBabyDefeatParticipationCount\":0,\"monsterKillCountAutoTrain\":13883}', 7),
+(1370, 3731, '123bum', 27, 2, 0, 1, '[8519939032,99976211,0,0,0]', '[19,586,360]', '[0,2094850911,2064297411,1000,1000,1120,1300,780,0,0,0,0,2280,1300]', '[10,5,0,1784639562077,1784635255932]', '[\"[-1,0,\\\"[]\\\",1784637952013]\",\"[8,1,\\\"[\\\\\\\"[6,20]\\\\\\\"]\\\",1784634913344]\",\"[-1,0,\\\"[]\\\",1784637408503]\",\"[-1,0,\\\"[]\\\",1784637408503]\",\"[12,1,\\\"[\\\\\\\"[14,1]\\\\\\\"]\\\",1784634913344]\",\"[-1,0,\\\"[]\\\",1784637408503]\",\"[-1,0,\\\"[]\\\",1784637408503]\",\"[-1,0,\\\"[]\\\",1784637408503]\",\"[-1,0,\\\"[]\\\",1784637408503]\",\"[532,1,\\\"[\\\\\\\"[89,0]\\\\\\\"]\\\",1784635387446]\",\"[-1,0,\\\"[]\\\",1784637408503]\"]', '[\"[446,16,\\\"[\\\\\\\"[100,5]\\\\\\\"]\\\",1784635284439]\",\"[194,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635352565]\",\"[521,1,\\\"[\\\\\\\"[1,322]\\\\\\\"]\\\",1784635356789]\",\"[20,98,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635458768]\",\"[1801,16,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635521348]\",\"[19,119,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635535462]\",\"[445,11,\\\"[\\\\\\\"[98,3]\\\\\\\"]\\\",1784635535462]\",\"[447,16,\\\"[\\\\\\\"[101,5]\\\\\\\"]\\\",1784635541521]\",\"[1800,74,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635547494]\",\"[1799,66,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635674356]\",\"[225,124,\\\"[\\\\\\\"[74,0]\\\\\\\"]\\\",1784635677097]\",\"[444,13,\\\"[\\\\\\\"[99,3]\\\\\\\"]\\\",1784635677097]\",\"[1798,73,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635685357]\",\"[1612,73,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635691101]\",\"[442,18,\\\"[\\\\\\\"[96,5]\\\\\\\"]\\\",1784635779022]\",\"[1802,10,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635782262]\",\"[441,20,\\\"[\\\\\\\"[95,5]\\\\\\\"]\\\",1784635836941]\",\"[443,15,\\\"[\\\\\\\"[97,5]\\\\\\\"]\\\",1784636254930]\",\"[595,426,\\\"[\\\\\\\"[2,256]\\\\\\\"]\\\",1784636536706]\",\"[17,6,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784638193067]\",\"[-1,0,\\\"[]\\\",1784637968537]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\"]', '[\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408505]\",\"[-1,0,\\\"[]\\\",1784637408506]\",\"[-1,0,\\\"[]\\\",1784637408506]\",\"[-1,0,\\\"[]\\\",1784637408506]\",\"[-1,0,\\\"[]\\\",1784637408506]\"]', '[]', '[\"[443,1,\\\"[\\\\\\\"[97,5]\\\\\\\"]\\\",1784635189075]\",\"[225,5,\\\"[\\\\\\\"[74,0]\\\\\\\"]\\\",1784635070737]\",\"[20,4,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635087311]\",\"[1800,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635063349]\",\"[1801,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635039757]\",\"[13,5,\\\"[\\\\\\\"[48,100]\\\\\\\"]\\\",1784634928118]\",\"[1799,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635287611]\",\"[193,75,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635339156]\",\"[19,1,\\\"[\\\\\\\"[73,0]\\\\\\\"]\\\",1784635287611]\",\"[502,1,\\\"[\\\\\\\"[123,5]\\\\\\\"]\\\",1784636716602]\"]', '[]', '[]', '[0,0,0,0,false,0,0,0]', '[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]', '[16,2,0,0]', '[]', '[1787227149177,1787227149682,1787227150202,1787227150670,1787227151291,1787227152104,1787227152807,1787227155251,1787227156232,1787227169735]', '[\"[4,7,1784637379810,0]\",\"[5,6,1784636845191,0]\",\"[8,7,0,0]\",\"[13,0,0,0]\",\"[14,7,1784637231039,0]\",\"[21,0,0,0]\",\"[23,0,0,0]\",\"[19,0,0,0]\"]', '[4,5,8,-1,14,-1,-1,-1,-1,-1]', '[\"[1,2,\\\"$Mabư\\\",0,2067064227,2]\",\"[0,2060008941,9461,857,1000,124420,123560,5057,31,1,100693,13324]\",\"[\\\"[2,1,\\\\\\\"[\\\\\\\\\\\\\\\"[47,3]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[107,1]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[101,10000]\\\\\\\\\\\\\\\",\\\\\\\\\\\\\\\"[102,1]\\\\\\\\\\\\\\\"]\\\\\\\",1784634913344]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784637454900]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784637454900]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784637454900]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784637454900]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784637454900]\\\",\\\"[-1,0,\\\\\\\"[]\\\\\\\",1784637454900]\\\"]\",\"[\\\"[2,1,1784639950067,0]\\\",\\\"[1,1,1784639949340,0]\\\",\\\"[6,1,1784639544285,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\",\\\"[-1,0,0,0]\\\"]\"]', '[\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\",\"[0,0,0]\"]', '[-1,0,0,0,10,0]', '2026-07-21 11:55:13', 'null', '[0,false,1784634913403]', '[]', '[]', 0, '[0,1784634913403]', 0, '[false,0,false,false]', '1', '[false,0]', '[0,50000000,100,1784634913403,0]', '[false,0,false]', '[false,0,0,0]', 0, '[0,0,0,0,0,0]', '[0,false,-1,132200,1784639952433,0,0,0,0,0]', '[-1,0,0,0,5,0]', '[0,0,false,false,false,0,0,0]', 1331, '[\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[1,false]\",\"[4242,false]\",\"[25,false]\",\"[5,false]\",\"[9640000,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[13,false]\",\"[0,false]\",\"[4,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\",\"[0,false]\"]', '[]', 0, '[0,0,0,0,0,0,false,false,false,false]', '[]', '[{\"id\":\"1\",\"count\":\"0\",\"countMax\":\"1000000\",\"idBadgesReward\":\"218\"},{\"id\":\"2\",\"count\":\"0\",\"countMax\":\"100\",\"idBadgesReward\":\"219\"},{\"id\":\"3\",\"count\":\"0\",\"countMax\":\"300\",\"idBadgesReward\":\"220\"},{\"id\":\"4\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"221\"},{\"id\":\"5\",\"count\":\"0\",\"countMax\":\"1\",\"idBadgesReward\":\"222\"},{\"id\":\"6\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"223\"},{\"id\":\"7\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"1286\"},{\"id\":\"8\",\"count\":\"0\",\"countMax\":\"5\",\"idBadgesReward\":\"1287\"},{\"id\":\"9\",\"count\":\"291\",\"countMax\":\"500\",\"idBadgesReward\":\"224\"},{\"id\":\"10\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"225\"},{\"id\":\"11\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"1300\"},{\"id\":\"12\",\"count\":\"0\",\"countMax\":\"10\",\"idBadgesReward\":\"240\"},{\"id\":\"13\",\"count\":\"0\",\"countMax\":\"20\",\"idBadgesReward\":\"242\"},{\"id\":\"14\",\"count\":\"0\",\"countMax\":\"30\",\"idBadgesReward\":\"243\"},{\"id\":\"15\",\"count\":\"0\",\"countMax\":\"500\",\"idBadgesReward\":\"247\"},{\"id\":\"16\",\"count\":\"0\",\"countMax\":\"2000000\",\"idBadgesReward\":\"253\"},{\"id\":\"17\",\"count\":\"0\",\"countMax\":\"7\",\"idBadgesReward\":\"256\"},{\"id\":\"18\",\"count\":\"0\",\"countMax\":\"1\",\"idBadgesReward\":\"226\"}]', '2026-07-21 11:55:13', '[4,88,89,90,91,92,93,109,110,111,112,113,322,323,324,325,326,327,130,131,132,133,134,135]', '[-1,-1,0]', '[{\"id\":\"0\",\"daNhan\":\"false\"},{\"id\":\"1\",\"daNhan\":\"false\"}]', 0, 0, 0, 0, 1028000, '[]', '[0,1,\"1970-01-01T00:00\"]', '[0,0,0,0]', '[0,0,0,0]', '[0,0,0,0]', '{\"kolQuestStage\":0,\"kolVIPQuestStage\":0,\"destronGas70CompletionCount\":0,\"martialArtsTournamentWins\":0,\"dailySuperHardQuestCompletionCount\":0,\"bossBabyDefeatParticipationCount\":0,\"monsterKillCountAutoTrain\":286}', 0);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `posts`
+-- Table structure for table `posts`
 --
 
 CREATE TABLE `posts` (
@@ -9465,17 +9479,17 @@ CREATE TABLE `posts` (
   `tieude` varchar(75) NOT NULL,
   `noidung` text NOT NULL,
   `username` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `theloai` int(11) NOT NULL DEFAULT 0,
-  `ghimbai` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `theloai` int(11) NOT NULL DEFAULT '0',
+  `ghimbai` int(11) NOT NULL DEFAULT '0',
   `image` varchar(255) DEFAULT NULL,
-  `trangthai` int(11) NOT NULL DEFAULT 0,
-  `tinhtrang` int(11) NOT NULL DEFAULT 0,
-  `like` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+  `trangthai` int(11) NOT NULL DEFAULT '0',
+  `tinhtrang` int(11) NOT NULL DEFAULT '0',
+  `like` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `posts`
+-- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `tieude`, `noidung`, `username`, `created_at`, `theloai`, `ghimbai`, `image`, `trangthai`, `tinhtrang`, `like`) VALUES
@@ -9491,27 +9505,27 @@ INSERT INTO `posts` (`id`, `tieude`, `noidung`, `username`, `created_at`, `thelo
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `radar`
+-- Table structure for table `radar`
 --
 
 CREATE TABLE `radar` (
   `id` int(11) NOT NULL,
-  `iconId` int(11) DEFAULT 0,
-  `rank` tinyint(4) DEFAULT 0,
-  `max` int(11) DEFAULT 60,
-  `type` int(11) DEFAULT 0,
-  `mob_id` int(11) DEFAULT 1,
-  `body` varchar(500) DEFAULT '[]',
-  `name` varchar(500) DEFAULT '',
-  `info` varchar(2000) DEFAULT '',
-  `options` varchar(2000) DEFAULT '[]',
-  `require` int(11) DEFAULT -1,
-  `require_level` int(11) DEFAULT 0,
-  `aura_id` smallint(6) DEFAULT -1
+  `iconId` int(11) DEFAULT '0',
+  `rank` tinyint(4) DEFAULT '0',
+  `max` int(11) DEFAULT '60',
+  `type` int(11) DEFAULT '0',
+  `mob_id` int(11) DEFAULT '1',
+  `body` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT '[]',
+  `name` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `info` varchar(2000) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `options` varchar(2000) COLLATE utf8mb4_unicode_ci DEFAULT '[]',
+  `require` int(11) DEFAULT '-1',
+  `require_level` int(11) DEFAULT '0',
+  `aura_id` smallint(6) DEFAULT '-1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `radar`
+-- Dumping data for table `radar`
 --
 
 INSERT INTO `radar` (`id`, `iconId`, `rank`, `max`, `type`, `mob_id`, `body`, `name`, `info`, `options`, `require`, `require_level`, `aura_id`) VALUES
@@ -9540,13 +9554,13 @@ INSERT INTO `radar` (`id`, `iconId`, `rank`, `max`, `type`, `mob_id`, `body`, `n
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `settings`
+-- Table structure for table `settings`
 --
 
 CREATE TABLE `settings` (
   `Title` varchar(100) DEFAULT 'Nguyen Duc Kien',
-  `Description` longtext DEFAULT NULL,
-  `Keywords` longtext DEFAULT NULL,
+  `Description` longtext,
+  `Keywords` longtext,
   `SiteKey` varchar(100) DEFAULT NULL,
   `SecretKey` varchar(100) DEFAULT NULL,
   `ServerName` varchar(100) DEFAULT NULL,
@@ -9562,10 +9576,10 @@ CREATE TABLE `settings` (
   `Windows` varchar(50) DEFAULT NULL,
   `IPhone` varchar(50) DEFAULT NULL,
   `Java` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `settings`
+-- Dumping data for table `settings`
 --
 
 INSERT INTO `settings` (`Title`, `Description`, `Keywords`, `SiteKey`, `SecretKey`, `ServerName`, `Fanpage`, `Group`, `Zalo`, `EmailSupport`, `AccountBank`, `PasswordBank`, `NumberBank`, `NameBank`, `Android`, `Windows`, `IPhone`, `Java`) VALUES
@@ -9574,7 +9588,7 @@ INSERT INTO `settings` (`Title`, `Description`, `Keywords`, `SiteKey`, `SecretKe
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `shop`
+-- Table structure for table `shop`
 --
 
 CREATE TABLE `shop` (
@@ -9582,10 +9596,10 @@ CREATE TABLE `shop` (
   `npc_id` int(11) NOT NULL,
   `tag_name` varchar(50) DEFAULT NULL,
   `type_shop` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `shop`
+-- Dumping data for table `shop`
 --
 
 INSERT INTO `shop` (`id`, `npc_id`, `tag_name`, `type_shop`) VALUES
@@ -9625,7 +9639,7 @@ INSERT INTO `shop` (`id`, `npc_id`, `tag_name`, `type_shop`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `shop_ky_gui`
+-- Table structure for table `shop_ky_gui`
 --
 
 CREATE TABLE `shop_ky_gui` (
@@ -9639,10 +9653,10 @@ CREATE TABLE `shop_ky_gui` (
   `itemOption` text NOT NULL,
   `isUpTop` int(11) NOT NULL,
   `isBuy` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `shop_ky_gui`
+-- Dumping data for table `shop_ky_gui`
 --
 
 INSERT INTO `shop_ky_gui` (`id`, `player_id`, `tab`, `item_id`, `gold`, `gem`, `quantity`, `itemOption`, `isUpTop`, `isBuy`) VALUES
@@ -9653,7 +9667,7 @@ INSERT INTO `shop_ky_gui` (`id`, `player_id`, `tab`, `item_id`, `gold`, `gem`, `
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `side_task_template`
+-- Table structure for table `side_task_template`
 --
 
 CREATE TABLE `side_task_template` (
@@ -9664,10 +9678,10 @@ CREATE TABLE `side_task_template` (
   `max_count_lv3` varchar(255) NOT NULL,
   `max_count_lv4` varchar(255) NOT NULL,
   `max_count_lv5` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `side_task_template`
+-- Dumping data for table `side_task_template`
 --
 
 INSERT INTO `side_task_template` (`id`, `NAME`, `max_count_lv1`, `max_count_lv2`, `max_count_lv3`, `max_count_lv4`, `max_count_lv5`) VALUES
@@ -9734,24 +9748,24 @@ INSERT INTO `side_task_template` (`id`, `NAME`, `max_count_lv1`, `max_count_lv2`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `skill_template`
+-- Table structure for table `skill_template`
 --
 
 CREATE TABLE `skill_template` (
   `nclass_id` int(11) NOT NULL,
   `id` int(11) NOT NULL,
   `NAME` varchar(50) NOT NULL,
-  `max_point` smallint(6) NOT NULL DEFAULT 7,
+  `max_point` smallint(6) NOT NULL DEFAULT '7',
   `mana_use_type` smallint(6) NOT NULL,
   `TYPE` smallint(6) NOT NULL,
   `icon_id` int(11) NOT NULL,
   `dam_info` varchar(255) NOT NULL,
-  `slot` int(11) NOT NULL DEFAULT 7,
+  `slot` int(11) NOT NULL DEFAULT '7',
   `skills` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `skill_template`
+-- Dumping data for table `skill_template`
 --
 
 INSERT INTO `skill_template` (`nclass_id`, `id`, `NAME`, `max_point`, `mana_use_type`, `TYPE`, `icon_id`, `dam_info`, `slot`, `skills`) VALUES
@@ -9786,25 +9800,25 @@ INSERT INTO `skill_template` (`nclass_id`, `id`, `NAME`, `max_point`, `mana_use_
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `super_rank`
+-- Table structure for table `super_rank`
 --
 
 CREATE TABLE `super_rank` (
   `id` int(11) NOT NULL,
   `player_id` int(11) NOT NULL,
-  `name` text NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `rank` int(11) NOT NULL,
   `last_pk_time` bigint(20) NOT NULL,
   `last_reward_time` bigint(20) NOT NULL,
   `ticket` int(11) NOT NULL,
   `win` int(11) NOT NULL,
   `lose` int(11) NOT NULL,
-  `history` text NOT NULL,
-  `info` text NOT NULL
+  `history` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `info` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `super_rank`
+-- Dumping data for table `super_rank`
 --
 
 INSERT INTO `super_rank` (`id`, `player_id`, `name`, `rank`, `last_pk_time`, `last_reward_time`, `ticket`, `win`, `lose`, `history`, `info`) VALUES
@@ -11157,22 +11171,25 @@ INSERT INTO `super_rank` (`id`, `player_id`, `name`, `rank`, `last_pk_time`, `la
 (1344, 1364, 'jsjnd', 1326, 1749372137432, 1749372137442, 3, 0, 0, '[]', '{\"head\":0,\"def\":3,\"hp\":140,\"dame\":15,\"body\":16,\"leg\":17}'),
 (1345, 1365, 'tulee876', 1327, 1749381757738, 1749381757751, 3, 0, 0, '[]', '{\"head\":177,\"def\":20,\"hp\":895,\"dame\":68,\"body\":178,\"leg\":179}'),
 (1346, 1366, 'vittraidat', 1328, 1749385856426, 1749385856439, 3, 0, 0, '[]', '{\"head\":1131,\"def\":2,\"hp\":234,\"dame\":35,\"body\":1132,\"leg\":1133}'),
-(1347, 1367, 'admin', 1329, 1757156709946, 1757156710146, 3, 0, 0, '[]', '{\"head\":1861,\"def\":2,\"hp\":230000034,\"dame\":1251862000,\"body\":1864,\"leg\":1865}');
+(1347, 1367, 'admin', 1329, 1784727884682, 1784727885070, 3, 0, 0, '[]', '{\"head\":1861,\"def\":2,\"hp\":200000030,\"dame\":1000000000,\"body\":1864,\"leg\":1865}'),
+(1348, 1368, 'hohongquan', 1, 1784727909859, 1784727910079, 3, 0, 0, '[]', '{\"head\":630,\"def\":300,\"hp\":714601,\"dame\":78882,\"body\":631,\"leg\":632}'),
+(1349, 1369, 'admin22', 1330, 1784683003182, 1784683003695, 3, 0, 0, '[]', '{\"head\":873,\"def\":7200,\"hp\":1793876,\"dame\":100351,\"body\":874,\"leg\":875}'),
+(1350, 1370, '123bum', 1331, 1784634913412, 1784634913435, 3, 0, 0, '[]', '{\"head\":27,\"def\":0,\"hp\":2280,\"dame\":780,\"body\":57,\"leg\":17}');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tab_shop`
+-- Table structure for table `tab_shop`
 --
 
 CREATE TABLE `tab_shop` (
   `id` int(11) NOT NULL,
   `shop_id` int(11) NOT NULL,
   `NAME` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `tab_shop`
+-- Dumping data for table `tab_shop`
 --
 
 INSERT INTO `tab_shop` (`id`, `shop_id`, `NAME`) VALUES
@@ -11238,18 +11255,18 @@ INSERT INTO `tab_shop` (`id`, `shop_id`, `NAME`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `task_badges_template`
+-- Table structure for table `task_badges_template`
 --
 
 CREATE TABLE `task_badges_template` (
   `id` int(11) NOT NULL,
-  `NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `maxCount` int(11) NOT NULL DEFAULT 0,
-  `idBadgesReward` int(11) NOT NULL DEFAULT -1
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=DYNAMIC;
+  `NAME` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `maxCount` int(11) NOT NULL DEFAULT '0',
+  `idBadgesReward` int(11) NOT NULL DEFAULT '-1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `task_badges_template`
+-- Dumping data for table `task_badges_template`
 --
 
 INSERT INTO `task_badges_template` (`id`, `NAME`, `maxCount`, `idBadgesReward`) VALUES
@@ -11275,17 +11292,17 @@ INSERT INTO `task_badges_template` (`id`, `NAME`, `maxCount`, `idBadgesReward`) 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `task_main_template`
+-- Table structure for table `task_main_template`
 --
 
 CREATE TABLE `task_main_template` (
   `id` int(11) NOT NULL,
   `NAME` varchar(255) NOT NULL,
   `detail` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `task_main_template`
+-- Dumping data for table `task_main_template`
 --
 
 INSERT INTO `task_main_template` (`id`, `NAME`, `detail`) VALUES
@@ -11323,21 +11340,21 @@ INSERT INTO `task_main_template` (`id`, `NAME`, `detail`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `task_sub_template`
+-- Table structure for table `task_sub_template`
 --
 
 CREATE TABLE `task_sub_template` (
   `task_main_id` int(11) NOT NULL,
   `NAME` varchar(255) NOT NULL,
-  `max_count` int(11) NOT NULL DEFAULT -1,
+  `max_count` int(11) NOT NULL DEFAULT '-1',
   `notify` varchar(255) NOT NULL DEFAULT '',
-  `npc_id` int(11) NOT NULL DEFAULT -1,
+  `npc_id` int(11) NOT NULL DEFAULT '-1',
   `map` int(11) NOT NULL,
   `ducvupro` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `task_sub_template`
+-- Dumping data for table `task_sub_template`
 --
 
 INSERT INTO `task_sub_template` (`task_main_id`, `NAME`, `max_count`, `notify`, `npc_id`, `map`, `ducvupro`) VALUES
@@ -11468,30 +11485,30 @@ INSERT INTO `task_sub_template` (`task_main_id`, `NAME`, `max_count`, `notify`, 
 (29, 'bạn đã xong nhiệm vụ rồi', -1, '.....', -1, -1, 125);
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `account`
+-- Indexes for table `account`
 --
 ALTER TABLE `account`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `username` (`username`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `achievement_template`
+-- Indexes for table `achievement_template`
 --
 ALTER TABLE `achievement_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `array_head_2_frames`
+-- Indexes for table `array_head_2_frames`
 --
 ALTER TABLE `array_head_2_frames`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `bank_transfers`
+-- Indexes for table `bank_transfers`
 --
 ALTER TABLE `bank_transfers`
   ADD PRIMARY KEY (`id`) USING BTREE,
@@ -11500,75 +11517,75 @@ ALTER TABLE `bank_transfers`
   ADD KEY `status` (`status`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `bg_item_template`
+-- Indexes for table `bg_item_template`
 --
 ALTER TABLE `bg_item_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `clan`
+-- Indexes for table `clan`
 --
 ALTER TABLE `clan`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `clan_task_template`
+-- Indexes for table `clan_task_template`
 --
 ALTER TABLE `clan_task_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `post_id` (`post_id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `data_badges`
+-- Indexes for table `data_badges`
 --
 ALTER TABLE `data_badges`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `flag_bag`
+-- Indexes for table `flag_bag`
 --
 ALTER TABLE `flag_bag`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `giftcode`
+-- Indexes for table `giftcode`
 --
 ALTER TABLE `giftcode`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `head_avatar`
+-- Indexes for table `head_avatar`
 --
 ALTER TABLE `head_avatar`
   ADD PRIMARY KEY (`head_id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `history_transaction`
+-- Indexes for table `history_transaction`
 --
 ALTER TABLE `history_transaction`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `img_by_name`
+-- Indexes for table `img_by_name`
 --
 ALTER TABLE `img_by_name`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `NAME` (`NAME`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `item_option_template`
+-- Indexes for table `item_option_template`
 --
 ALTER TABLE `item_option_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `item_shop`
+-- Indexes for table `item_shop`
 --
 ALTER TABLE `item_shop`
   ADD PRIMARY KEY (`id`) USING BTREE,
@@ -11576,7 +11593,7 @@ ALTER TABLE `item_shop`
   ADD KEY `temp_id` (`temp_id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `item_shop_option`
+-- Indexes for table `item_shop_option`
 --
 ALTER TABLE `item_shop_option`
   ADD PRIMARY KEY (`id`) USING BTREE,
@@ -11584,283 +11601,261 @@ ALTER TABLE `item_shop_option`
   ADD KEY `option_id` (`option_id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `item_template`
+-- Indexes for table `item_template`
 --
 ALTER TABLE `item_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `map_template`
+-- Indexes for table `map_template`
 --
 ALTER TABLE `map_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `mob_template`
+-- Indexes for table `mob_template`
 --
 ALTER TABLE `mob_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `napthe`
+-- Indexes for table `napthe`
 --
 ALTER TABLE `napthe`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `notify`
+-- Indexes for table `notify`
 --
 ALTER TABLE `notify`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `npc_template`
+-- Indexes for table `npc_template`
 --
 ALTER TABLE `npc_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `payments`
+-- Indexes for table `payments`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `refNo` (`refNo`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `phongchat`
+-- Indexes for table `phongchat`
 --
 ALTER TABLE `phongchat`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `player`
+-- Indexes for table `player`
 --
 ALTER TABLE `player`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD UNIQUE KEY `account_id` (`account_id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `posts`
+-- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `shop`
+-- Indexes for table `shop`
 --
 ALTER TABLE `shop`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `npc_id` (`npc_id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `shop_ky_gui`
+-- Indexes for table `shop_ky_gui`
 --
 ALTER TABLE `shop_ky_gui`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `side_task_template`
+-- Indexes for table `side_task_template`
 --
 ALTER TABLE `side_task_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `skill_template`
+-- Indexes for table `skill_template`
 --
 ALTER TABLE `skill_template`
   ADD PRIMARY KEY (`nclass_id`,`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `super_rank`
+-- Indexes for table `super_rank`
 --
 ALTER TABLE `super_rank`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `tab_shop`
+-- Indexes for table `tab_shop`
 --
 ALTER TABLE `tab_shop`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `shop_id` (`shop_id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `task_badges_template`
+-- Indexes for table `task_badges_template`
 --
 ALTER TABLE `task_badges_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `task_main_template`
+-- Indexes for table `task_main_template`
 --
 ALTER TABLE `task_main_template`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `task_sub_template`
+-- Indexes for table `task_sub_template`
 --
 ALTER TABLE `task_sub_template`
   ADD PRIMARY KEY (`ducvupro`) USING BTREE,
   ADD KEY `task_main_id` (`task_main_id`) USING BTREE;
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `account`
+-- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3729;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3732;
 --
--- AUTO_INCREMENT cho bảng `achievement_template`
+-- AUTO_INCREMENT for table `achievement_template`
 --
 ALTER TABLE `achievement_template`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
--- AUTO_INCREMENT cho bảng `bank_transfers`
+-- AUTO_INCREMENT for table `bank_transfers`
 --
 ALTER TABLE `bank_transfers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT cho bảng `comments`
+-- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
 --
--- AUTO_INCREMENT cho bảng `data_badges`
+-- AUTO_INCREMENT for table `data_badges`
 --
 ALTER TABLE `data_badges`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
--- AUTO_INCREMENT cho bảng `giftcode`
+-- AUTO_INCREMENT for table `giftcode`
 --
 ALTER TABLE `giftcode`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1262;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT cho bảng `history_transaction`
+-- AUTO_INCREMENT for table `history_transaction`
 --
 ALTER TABLE `history_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1026;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1028;
 --
--- AUTO_INCREMENT cho bảng `img_by_name`
+-- AUTO_INCREMENT for table `img_by_name`
 --
 ALTER TABLE `img_by_name`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
-
 --
--- AUTO_INCREMENT cho bảng `item_shop`
+-- AUTO_INCREMENT for table `item_shop`
 --
 ALTER TABLE `item_shop`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=999;
-
 --
--- AUTO_INCREMENT cho bảng `item_shop_option`
+-- AUTO_INCREMENT for table `item_shop_option`
 --
 ALTER TABLE `item_shop_option`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1801;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1742;
 --
--- AUTO_INCREMENT cho bảng `napthe`
+-- AUTO_INCREMENT for table `napthe`
 --
 ALTER TABLE `napthe`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
--- AUTO_INCREMENT cho bảng `notify`
+-- AUTO_INCREMENT for table `notify`
 --
 ALTER TABLE `notify`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT cho bảng `payments`
+-- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
--- AUTO_INCREMENT cho bảng `phongchat`
+-- AUTO_INCREMENT for table `phongchat`
 --
 ALTER TABLE `phongchat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT cho bảng `player`
+-- AUTO_INCREMENT for table `player`
 --
 ALTER TABLE `player`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1368;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1371;
 --
--- AUTO_INCREMENT cho bảng `posts`
+-- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
-
 --
--- AUTO_INCREMENT cho bảng `shop`
+-- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
 --
--- AUTO_INCREMENT cho bảng `super_rank`
+-- AUTO_INCREMENT for table `super_rank`
 --
 ALTER TABLE `super_rank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1348;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1351;
 --
--- AUTO_INCREMENT cho bảng `tab_shop`
+-- AUTO_INCREMENT for table `tab_shop`
 --
 ALTER TABLE `tab_shop`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
-
 --
--- AUTO_INCREMENT cho bảng `task_badges_template`
+-- AUTO_INCREMENT for table `task_badges_template`
 --
 ALTER TABLE `task_badges_template`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
--- AUTO_INCREMENT cho bảng `task_sub_template`
+-- AUTO_INCREMENT for table `task_sub_template`
 --
 ALTER TABLE `task_sub_template`
-  MODIFY `ducvupro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `ducvupro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+--
+-- Constraints for dumped tables
+--
 
 --
--- Các ràng buộc cho các bảng đã đổ
---
-
---
--- Các ràng buộc cho bảng `comments`
+-- Constraints for table `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
 
 --
--- Các ràng buộc cho bảng `item_shop_option`
+-- Constraints for table `item_shop_option`
 --
 ALTER TABLE `item_shop_option`
   ADD CONSTRAINT `item_shop_option_ibfk_1` FOREIGN KEY (`item_shop_id`) REFERENCES `item_shop` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `item_shop_option_ibfk_2` FOREIGN KEY (`option_id`) REFERENCES `item_option_template` (`id`);
 
 --
--- Các ràng buộc cho bảng `shop`
+-- Constraints for table `shop`
 --
 ALTER TABLE `shop`
   ADD CONSTRAINT `shop_ibfk_1` FOREIGN KEY (`npc_id`) REFERENCES `npc_template` (`id`);
 
 --
--- Các ràng buộc cho bảng `tab_shop`
+-- Constraints for table `tab_shop`
 --
 ALTER TABLE `tab_shop`
   ADD CONSTRAINT `tab_shop_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`id`) ON DELETE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
