@@ -82,10 +82,6 @@ public class AdminWebServer {
                 "            <label>Số lượng:</label>" +
                 "            <input type=\"number\" id=\"quantity\" placeholder=\"Số lượng\" value=\"1\">" +
                 "        </div>" +
-                "        <div class=\"form-group\">" +
-                "            <label>Chỉ số (Tuỳ chọn. VD: 50:10; 77:20):</label>" +
-                "            <input type=\"text\" id=\"options\" placeholder=\"id_option:chỉ_số (Cách nhau bằng dấu ;)\">" +
-                "        </div>" +
                 "        <button onclick=\"addItem()\">Thêm Vào Hành Trang</button>" +
                 "        <div id=\"resultItem\" class=\"result\"></div>" +
                 "    </div>" +
@@ -153,9 +149,8 @@ public class AdminWebServer {
                 "            const player = document.getElementById('player').value;" +
                 "            const itemId = document.getElementById('itemId').value;" +
                 "            const quantity = document.getElementById('quantity').value;" +
-                "            const options = document.getElementById('options').value;" +
                 "            if(!player || !itemId) return showRes('resultItem', 'Vui lòng nhập đủ thông tin!', false);" +
-                "            fetch('/api/add-item?player=' + encodeURIComponent(player) + '&itemId=' + itemId + '&quantity=' + quantity + '&options=' + encodeURIComponent(options))" +
+                "            fetch('/api/add-item?player=' + encodeURIComponent(player) + '&itemId=' + itemId + '&quantity=' + quantity)" +
                 "            .then(r => r.text())" +
                 "            .then(text => showRes('resultItem', text, text.includes('thành công')))" +
                 "            .catch(e => showRes('resultItem', 'Lỗi kết nối!', false));" +
@@ -200,7 +195,6 @@ public class AdminWebServer {
                 String playerName = query.get("player");
                 int itemId = Integer.parseInt(query.get("itemId"));
                 int quantity = Integer.parseInt(query.get("quantity"));
-                String optionsStr = query.get("options");
 
                 Player player = Client.gI().getPlayer(playerName);
                 if (player == null) {
@@ -210,20 +204,16 @@ public class AdminWebServer {
                     if (item == null || item.template == null) {
                         response = "Lỗi: ID vật phẩm không hợp lệ!";
                     } else {
-                        if (optionsStr != null && !optionsStr.trim().isEmpty()) {
-                            try {
-                                String[] opts = optionsStr.split(";");
-                                for (String opt : opts) {
-                                    if(opt.trim().isEmpty()) continue;
-                                    String[] parts = opt.split(":");
-                                    if (parts.length == 2) {
-                                        int optId = Integer.parseInt(parts[0].trim());
-                                        int param = Integer.parseInt(parts[1].trim());
-                                        item.itemOptions.add(new nro.models.item.Item.ItemOption(optId, param));
-                                    }
-                                }
-                            } catch (Exception ex) {
-                                // Ignore parse errors
+                        // Tự động gán chỉ số mặc định
+                        java.util.List<nro.models.item.Item.ItemOption> defaultOptions = ItemService.gI().getListOptionItemShop((short) itemId);
+                        if (defaultOptions != null && !defaultOptions.isEmpty()) {
+                            for (nro.models.item.Item.ItemOption option : defaultOptions) {
+                                item.itemOptions.add(new nro.models.item.Item.ItemOption(option));
+                            }
+                        } else if (item.isDTS()) {
+                            Item dots = ItemService.gI().DoThienSu(itemId, player.gender);
+                            if (dots != null && dots.itemOptions != null) {
+                                item.itemOptions.addAll(dots.itemOptions);
                             }
                         }
                         InventoryService.gI().addItemBag(player, item);
