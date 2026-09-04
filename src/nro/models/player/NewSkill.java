@@ -86,7 +86,7 @@ public class NewSkill {
     }
 
     private void update() {
-        if (this.isStartSkillSpecial = true) {
+        if (this.isStartSkillSpecial) {
             SkillService.gI().updateSkillSpecial(player);
         }
     }
@@ -106,19 +106,14 @@ public class NewSkill {
         this._xPlayer = _xPlayer;
         this._yPlayer = _yPlayer;
 
-        int length = _xObjTaget - _xPlayer;
-        int dx = dir * (skillSelect.point + 400);
+        int range = skillSelect.point * 50 + 400;
         if (skillSelect.template.id != Skill.MA_PHONG_BA) {
-            if (Math.abs(dx) < Math.abs(length) || Math.abs(length) < 100) {
-                this._xObjTaget = (short) dx;
-            } else {
-                this._xObjTaget = (short) length;
-            }
+            this._xObjTaget = (short) range;
+            this._yObjTaget = 150;
         } else {
-            this._xObjTaget = 75;
+            this._xObjTaget = 500;
+            this._yObjTaget = 150;
         }
-        this._xObjTaget = (short) Math.abs(this._xObjTaget);
-        this._yObjTaget = (short) Math.abs(_yObjTaget);
         this.isStartSkillSpecial = true;
         this.stepSkillSpecial = 0;
         this.lastTimeSkillSpecial = System.currentTimeMillis();

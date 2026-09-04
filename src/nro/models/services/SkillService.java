@@ -173,10 +173,15 @@ public class SkillService {
                         if (playerMap == null || playerMap.id == player.id) {
                             continue;
                         }
-                        if (player.newSkill.dir == -1 && !playerMap.isDie() && Util.getDistance(player, playerMap) <= 500 && this.canAttackPlayer(player, playerMap)) {
+                        if (player.newSkill.dir == -1 && player.location.x > playerMap.location.x && !playerMap.isDie()
+                                && Math.abs(playerMap.location.x - player.location.x) <= player.newSkill._xObjTaget
+                                && Math.abs(playerMap.location.y - player.location.y) <= player.newSkill._yObjTaget
+                                && this.canAttackPlayer(player, playerMap)) {
                             player.newSkill.playersTaget.add(playerMap);
-
-                        } else if (player.newSkill.dir == 1 && !playerMap.isDie() && Util.getDistance(player, playerMap) <= 500 && this.canAttackPlayer(player, playerMap)) {
+                        } else if (player.newSkill.dir == 1 && player.location.x < playerMap.location.x && !playerMap.isDie()
+                                && Math.abs(playerMap.location.x - player.location.x) <= player.newSkill._xObjTaget
+                                && Math.abs(playerMap.location.y - player.location.y) <= player.newSkill._yObjTaget
+                                && this.canAttackPlayer(player, playerMap)) {
                             player.newSkill.playersTaget.add(playerMap);
                         }
                     }
@@ -186,10 +191,14 @@ public class SkillService {
                             if (mobMap == null) {
                                 continue;
                             }
-                            if (player.newSkill.dir == -1 && !mobMap.isDie() && Util.getDistance(player, mobMap) <= 500) {
+                            if (player.newSkill.dir == -1 && player.location.x > mobMap.location.x && !mobMap.isDie()
+                                    && Math.abs(mobMap.location.x - player.location.x) <= player.newSkill._xObjTaget
+                                    && Math.abs(mobMap.location.y - player.location.y) <= player.newSkill._yObjTaget) {
                                 player.newSkill.mobsTaget.add(mobMap);
                                 mobMap.addTemporaryEnemies(player);
-                            } else if (player.newSkill.dir == 1 && !mobMap.isDie() && Util.getDistance(player, mobMap) <= 500) {
+                            } else if (player.newSkill.dir == 1 && player.location.x < mobMap.location.x && !mobMap.isDie()
+                                    && Math.abs(mobMap.location.x - player.location.x) <= player.newSkill._xObjTaget
+                                    && Math.abs(mobMap.location.y - player.location.y) <= player.newSkill._yObjTaget) {
                                 player.newSkill.mobsTaget.add(mobMap);
                                 mobMap.addTemporaryEnemies(player);
                             }
@@ -203,7 +212,7 @@ public class SkillService {
                     player.newSkill.lastTimeSkillSpecial = System.currentTimeMillis();
                     player.newSkill.stepSkillSpecial = 1;
                     newSkillNotFocus(player, 21);
-                } else if (player.newSkill.stepSkillSpecial == 1 && !Util.canDoWithTime(player.newSkill.lastTimeSkillSpecial, NewSkill.TIME_GONG)) {
+                } else if (player.newSkill.stepSkillSpecial == 1 && !Util.canDoWithTime(player.newSkill.lastTimeSkillSpecial, NewSkill.TIME_END_24_25)) {
                     List<Player> playersMap;
                     if (player.isBoss) {
                         playersMap = player.zone.getNotBosses();
@@ -216,14 +225,14 @@ public class SkillService {
                             continue;
                         }
                         if (player.newSkill.dir == -1 && player.location.x > playerMap.location.x && !playerMap.isDie()
-                                && Math.abs(playerMap.location.x - player.newSkill._xPlayer) <= player.newSkill._xObjTaget
-                                && Math.abs(playerMap.location.y - player.newSkill._yPlayer) <= player.newSkill._yObjTaget
+                                && Math.abs(playerMap.location.x - player.location.x) <= player.newSkill._xObjTaget
+                                && Math.abs(playerMap.location.y - player.location.y) <= player.newSkill._yObjTaget
                                 && this.canAttackPlayer(player, playerMap)) {
                             this.playerAttackPlayer(player, playerMap, false);
                         }
                         if (player.newSkill.dir == 1 && player.location.x < playerMap.location.x && !playerMap.isDie()
-                                && Math.abs(playerMap.location.x - player.newSkill._xPlayer) <= player.newSkill._xObjTaget
-                                && Math.abs(playerMap.location.y - player.newSkill._yPlayer) <= player.newSkill._yObjTaget
+                                && Math.abs(playerMap.location.x - player.location.x) <= player.newSkill._xObjTaget
+                                && Math.abs(playerMap.location.y - player.location.y) <= player.newSkill._yObjTaget
                                 && this.canAttackPlayer(player, playerMap)) {
                             this.playerAttackPlayer(player, playerMap, false);
                         }
@@ -234,13 +243,13 @@ public class SkillService {
                                 continue;
                             }
                             if (player.newSkill.dir == -1 && player.location.x > mobMap.location.x && !mobMap.isDie()
-                                    && Math.abs(mobMap.location.x - player.newSkill._xPlayer) <= player.newSkill._xObjTaget
-                                    && Math.abs(mobMap.location.y - player.newSkill._yPlayer) <= player.newSkill._yObjTaget) {
+                                    && Math.abs(mobMap.location.x - player.location.x) <= player.newSkill._xObjTaget
+                                    && Math.abs(mobMap.location.y - player.location.y) <= player.newSkill._yObjTaget) {
                                 this.playerAttackMob(player, mobMap, false, false);
                             }
                             if (player.newSkill.dir == 1 && player.location.x < mobMap.location.x && !mobMap.isDie()
-                                    && Math.abs(mobMap.location.x - player.newSkill._xPlayer) <= player.newSkill._xObjTaget
-                                    && Math.abs(mobMap.location.y - player.newSkill._yPlayer) <= player.newSkill._yObjTaget) {
+                                    && Math.abs(mobMap.location.x - player.location.x) <= player.newSkill._xObjTaget
+                                    && Math.abs(mobMap.location.y - player.location.y) <= player.newSkill._yObjTaget) {
                                 this.playerAttackMob(player, mobMap, false, false);
                             }
                         }
