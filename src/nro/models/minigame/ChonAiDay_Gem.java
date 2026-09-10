@@ -116,10 +116,14 @@ public class ChonAiDay_Gem implements Runnable {
                     resetPlayers(PlayersVIP);
                     resetChonAiDay();
                 }
-
-                Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
+                resetChonAiDay();
+            } finally {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ignored) {
+                }
             }
         }
     }

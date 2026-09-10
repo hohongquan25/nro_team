@@ -63,7 +63,7 @@ public class ChonAiDay_Gold implements Runnable {
                     if (!listN.isEmpty()) {
                         int numWinners = Math.min(listN.size(), 5);
                         Player pl = listN.get(Util.nextInt(0, numWinners - 1));
-                        if (pl != null) {
+                        if (pl != null && pl.inventory != null) {
                             String chatMessage = pl.name + " đã chiến thắng Chọn ai đây giải thưởng";
                             int goldC = goldNormar * 80 / 100;
                             Service.gI().sendThongBao(pl, "Chúc mừng bạn đã dành chiến thắng và nhận được " + Util.numberToMoney(goldC) + " vàng");
@@ -96,9 +96,14 @@ public class ChonAiDay_Gold implements Runnable {
                     resetPlayers(PlayersVIP);
                     resetChonAiDay();
                 }
-                Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
+                resetChonAiDay();
+            } finally {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ignored) {
+                }
             }
         }
     }

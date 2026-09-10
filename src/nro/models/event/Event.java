@@ -42,7 +42,8 @@ public abstract class Event implements IEvent {
                 BossManager.gI().createBoss(bossId);
             }
         } catch (Exception e) {
-            Logger.error(e + "\n");
+            System.err.println("[Event Error] Lỗi khi tạo boss ID " + bossId + ": " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

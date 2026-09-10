@@ -26,12 +26,13 @@ public class The23rdMartialArtCongressManager implements Runnable {
     @Override
     public void run() {
         while (!Maintenance.isRunning) {
+            long start = System.currentTimeMillis();
             try {
-                long start = System.currentTimeMillis();
                 update();
-                Functions.sleep(Math.max(1000 - (System.currentTimeMillis() - start), 10));
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                Functions.sleep(Math.max(1000 - (System.currentTimeMillis() - start), 100));
             }
         }
     }

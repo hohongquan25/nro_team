@@ -33,11 +33,11 @@ public class DrKore extends Boss {
             super.chatM();
             return;
         }
-        if (this.bossAppearTogether == null || this.bossAppearTogether[this.currentLevel] == null) {
+        if (this.bossAppearTogether == null || this.currentLevel >= this.bossAppearTogether.length || this.bossAppearTogether[this.currentLevel] == null) {
             return;
         }
         for (Boss boss : this.bossAppearTogether[this.currentLevel]) {
-            if (boss.id == BossID.ANDROID_19 && !boss.isDie()) {
+            if (boss != null && boss.id == BossID.ANDROID_19 && !boss.isDie()) {
                 this.chat("Hút năng lượng của nó, mau lên");
                 boss.chat("Tuân lệnh đại ca, hê hê hê");
                 break;
@@ -80,8 +80,11 @@ public class DrKore extends Boss {
 
     @Override
     public void doneChatS() {
+        if (this.bossAppearTogether == null || this.currentLevel >= this.bossAppearTogether.length || this.bossAppearTogether[this.currentLevel] == null) {
+            return;
+        }
         for (Boss boss : this.bossAppearTogether[this.currentLevel]) {
-            if (boss.id == BossID.ANDROID_19) {
+            if (boss != null && boss.id == BossID.ANDROID_19) {
                 boss.changeToTypePK();
                 break;
             }

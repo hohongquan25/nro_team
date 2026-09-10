@@ -420,10 +420,13 @@ public class NgocRongNamecService implements Runnable {
                     reInitNgocRongNamec();
                     this.lastTimeReInitNRNM = System.currentTimeMillis();
                 }
-
-                Thread.sleep(1000);
             } catch (Exception e) {
-            e.printStackTrace();
+                e.printStackTrace();
+            } finally {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ignored) {
+                }
             }
         }
     }

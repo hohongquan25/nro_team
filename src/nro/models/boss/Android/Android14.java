@@ -56,16 +56,18 @@ public class Android14 extends Boss {
     }
 
     public void callApk13() {
-        if (this.bossAppearTogether == null || this.bossAppearTogether[this.currentLevel] == null) {
+        if (this.bossAppearTogether == null || this.currentLevel >= this.bossAppearTogether.length || this.bossAppearTogether[this.currentLevel] == null) {
             return;
         }
         for (Boss boss : this.bossAppearTogether[this.currentLevel]) {
-            if (boss.id == BossID.ANDROID_13) {
-                boss.changeStatus(BossStatus.RESPAWN);
-            } else if (boss.id == BossID.ANDROID_15) {
-                boss.changeToTypeNonPK();
-                ((Android15) boss).callApk13 = true;
-                ((Android15) boss).recoverHP();
+            if (boss != null) {
+                if (boss.id == BossID.ANDROID_13) {
+                    boss.changeStatus(BossStatus.RESPAWN);
+                } else if (boss.id == BossID.ANDROID_15) {
+                    boss.changeToTypeNonPK();
+                    ((Android15) boss).callApk13 = true;
+                    ((Android15) boss).recoverHP();
+                }
             }
         }
         this.changeToTypeNonPK();
@@ -79,11 +81,11 @@ public class Android14 extends Boss {
 
     @Override
     public void doneChatS() {
-        if (this.bossAppearTogether == null || this.bossAppearTogether[this.currentLevel] == null) {
+        if (this.bossAppearTogether == null || this.currentLevel >= this.bossAppearTogether.length || this.bossAppearTogether[this.currentLevel] == null) {
             return;
         }
         for (Boss boss : this.bossAppearTogether[this.currentLevel]) {
-            if (boss.id == BossID.ANDROID_15) {
+            if (boss != null && boss.id == BossID.ANDROID_15) {
                 boss.changeToTypePK();
                 break;
             }

@@ -365,7 +365,8 @@ public class BossManager implements Runnable {
                     null;
             };
         } catch (Exception e) {
-            Logger.error(e + "\n");
+            System.err.println("[BossManager Error] Lỗi khi tạo boss ID " + bossID + ": " + e.getMessage());
+            e.printStackTrace();
             return null;
         }
     }

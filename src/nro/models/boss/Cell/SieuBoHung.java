@@ -60,10 +60,14 @@ public class SieuBoHung extends Boss {
                 Thread.sleep(2000);
                 this.chat("Liệu mà giữ mạng đấy");
                 Thread.sleep(2000);
-                for (Boss boss : this.bossAppearTogether[this.currentLevel]) {
-                    switch ((int) boss.id) {
-                        case BossID.XEN_CON_1, BossID.XEN_CON_2, BossID.XEN_CON_3, BossID.XEN_CON_4, BossID.XEN_CON_5, BossID.XEN_CON_6, BossID.XEN_CON_7 ->
-                            boss.changeStatus(BossStatus.RESPAWN);
+                if (this.bossAppearTogether != null && this.currentLevel < this.bossAppearTogether.length && this.bossAppearTogether[this.currentLevel] != null) {
+                    for (Boss boss : this.bossAppearTogether[this.currentLevel]) {
+                        if (boss != null) {
+                            switch ((int) boss.id) {
+                                case BossID.XEN_CON_1, BossID.XEN_CON_2, BossID.XEN_CON_3, BossID.XEN_CON_4, BossID.XEN_CON_5, BossID.XEN_CON_6, BossID.XEN_CON_7 ->
+                                    boss.changeStatus(BossStatus.RESPAWN);
+                            }
+                        }
                     }
                 }
             } catch (Exception ignored) {

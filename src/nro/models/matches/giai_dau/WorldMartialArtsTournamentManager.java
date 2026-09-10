@@ -62,8 +62,8 @@ public class WorldMartialArtsTournamentManager implements Runnable {
     @Override
     public void run() {
         while (!Maintenance.isRunning) {
+            long start = System.currentTimeMillis();
             try {
-                long start = System.currentTimeMillis();
                 if (Util.isAfterMidnight(lastTime)) {
                     listChamp.clear();
                     lastTime = System.currentTimeMillis();
@@ -81,9 +81,10 @@ public class WorldMartialArtsTournamentManager implements Runnable {
                     nextTime = WorldMartialArtsTournamentService.getNextTournamentTime();
                 }
                 updateChatText();
-                Functions.sleep(Math.max(1000 - (System.currentTimeMillis() - start), 10));
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                Functions.sleep(Math.max(1000 - (System.currentTimeMillis() - start), 100));
             }
         }
     }

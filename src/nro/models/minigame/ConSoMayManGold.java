@@ -64,11 +64,18 @@ public class ConSoMayManGold implements Runnable {
                         inBettingPhase = true;
                     }
                 }
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                break;
             } catch (Exception e) {
                 e.printStackTrace();
+                result_next = Util.nextInt((int) min, (int) max);
+                second = 50;
+                currlast = System.currentTimeMillis();
+                inBettingPhase = true;
+            } finally {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    break;
+                }
             }
         }
     }

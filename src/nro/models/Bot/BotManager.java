@@ -20,21 +20,21 @@ public class BotManager implements Runnable {
     @Override
     public void run() {
         while (ServerManager.isRunning) {
+            long st = System.currentTimeMillis();
             try {
-                long st = System.currentTimeMillis();
-
                 for (Bot bot : new ArrayList<>(this.bot)) {
                     if (bot != null) {
                         bot.update();
                     }
                 }
-
-                long timeLeft = 150 - (System.currentTimeMillis() - st);
-                if (timeLeft > 0) {
-                    Thread.sleep(timeLeft);
-                }
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                long timeLeft = 150 - (System.currentTimeMillis() - st);
+                try {
+                    Thread.sleep(Math.max(timeLeft, 50));
+                } catch (InterruptedException ignored) {
+                }
             }
         }
     }

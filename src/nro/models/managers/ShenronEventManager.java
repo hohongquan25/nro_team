@@ -32,13 +32,14 @@ public class ShenronEventManager implements Runnable {
     @Override
     public void run() {
         while (isRunning && !Maintenance.isRunning) {
+            long start = System.currentTimeMillis();
             try {
-                long start = System.currentTimeMillis();
                 update();
-                long timeUpdate = System.currentTimeMillis() - start;
-                Functions.sleep(Math.max(1000 - timeUpdate, 10));
             } catch (Exception ex) {
                 ex.printStackTrace();
+            } finally {
+                long timeUpdate = System.currentTimeMillis() - start;
+                Functions.sleep(Math.max(1000 - timeUpdate, 100));
             }
         }
     }
