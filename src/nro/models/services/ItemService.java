@@ -974,7 +974,7 @@ public class ItemService {
             idTempTL = giay[Util.nextInt(3)];
         }
 
-        int tiLe = Util.nextInt(100, 115);
+        int tiLe = Util.nextInt(150, 200);
         List<ItemOption> itemoptions = new ArrayList<>();
 
         // Tùy chỉnh chỉ số cho từng ID trang bị cụ thể
@@ -1083,6 +1083,152 @@ public class ItemService {
         it.options.clear();
         it.options.addAll(itemoptions);
         return it;
+    }
+
+    public ItemMap randDoTSBoss(Zone zone, int quantity, int x, int y, long id) {
+        short idTempTS;
+        short[] ao = {1048, 1049, 1050};
+        short[] quan = {1051, 1052, 1053};
+        short[] gang = {1054, 1055, 1056};
+        short[] giay = {1057, 1058, 1059};
+        short[] nhan = {1060, 1061, 1062};
+        short[] options = {86, 87};
+
+        if (Util.isTrue(10, 100)) {
+            idTempTS = nhan[Util.nextInt(3)];
+        } else if (Util.isTrue(25, 100)) {
+            idTempTS = gang[Util.nextInt(3)];
+        } else if (Util.isTrue(45, 100)) {
+            idTempTS = quan[Util.nextInt(3)];
+        } else if (Util.isTrue(75, 100)) {
+            idTempTS = ao[Util.nextInt(3)];
+        } else {
+            idTempTS = giay[Util.nextInt(3)];
+        }
+
+        int tiLe = Util.nextInt(150, 200);
+        List<ItemOption> itemoptions = new ArrayList<>();
+
+        switch (idTempTS) {
+            case 1048: // Áo Thiên Sứ TD
+                itemoptions.add(new ItemOption(47, 2800 * tiLe / 100));
+                break;
+            case 1049: // Áo Thiên Sứ NM
+                itemoptions.add(new ItemOption(47, 3200 * tiLe / 100));
+                break;
+            case 1050: // Áo Thiên Sứ XD
+                itemoptions.add(new ItemOption(47, 3600 * tiLe / 100));
+                break;
+            case 1051: // Quần Thiên Sứ TD
+                itemoptions.add(new ItemOption(22, 130 * tiLe / 100));
+                itemoptions.add(new ItemOption(27, (130000 * tiLe / 100) / 20));
+                break;
+            case 1052: // Quần Thiên Sứ NM
+                itemoptions.add(new ItemOption(22, 120 * tiLe / 100));
+                itemoptions.add(new ItemOption(27, (120000 * tiLe / 100) / 20));
+                break;
+            case 1053: // Quần Thiên Sứ XD
+                itemoptions.add(new ItemOption(22, 110 * tiLe / 100));
+                itemoptions.add(new ItemOption(27, (110000 * tiLe / 100) / 20));
+                break;
+            case 1054: // Găng Thiên Sứ TD
+                itemoptions.add(new ItemOption(0, 10500 * tiLe / 100));
+                break;
+            case 1055: // Găng Thiên Sứ NM
+                itemoptions.add(new ItemOption(0, 10000 * tiLe / 100));
+                break;
+            case 1056: // Găng Thiên Sứ XD
+                itemoptions.add(new ItemOption(0, 11500 * tiLe / 100));
+                break;
+            case 1057: // Giày Thiên Sứ TD
+                itemoptions.add(new ItemOption(23, 100 * tiLe / 100));
+                itemoptions.add(new ItemOption(28, (100000 * tiLe / 100) / 20));
+                break;
+            case 1058: // Giày Thiên Sứ NM
+                itemoptions.add(new ItemOption(23, 120 * tiLe / 100));
+                itemoptions.add(new ItemOption(28, (120000 * tiLe / 100) / 20));
+                break;
+            case 1059: // Giày Thiên Sứ XD
+                itemoptions.add(new ItemOption(23, 90 * tiLe / 100));
+                itemoptions.add(new ItemOption(28, (int) ((90000L * tiLe / 100) * 150 / 1000)));
+                break;
+            case 1060:
+            case 1061:
+            case 1062: // Nhẫn Thiên Sứ
+                itemoptions.add(new ItemOption(14, 18 * tiLe / 100));
+                break;
+            default:
+                break;
+        }
+
+        if (tiLe > 100) {
+            itemoptions.add(new ItemOption(207, tiLe - 100));
+        }
+        if (Util.isTrue(30, 100)) {
+            itemoptions.add(new ItemOption(options[Util.nextInt(options.length)], 0));
+        }
+        itemoptions.add(new ItemOption(21, 30));
+        itemoptions.add(new ItemOption(30, 1));
+
+        ItemMap it = new ItemMap(zone, idTempTS, quantity, x, y, id);
+        it.options.clear();
+        it.options.addAll(itemoptions);
+        return it;
+    }
+
+    public void dropBossReward(Zone zone, Player plKill, int x, int y, int rateTL, int rateTS, int rateDoShop, int rateNR) {
+        if (zone == null || plKill == null) {
+            return;
+        }
+        int dropY = zone.map.yPhysicInTop(x, y - 24);
+
+        // 100% rơi vàng
+        int dropGold = 190;
+        int goldQty = Util.nextInt(20000, 30000);
+        ItemMap goldMap = new ItemMap(zone, dropGold, goldQty, x, dropY, plKill.id);
+        Service.gI().dropItemMap(zone, goldMap);
+
+        // Rơi Đồ Thiên Sứ (chỉ số 150%-200%)
+        if (Util.isTrue(rateTS, 100)) {
+            ItemMap itTS = randDoTSBoss(zone, 1, x, dropY, plKill.id);
+            if (itTS != null) {
+                Service.gI().dropItemMap(zone, itTS);
+            }
+        }
+
+        // Rơi Đồ Thần Linh (chỉ số 150%-200%)
+        if (Util.isTrue(rateTL, 100)) {
+            ItemMap itTL = randDoTLBoss(zone, 1, x, dropY, plKill.id);
+            if (itTL != null) {
+                Service.gI().dropItemMap(zone, itTL);
+            }
+        }
+
+        // Rơi trang bị cấp cao có sao pha lê
+        if (Util.isTrue(rateDoShop, 100)) {
+            int group = Util.nextInt(1, 100) <= 70 ? 0 : 1;
+            int[][] drops = {
+                {230, 231, 232, 234, 235, 236, 238, 239, 240, 242, 243, 244, 246, 247, 248, 250, 251, 252, 266, 267, 268, 270, 271, 272, 274, 275, 276},
+                {254, 255, 256, 258, 259, 260, 262, 263, 264, 278, 279, 280}
+            };
+            int dropOptional = drops[group][Util.nextInt(0, drops[group].length - 1)];
+            ItemMap optionalItemMap = new ItemMap(zone, dropOptional, 1, x, dropY, plKill.id);
+            List<Item.ItemOption> optionalOps = getListOptionItemShop((short) dropOptional);
+            optionalOps.forEach(option -> option.param = (int) (option.param * Util.nextInt(100, 115) / 100.0));
+            optionalItemMap.options.addAll(optionalOps);
+            int rand = Util.nextInt(1, 100);
+            int value = (rand <= 80) ? Util.nextInt(1, 3) : (rand <= 97) ? Util.nextInt(4, 5) : 6;
+            optionalItemMap.options.add(new Item.ItemOption(107, value));
+            Service.gI().dropItemMap(zone, optionalItemMap);
+        }
+
+        // Rơi ngọc rồng
+        if (Util.isTrue(rateNR, 100)) {
+            int[] dropItems = {15, 16, 17, 18, 19, 20};
+            int dropOptional = dropItems[Util.nextInt(0, dropItems.length - 1)];
+            ItemMap optionalItemMap = new ItemMap(zone, dropOptional, Util.nextInt(1, 3), x, dropY, plKill.id);
+            Service.gI().dropItemMap(zone, optionalItemMap);
+        }
     }
 
     public Item DoThienSu(int itemId, int gender) {

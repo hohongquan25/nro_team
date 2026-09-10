@@ -139,27 +139,27 @@ public class BossManager implements Runnable {
     }
 
     public void loadBoss() {
-        this.createBoss(BossID.TIEU_DOI_TRUONG);
-        this.createBoss(BossID.TIEU_DOI_TRUONG_NM);
-        this.createBoss(BossID.BOJACK);
-        this.createBoss(BossID.SUPER_BOJACK);
-        this.createBoss(BossID.KING_KONG);
-        this.createBoss(BossID.XEN_BO_HUNG, 1);
-        this.createBoss(BossID.SIEU_BO_HUNG, 1);
-        this.createBoss(BossID.KUKU, 5);
-        this.createBoss(BossID.MAP_DAU_DINH, 5);
-        this.createBoss(BossID.RAMBO, 5);
-        this.createBoss(BossID.FIDE);
-        this.createBoss(BossID.ANDROID_14);
-        this.createBoss(BossID.DR_KORE);
-        this.createBoss(BossID.CUMBER);
-        this.createBoss(BossID.COOLER, 1);
-        this.createBoss(BossID.BLACK_GOKU, 2);
-        this.createBoss(BossID.GOLDEN_FRIEZA, 1);
-        this.createBoss(BossID.SOI_HEC_QUYN1, 2);
-        this.createBoss(BossID.AN_TROM, 5);
-        this.createBoss(BossID.O_DO1, 5);
-        this.createBoss(BossID.BABY, 2);
+        this.createBoss(BossID.TIEU_DOI_TRUONG, 2);
+        this.createBoss(BossID.TIEU_DOI_TRUONG_NM, 2);
+        this.createBoss(BossID.BOJACK, 2);
+        this.createBoss(BossID.SUPER_BOJACK, 2);
+        this.createBoss(BossID.KING_KONG, 2);
+        this.createBoss(BossID.XEN_BO_HUNG, 2);
+        this.createBoss(BossID.SIEU_BO_HUNG, 2);
+        this.createBoss(BossID.KUKU, 8);
+        this.createBoss(BossID.MAP_DAU_DINH, 8);
+        this.createBoss(BossID.RAMBO, 8);
+        this.createBoss(BossID.FIDE, 2);
+        this.createBoss(BossID.ANDROID_14, 2);
+        this.createBoss(BossID.DR_KORE, 2);
+        this.createBoss(BossID.CUMBER, 2);
+        this.createBoss(BossID.COOLER, 2);
+        this.createBoss(BossID.BLACK_GOKU, 3);
+        this.createBoss(BossID.GOLDEN_FRIEZA, 2);
+        this.createBoss(BossID.SOI_HEC_QUYN1, 3);
+        this.createBoss(BossID.AN_TROM, 6);
+        this.createBoss(BossID.O_DO1, 6);
+        this.createBoss(BossID.BABY, 3);
         this.createBoss(BossID.MAT_TROI, 20);
 
     }

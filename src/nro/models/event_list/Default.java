@@ -8,7 +8,7 @@ public class Default extends Event {
 
     @Override
     public void boss() {
-        createBoss(BossID.BROLY, 30);
+        createBoss(BossID.BROLY, 35);
     }
 
 }

@@ -2,6 +2,7 @@ package nro.models.boss.Golden_fireza;
 
 import nro.models.services.SkillService;
 import nro.models.services.Service;
+import nro.models.services.ItemService;
 import nro.models.services.EffectSkillService;
 import nro.models.utils.SkillUtil;
 import nro.models.utils.Util;
@@ -49,6 +50,7 @@ public class GoldenFrieza extends Boss {
         CaiTrangFideVang.options.add(new Item.ItemOption(103, 20));
         CaiTrangFideVang.options.add(new Item.ItemOption(93, 20));
         Service.gI().dropItemMap(this.zone, CaiTrangFideVang);
+        ItemService.gI().dropBossReward(this.zone, plKill, this.location.x, this.location.y, 40, 25, 30, 80);
     }
 
     @Override

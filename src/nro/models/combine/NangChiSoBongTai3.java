@@ -42,6 +42,9 @@ public class NangChiSoBongTai3 {
                 player.combineNew.ratioCombine = RATIO_NANG_CAP;
 
                 int currentHon = InventoryService.gI().getParam(player, ITEM_PARAM_INDEX, HON_BONG_TAI_ID);
+                if (honBongTai != null && currentHon < honBongTai.quantity) {
+                    currentHon = honBongTai.quantity;
+                }
 
                 String npcSay = "|2|Mở chỉ số Bông tai Porata [+3]\n\n";
                 npcSay += "|2|Tỉ lệ thành công: " + player.combineNew.ratioCombine + "%\n";
@@ -99,7 +102,11 @@ public class NangChiSoBongTai3 {
     }
     public static void nangChiSoBongTai(Player player) {
         try {
+            Item honBongTai = InventoryService.gI().findItemBag(player, HON_BONG_TAI_ID);
             int currentHon = InventoryService.gI().getParam(player, ITEM_PARAM_INDEX, HON_BONG_TAI_ID);
+            if (honBongTai != null && currentHon < honBongTai.quantity) {
+                currentHon = honBongTai.quantity;
+            }
             Item daXanhLam = InventoryService.gI().findItemBag(player, DA_XANH_LAM_ID);
 
             if (currentHon < REQUIRED_HON_BONG_TAI || daXanhLam == null || daXanhLam.quantity < 1) {
@@ -136,7 +143,11 @@ public class NangChiSoBongTai3 {
             } else {
                 CombineService.gI().sendEffectFailCombine(player);
             }
-            InventoryService.gI().subParamItemsBag(player, HON_BONG_TAI_ID, ITEM_PARAM_INDEX, REQUIRED_HON_BONG_TAI);
+            if (honBongTai != null && honBongTai.quantity >= REQUIRED_HON_BONG_TAI) {
+                InventoryService.gI().subQuantityItemsBag(player, honBongTai, REQUIRED_HON_BONG_TAI);
+            } else {
+                InventoryService.gI().subParamItemsBag(player, HON_BONG_TAI_ID, ITEM_PARAM_INDEX, REQUIRED_HON_BONG_TAI);
+            }
             InventoryService.gI().subQuantityItemsBag(player, daXanhLam, 1);
 
             Service.gI().sendMoney(player);

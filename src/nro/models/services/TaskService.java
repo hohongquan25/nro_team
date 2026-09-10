@@ -1029,7 +1029,7 @@ public class TaskService {
                     break;
                 case ConstTask.TASK_27_5:
                     npcSay(player, ConstNpc.BUNMA_TL,
-                            "Vào lúc 12h trưa các ngày, bạn đến gặp NPC Ô sin tại map Đại hội võ thuật. sau đó bạn đến các tầng của map để tiêu diệt các mục tiêu:\n"
+                            "Vào lúc 12h trưa và 22h tối các ngày, bạn đến gặp NPC Ô sin tại map Đại hội võ thuật. sau đó bạn đến các tầng của map để tiêu diệt các mục tiêu:\n"
                             + "Hạ 25 Drabura\n"
                             + "Hạ 25 Bui Bui\n"
                             + "Hạ 25 Bui Bui lần 2\n"

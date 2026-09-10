@@ -199,7 +199,7 @@ public class TimeUtil {
     public static boolean isMabuOpen() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        return (hour >= 12 && hour < 13);
+        return (hour >= 12 && hour < 13) || (hour >= 22 && hour < 23);
     }
 
     public static boolean isMabu14HOpen() {

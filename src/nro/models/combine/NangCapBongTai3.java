@@ -49,6 +49,9 @@ public class NangCapBongTai3 {
                 npcSay += "|2|Tỉ lệ thành công: " + RATIO_BONG_TAI + "%\n";
 
                 int currentMvp = InventoryService.gI().getParam(player, ITEM_PARAM_INDEX, ITEM_ID_MANH_VO_BT3);
+                if (manhVo != null && currentMvp < manhVo.quantity) {
+                    currentMvp = manhVo.quantity;
+                }
 
                 if (currentMvp < REQUIRED_MANH_VO_FULL) {
                     npcSay += "|7|Cần " + REQUIRED_MANH_VO_FULL + " " + manhVo.template.name + "\n";
@@ -134,12 +137,20 @@ public class NangCapBongTai3 {
                     bongTai.itemOptions.clear();
                     bongTai.itemOptions.add(new Item.ItemOption(ITEM_OPTION_ID_CAP, ITEM_OPTION_VALUE_CAP_3));
 
-                    // Trừ đủ mảnh vỡ yêu cầu
-                    InventoryService.gI().subParamItemsBag(player, ITEM_ID_MANH_VO_BT3, ITEM_PARAM_INDEX, REQUIRED_MANH_VO_FULL);
+                    // Trừ mảnh vỡ
+                    if (manhVo.quantity >= REQUIRED_MANH_VO_FULL) {
+                        InventoryService.gI().subQuantityItemsBag(player, manhVo, REQUIRED_MANH_VO_FULL);
+                    } else {
+                        InventoryService.gI().subParamItemsBag(player, ITEM_ID_MANH_VO_BT3, ITEM_PARAM_INDEX, REQUIRED_MANH_VO_FULL);
+                    }
                     CombineService.gI().sendEffectSuccessCombine(player);
                 } else {
                     // Thất bại: chỉ trừ mảnh vỡ theo mức fail
-                    InventoryService.gI().subParamItemsBag(player, ITEM_ID_MANH_VO_BT3, ITEM_PARAM_INDEX, REQUIRED_MANH_VO_FAIL);
+                    if (manhVo.quantity >= REQUIRED_MANH_VO_FAIL) {
+                        InventoryService.gI().subQuantityItemsBag(player, manhVo, REQUIRED_MANH_VO_FAIL);
+                    } else {
+                        InventoryService.gI().subParamItemsBag(player, ITEM_ID_MANH_VO_BT3, ITEM_PARAM_INDEX, REQUIRED_MANH_VO_FAIL);
+                    }
                     CombineService.gI().sendEffectFailCombine(player);
                 }
 
