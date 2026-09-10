@@ -774,14 +774,18 @@ public class AdminWebServer {
                 if (name == null || text == null || name.trim().isEmpty() || text.trim().isEmpty()) {
                     response = "Lỗi: Tiêu đề và nội dung không được để trống!";
                 } else {
+                    boolean success = false;
                     try (Connection conn = LocalManager.getConnection();
                             PreparedStatement ps = conn
                                     .prepareStatement("INSERT INTO notify (name, text) VALUES (?, ?)")) {
                         ps.setString(1, name.trim());
                         ps.setString(2, text.trim());
                         ps.executeUpdate();
-                        reloadNotify();
+                        success = true;
                         response = "Thêm thông báo thành công!";
+                    }
+                    if (success) {
+                        reloadNotify();
                     }
                 }
             } catch (Exception e) {
@@ -804,6 +808,7 @@ public class AdminWebServer {
                 if (name == null || text == null || name.trim().isEmpty() || text.trim().isEmpty()) {
                     response = "Lỗi: Tiêu đề và nội dung không được để trống!";
                 } else {
+                    boolean success = false;
                     try (Connection conn = LocalManager.getConnection();
                             PreparedStatement ps = conn
                                     .prepareStatement("UPDATE notify SET name = ?, text = ? WHERE id = ?")) {
@@ -812,11 +817,14 @@ public class AdminWebServer {
                         ps.setInt(3, id);
                         int updated = ps.executeUpdate();
                         if (updated > 0) {
-                            reloadNotify();
+                            success = true;
                             response = "Cập nhật thông báo #" + id + " thành công!";
                         } else {
                             response = "Lỗi: Không tìm thấy thông báo ID " + id;
                         }
+                    }
+                    if (success) {
+                        reloadNotify();
                     }
                 }
             } catch (Exception e) {
@@ -834,16 +842,20 @@ public class AdminWebServer {
                 Map<String, String> params = parseParams(exchange);
                 int id = Integer.parseInt(params.get("id"));
 
+                boolean success = false;
                 try (Connection conn = LocalManager.getConnection();
                         PreparedStatement ps = conn.prepareStatement("DELETE FROM notify WHERE id = ?")) {
                     ps.setInt(1, id);
                     int deleted = ps.executeUpdate();
                     if (deleted > 0) {
-                        reloadNotify();
+                        success = true;
                         response = "Xóa thông báo #" + id + " thành công!";
                     } else {
                         response = "Lỗi: Không tìm thấy thông báo ID " + id;
                     }
+                }
+                if (success) {
+                    reloadNotify();
                 }
             } catch (Exception e) {
                 response = "Lỗi: " + e.getMessage();
