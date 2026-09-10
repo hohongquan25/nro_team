@@ -74,10 +74,7 @@ public class AdminWebServer {
             server = HttpServer.create(new InetSocketAddress(8080), 0);
             server.createContext("/", new RootHandler());
             server.createContext("/admin", new UIHandler());
-            server.createContext("/api/notifies", new NotifiesHandler());
-            server.createContext("/api/add-notify", new AddNotifyHandler());
-            server.createContext("/api/update-notify", new UpdateNotifyHandler());
-            server.createContext("/api/delete-notify", new DeleteNotifyHandler());
+            server.createContext("/admin11", new UIHandler());
             server.createContext("/api/broadcast", new BroadcastHandler());
             server.createContext("/api/login-notice", new LoginNoticeHandler());
             server.createContext("/api/add-item", new AddItemHandler());
@@ -93,27 +90,6 @@ public class AdminWebServer {
         }
     }
 
-    public static void reloadNotify() {
-        try (Connection conn = LocalManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement("SELECT name, text FROM notify ORDER BY id DESC");
-                ResultSet rs = ps.executeQuery()) {
-            List<String> list = new ArrayList<>();
-            while (rs.next()) {
-                list.add(rs.getString("name") + "<>" + rs.getString("text"));
-            }
-            synchronized (Manager.NOTIFY) {
-                Manager.NOTIFY.clear();
-                Manager.NOTIFY.addAll(list);
-            }
-            for (Player p : Client.gI().getPlayers()) {
-                if (p != null && p.session != null) {
-                    ServerNotify.gI().sendNotifyTab(p);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private static void sendResponse(HttpExchange exchange, String response, String contentType, int code)
             throws IOException {
@@ -183,6 +159,61 @@ public class AdminWebServer {
     static class UIHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
+            String path = exchange.getRequestURI().getPath();
+            boolean isSecret = path != null && path.contains("admin11");
+
+            StringBuilder navButtons = new StringBuilder();
+            if (isSecret) {
+                navButtons.append("            <button class=\"nav-btn active\" onclick=\"switchTab('tab-broadcast')\">⚡ Chạy Chữ Server</button>\n")
+                        .append("            <button class=\"nav-btn\" onclick=\"switchTab('tab-login-notice')\">👋 Thông Báo Vào Game</button>\n")
+                        .append("            <button class=\"nav-btn\" onclick=\"switchTab('tab-item')\">🎁 Thêm Vật Phẩm</button>\n")
+                        .append("            <button class=\"nav-btn\" onclick=\"switchTab('tab-money')\">💰 Cộng Tiền</button>\n")
+                        .append("            <button class=\"nav-btn\" onclick=\"switchTab('tab-reg')\">👤 Đăng Ký TK</button>\n");
+            } else {
+                navButtons.append("            <button class=\"nav-btn active\" onclick=\"switchTab('tab-item')\">🎁 Thêm Vật Phẩm</button>\n")
+                        .append("            <button class=\"nav-btn\" onclick=\"switchTab('tab-money')\">💰 Cộng Tiền</button>\n")
+                        .append("            <button class=\"nav-btn\" onclick=\"switchTab('tab-reg')\">👤 Đăng Ký TK</button>\n");
+            }
+
+            StringBuilder secretTabs = new StringBuilder();
+            if (isSecret) {
+                secretTabs.append("        <!-- TAB: PHÁT CHẠY CHỮ SERVER -->\n")
+                        .append("        <div id=\"tab-broadcast\" class=\"tab-content active\">\n")
+                        .append("            <div class=\"card\">\n")
+                        .append("                <div class=\"card-title\">⚡ Phát Thông Báo Chạy Chữ Trực Tiếp (Message 93 toàn server)</div>\n")
+                        .append("                <div class=\"form-group\" style=\"margin-top: 16px;\">\n")
+                        .append("                    <label>Nội dung cần phát loa:</label>\n")
+                        .append("                    <input type=\"text\" id=\"broadcastMsg\" placeholder=\"Ví dụ: Server sẽ bảo trì trong 5 phút nữa, các cư dân vui lòng lưu ý!\">\n")
+                        .append("                </div>\n")
+                        .append("                <button class=\"btn btn-accent\" onclick=\"sendBroadcast()\">📢 Phát Thông Báo Toàn Server</button>\n")
+                        .append("            </div>\n")
+                        .append("        </div>\n\n")
+                        .append("        <!-- TAB: THÔNG BÁO POP-UP KHI VÀO GAME -->\n")
+                        .append("        <div id=\"tab-login-notice\" class=\"tab-content\">\n")
+                        .append("            <div class=\"card\">\n")
+                        .append("                <div class=\"card-header\">\n")
+                        .append("                    <div class=\"card-title\">👋 Bảng Pop-up Admin Khi Đăng Nhập (Big Message)</div>\n")
+                        .append("                    <button class=\"btn btn-refresh btn-sm\" onclick=\"loadLoginNotice()\">🔄 Làm Mới</button>\n")
+                        .append("                </div>\n")
+                        .append("                <p style=\"color: var(--text-muted); margin: 8px 0 20px; font-size: 14px; line-height: 1.6;\">\n")
+                        .append("                    Bảng thông báo này xuất hiện ở giữa màn hình (kèm hình đại diện Admin Quy Lão mũ tím) khi người chơi <b>vừa đăng nhập vào game</b>.<br>\n")
+                        .append("                    Bạn có thể chỉnh sửa nội dung bên dưới và bấm Lưu để cập nhật ngay lập tức mà <b>không cần tắt/bật lại server</b>!\n")
+                        .append("                </p>\n")
+                        .append("                <div class=\"form-group\">\n")
+                        .append("                    <label>Nội dung thông báo (hỗ trợ xuống dòng):</label>\n")
+                        .append("                    <textarea id=\"loginNoticeContent\" rows=\"6\" style=\"min-height: 150px; font-size: 15px; line-height: 1.6;\"></textarea>\n")
+                        .append("                </div>\n")
+                        .append("                <div style=\"display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;\">\n")
+                        .append("                    <button class=\"btn btn-primary\" onclick=\"saveLoginNotice(false)\">💾 Lưu Thông Báo</button>\n")
+                        .append("                    <button class=\"btn btn-accent\" onclick=\"saveLoginNotice(true)\">⚡ Lưu & Gửi Ngay Cho Tất Cả Người Chơi Online</button>\n")
+                        .append("                    <button class=\"btn btn-danger\" onclick=\"clearLoginNotice()\">❌ Xóa / Tắt Bảng Pop-up</button>\n")
+                        .append("                </div>\n")
+                        .append("            </div>\n")
+                        .append("        </div>\n\n");
+            }
+
+            String itemTabClass = isSecret ? "tab-content" : "tab-content active";
+
             String html = "<!DOCTYPE html>\n" +
                     "<html lang=\"vi\">\n" +
                     "<head>\n" +
@@ -286,117 +317,14 @@ public class AdminWebServer {
                     "    <div class=\"navbar\">\n" +
                     "        <div class=\"brand\">🐲 NRO ADMIN PORTAL</div>\n" +
                     "        <div class=\"nav-tabs\">\n" +
-                    "            <button class=\"nav-btn active\" onclick=\"switchTab('tab-notify')\">📢 Bảng Thông Báo</button>\n"
-                    +
-                    "            <button class=\"nav-btn\" onclick=\"switchTab('tab-broadcast')\">⚡ Chạy Chữ Server</button>\n"
-                    +
-                    "            <button class=\"nav-btn\" onclick=\"switchTab('tab-login-notice')\">👋 Thông Báo Vào Game</button>\n"
-                    +
-                    "            <button class=\"nav-btn\" onclick=\"switchTab('tab-item')\">🎁 Thêm Vật Phẩm</button>\n"
-                    +
-                    "            <button class=\"nav-btn\" onclick=\"switchTab('tab-money')\">💰 Cộng Tiền</button>\n" +
-                    "            <button class=\"nav-btn\" onclick=\"switchTab('tab-reg')\">👤 Đăng Ký TK</button>\n" +
+                    navButtons.toString() +
                     "        </div>\n" +
                     "    </div>\n" +
                     "\n" +
                     "    <div class=\"main-container\">\n" +
-                    "        <!-- TAB 1: BẢNG THÔNG BÁO -->\n" +
-                    "        <div id=\"tab-notify\" class=\"tab-content active\">\n" +
-                    "            <div class=\"card\">\n" +
-                    "                <div class=\"card-title\">➕ Thêm Thông Báo Mới (Hiển thị trong game tab Thông Báo)</div>\n"
-                    +
-                    "                <div style=\"margin-top: 16px;\">\n" +
-                    "                    <div class=\"form-group\">\n" +
-                    "                        <label>Tiêu đề thông báo:</label>\n" +
-                    "                        <input type=\"text\" id=\"addNotifyName\" placeholder=\"Ví dụ: Sự kiện Đua Top, Lịch bảo trì, Khuyến mãi nạp...\">\n"
-                    +
-                    "                    </div>\n" +
-                    "                    <div class=\"form-group\">\n" +
-                    "                        <label>Nội dung chi tiết (hỗ trợ nhiều dòng):</label>\n" +
-                    "                        <textarea id=\"addNotifyText\" placeholder=\"Nhập nội dung chi tiết thông báo cho toàn bộ cư dân...\"></textarea>\n"
-                    +
-                    "                    </div>\n" +
-                    "                    <button class=\"btn btn-primary\" onclick=\"createNotify()\">Đăng Thông Báo Ngay</button>\n"
-                    +
-                    "                </div>\n" +
-                    "            </div>\n" +
-                    "\n" +
-                    "            <div class=\"card\">\n" +
-                    "                <div class=\"card-header\">\n" +
-                    "                    <div class=\"card-title\">📋 Danh Sách Thông Báo Đang Hoạt Động</div>\n" +
-                    "                    <button class=\"btn btn-refresh btn-sm\" onclick=\"loadNotifies()\">🔄 Làm Mới</button>\n"
-                    +
-                    "                </div>\n" +
-                    "                <div style=\"overflow-x: auto;\">\n" +
-                    "                    <table>\n" +
-                    "                        <thead>\n" +
-                    "                            <tr>\n" +
-                    "                                <th style=\"width: 80px;\">ID</th>\n" +
-                    "                                <th style=\"width: 250px;\">Tiêu Đề</th>\n" +
-                    "                                <th>Nội Dung</th>\n" +
-                    "                                <th style=\"width: 150px; text-align: center;\">Thao Tác</th>\n" +
-                    "                            </tr>\n" +
-                    "                        </thead>\n" +
-                    "                        <tbody id=\"notifyTableBody\">\n" +
-                    "                            <tr><td colspan=\"4\" style=\"text-align: center; color: var(--text-muted);\">Đang tải dữ liệu...</td></tr>\n"
-                    +
-                    "                        </tbody>\n" +
-                    "                    </table>\n" +
-                    "                </div>\n" +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "\n" +
-                    "        <!-- TAB 2: PHÁT CHẠY CHỮ SERVER -->\n" +
-                    "        <div id=\"tab-broadcast\" class=\"tab-content\">\n" +
-                    "            <div class=\"card\">\n" +
-                    "                <div class=\"card-title\">⚡ Phát Thông Báo Chạy Chữ Trực Tiếp (Message 93 toàn server)</div>\n"
-                    +
-                    "                <p style=\"color: var(--text-muted); margin: 8px 0 20px; font-size: 14px;\">Dòng thông báo này sẽ lập tức chạy ngang màn hình của tất cả người chơi đang đăng nhập mà không cần khởi động lại server.</p>\n"
-                    +
-                    "                <div class=\"form-group\">\n" +
-                    "                    <label>Nội dung cần phát loa:</label>\n" +
-                    "                    <input type=\"text\" id=\"broadcastMsg\" placeholder=\"Ví dụ: Server sẽ bảo trì trong 5 phút nữa, các cư dân vui lòng lưu ý!\">\n"
-                    +
-                    "                </div>\n" +
-                    "                <button class=\"btn btn-accent\" onclick=\"sendBroadcast()\">📢 Phát Thông Báo Toàn Server</button>\n"
-                    +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "\n" +
-                    "        <!-- TAB 6: THÔNG BÁO POP-UP KHI VÀO GAME -->\n" +
-                    "        <div id=\"tab-login-notice\" class=\"tab-content\">\n" +
-                    "            <div class=\"card\">\n" +
-                    "                <div class=\"card-header\">\n" +
-                    "                    <div class=\"card-title\">👋 Bảng Pop-up Admin Khi Đăng Nhập (Big Message)</div>\n"
-                    +
-                    "                    <button class=\"btn btn-refresh btn-sm\" onclick=\"loadLoginNotice()\">🔄 Làm Mới</button>\n"
-                    +
-                    "                </div>\n" +
-                    "                <p style=\"color: var(--text-muted); margin: 8px 0 20px; font-size: 14px; line-height: 1.6;\">\n"
-                    +
-                    "                    Bảng thông báo này xuất hiện ở giữa màn hình (kèm hình đại diện Admin Quy Lão mũ tím) khi người chơi <b>vừa đăng nhập vào game</b>.<br>\n"
-                    +
-                    "                    Bạn có thể chỉnh sửa nội dung bên dưới và bấm Lưu để cập nhật ngay lập tức mà <b>không cần tắt/bật lại server</b>!\n"
-                    +
-                    "                </p>\n" +
-                    "                <div class=\"form-group\">\n" +
-                    "                    <label>Nội dung thông báo (hỗ trợ xuống dòng):</label>\n" +
-                    "                    <textarea id=\"loginNoticeContent\" rows=\"6\" style=\"min-height: 150px; font-size: 15px; line-height: 1.6;\"></textarea>\n"
-                    +
-                    "                </div>\n" +
-                    "                <div style=\"display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;\">\n" +
-                    "                    <button class=\"btn btn-primary\" onclick=\"saveLoginNotice(false)\">💾 Lưu Thông Báo</button>\n"
-                    +
-                    "                    <button class=\"btn btn-accent\" onclick=\"saveLoginNotice(true)\">⚡ Lưu & Gửi Ngay Cho Tất Cả Người Chơi Online</button>\n"
-                    +
-                    "                    <button class=\"btn btn-danger\" onclick=\"clearLoginNotice()\">❌ Xóa / Tắt Bảng Pop-up</button>\n"
-                    +
-                    "                </div>\n" +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "\n" +
+                    secretTabs.toString() +
                     "        <!-- TAB 3: THÊM VẬT PHẨM -->\n" +
-                    "        <div id=\"tab-item\" class=\"tab-content\">\n" +
+                    "        <div id=\"tab-item\" class=\"" + itemTabClass + "\">\n" +
                     "            <div class=\"card\" style=\"max-width: 600px; margin: 0 auto;\">\n" +
                     "                <div class=\"card-title\">🎁 Thêm Vật Phẩm Vào Hành Trang</div>\n" +
                     "                <div style=\"margin-top: 16px;\">\n" +
@@ -475,31 +403,6 @@ public class AdminWebServer {
                     "        </div>\n" +
                     "    </div>\n" +
                     "\n" +
-                    "    <!-- MODAL SỬA THÔNG BÁO -->\n" +
-                    "    <div id=\"editModal\" class=\"modal\">\n" +
-                    "        <div class=\"modal-box\">\n" +
-                    "            <div class=\"modal-header\">\n" +
-                    "                <div class=\"modal-title\">✏️ Chỉnh Sửa Thông Báo</div>\n" +
-                    "                <button class=\"btn-close\" onclick=\"closeEditModal()\">&times;</button>\n" +
-                    "            </div>\n" +
-                    "            <input type=\"hidden\" id=\"editNotifyId\">\n" +
-                    "            <div class=\"form-group\">\n" +
-                    "                <label>Tiêu đề thông báo:</label>\n" +
-                    "                <input type=\"text\" id=\"editNotifyName\">\n" +
-                    "            </div>\n" +
-                    "            <div class=\"form-group\">\n" +
-                    "                <label>Nội dung chi tiết:</label>\n" +
-                    "                <textarea id=\"editNotifyText\"></textarea>\n" +
-                    "            </div>\n" +
-                    "            <div style=\"display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;\">\n"
-                    +
-                    "                <button class=\"btn btn-refresh\" onclick=\"closeEditModal()\">Hủy</button>\n" +
-                    "                <button class=\"btn btn-primary\" onclick=\"saveEditNotify()\">Lưu Thay Đổi</button>\n"
-                    +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "    </div>\n" +
-                    "\n" +
                     "    <div id=\"toast\" class=\"toast\"></div>\n" +
                     "\n" +
                     "    <script>\n" +
@@ -510,7 +413,6 @@ public class AdminWebServer {
                     +
                     "            document.getElementById(tabId).classList.add('active');\n" +
                     "            event.target.classList.add('active');\n" +
-                    "            if (tabId === 'tab-notify') loadNotifies();\n" +
                     "        }\n" +
                     "\n" +
                     "        function showToast(msg, isSuccess = true) {\n" +
@@ -518,100 +420,6 @@ public class AdminWebServer {
                     "            t.className = 'toast ' + (isSuccess ? 'success' : 'error');\n" +
                     "            t.innerText = msg;\n" +
                     "            setTimeout(() => { t.className = 'toast'; }, 3500);\n" +
-                    "        }\n" +
-                    "\n" +
-                    "        let notifiesData = [];\n" +
-                    "        function loadNotifies() {\n" +
-                    "            fetch('/api/notifies')\n" +
-                    "                .then(r => r.json())\n" +
-                    "                .then(data => {\n" +
-                    "                    notifiesData = data;\n" +
-                    "                    const tbody = document.getElementById('notifyTableBody');\n" +
-                    "                    if (data.length === 0) {\n" +
-                    "                        tbody.innerHTML = '<tr><td colspan=\"4\" style=\"text-align: center; color: var(--text-muted);\">Chưa có thông báo nào trong database.</td></tr>';\n"
-                    +
-                    "                        return;\n" +
-                    "                    }\n" +
-                    "                    let html = '';\n" +
-                    "                    data.forEach(item => {\n" +
-                    "                        html += `<tr>\n" +
-                    "                            <td><span class=\"badge\">#${item.id}</span></td>\n" +
-                    "                            <td style=\"font-weight: 600; color: #60a5fa;\">${escapeHtml(item.name)}</td>\n"
-                    +
-                    "                            <td style=\"white-space: pre-line; color: #cbd5e1;\">${escapeHtml(item.text)}</td>\n"
-                    +
-                    "                            <td style=\"text-align: center;\">\n" +
-                    "                                <button class=\"btn btn-refresh btn-sm\" onclick=\"openEditModal(${item.id})\">✏️ Sửa</button>\n"
-                    +
-                    "                                <button class=\"btn btn-danger btn-sm\" onclick=\"deleteNotify(${item.id})\">🗑️ Xóa</button>\n"
-                    +
-                    "                            </td>\n" +
-                    "                        </tr>`;\n" +
-                    "                    });\n" +
-                    "                    tbody.innerHTML = html;\n" +
-                    "                })\n" +
-                    "                .catch(e => showToast('Lỗi nạp danh sách thông báo!', false));\n" +
-                    "        }\n" +
-                    "\n" +
-                    "        function createNotify() {\n" +
-                    "            const name = document.getElementById('addNotifyName').value.trim();\n" +
-                    "            const text = document.getElementById('addNotifyText').value.trim();\n" +
-                    "            if (!name || !text) return showToast('Vui lòng nhập đầy đủ tiêu đề và nội dung!', false);\n"
-                    +
-                    "            const formData = new URLSearchParams();\n" +
-                    "            formData.append('name', name);\n" +
-                    "            formData.append('text', text);\n" +
-                    "            fetch('/api/add-notify', { method: 'POST', body: formData })\n" +
-                    "                .then(r => r.text())\n" +
-                    "                .then(msg => {\n" +
-                    "                    showToast(msg, msg.includes('thành công'));\n" +
-                    "                    document.getElementById('addNotifyName').value = '';\n" +
-                    "                    document.getElementById('addNotifyText').value = '';\n" +
-                    "                    loadNotifies();\n" +
-                    "                });\n" +
-                    "        }\n" +
-                    "\n" +
-                    "        function openEditModal(id) {\n" +
-                    "            const item = notifiesData.find(x => x.id === id);\n" +
-                    "            if (!item) return;\n" +
-                    "            document.getElementById('editNotifyId').value = item.id;\n" +
-                    "            document.getElementById('editNotifyName').value = item.name;\n" +
-                    "            document.getElementById('editNotifyText').value = item.text;\n" +
-                    "            document.getElementById('editModal').classList.add('active');\n" +
-                    "        }\n" +
-                    "\n" +
-                    "        function closeEditModal() {\n" +
-                    "            document.getElementById('editModal').classList.remove('active');\n" +
-                    "        }\n" +
-                    "\n" +
-                    "        function saveEditNotify() {\n" +
-                    "            const id = document.getElementById('editNotifyId').value;\n" +
-                    "            const name = document.getElementById('editNotifyName').value.trim();\n" +
-                    "            const text = document.getElementById('editNotifyText').value.trim();\n" +
-                    "            if (!name || !text) return showToast('Vui lòng nhập đủ thông tin!', false);\n" +
-                    "            const formData = new URLSearchParams();\n" +
-                    "            formData.append('id', id);\n" +
-                    "            formData.append('name', name);\n" +
-                    "            formData.append('text', text);\n" +
-                    "            fetch('/api/update-notify', { method: 'POST', body: formData })\n" +
-                    "                .then(r => r.text())\n" +
-                    "                .then(msg => {\n" +
-                    "                    showToast(msg, msg.includes('thành công'));\n" +
-                    "                    closeEditModal();\n" +
-                    "                    loadNotifies();\n" +
-                    "                });\n" +
-                    "        }\n" +
-                    "\n" +
-                    "        function deleteNotify(id) {\n" +
-                    "            if (!confirm('Bạn có chắc chắn muốn xóa thông báo #' + id + ' không?')) return;\n" +
-                    "            const formData = new URLSearchParams();\n" +
-                    "            formData.append('id', id);\n" +
-                    "            fetch('/api/delete-notify', { method: 'POST', body: formData })\n" +
-                    "                .then(r => r.text())\n" +
-                    "                .then(msg => {\n" +
-                    "                    showToast(msg, msg.includes('thành công'));\n" +
-                    "                    loadNotifies();\n" +
-                    "                });\n" +
                     "        }\n" +
                     "\n" +
                     "        function sendBroadcast() {\n" +
@@ -723,144 +531,11 @@ public class AdminWebServer {
                     "        }\n" +
                     "\n" +
                     "        // Khởi tạo nạp danh sách ban đầu\n" +
-                    "        loadNotifies();\n" +
-                    "        loadLoginNotice();\n" +
+                    "        if (document.getElementById('loginNoticeContent')) loadLoginNotice();\n" +
                     "    </script>\n" +
                     "</body>\n" +
                     "</html>";
             sendResponse(exchange, html, "text/html; charset=UTF-8", 200);
-        }
-    }
-
-    static class NotifiesHandler implements HttpHandler {
-        @Override
-        public void handle(HttpExchange exchange) throws IOException {
-            StringBuilder sb = new StringBuilder();
-            sb.append("[");
-            boolean first = true;
-            try (Connection conn = LocalManager.getConnection();
-                    PreparedStatement ps = conn.prepareStatement("SELECT id, name, text FROM notify ORDER BY id DESC");
-                    ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    if (!first)
-                        sb.append(",");
-                    int id = rs.getInt("id");
-                    String name = rs.getString("name");
-                    String text = rs.getString("text");
-                    sb.append("{")
-                            .append("\"id\":").append(id).append(",")
-                            .append("\"name\":\"").append(escapeJson(name)).append("\",")
-                            .append("\"text\":\"").append(escapeJson(text)).append("\"")
-                            .append("}");
-                    first = false;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            sb.append("]");
-            sendResponse(exchange, sb.toString(), "application/json; charset=UTF-8", 200);
-        }
-    }
-
-    static class AddNotifyHandler implements HttpHandler {
-        @Override
-        public void handle(HttpExchange exchange) throws IOException {
-            String response = "";
-            try {
-                Map<String, String> params = parseParams(exchange);
-                String name = params.get("name");
-                String text = params.get("text");
-
-                if (name == null || text == null || name.trim().isEmpty() || text.trim().isEmpty()) {
-                    response = "Lỗi: Tiêu đề và nội dung không được để trống!";
-                } else {
-                    boolean success = false;
-                    try (Connection conn = LocalManager.getConnection();
-                            PreparedStatement ps = conn
-                                    .prepareStatement("INSERT INTO notify (name, text) VALUES (?, ?)")) {
-                        ps.setString(1, name.trim());
-                        ps.setString(2, text.trim());
-                        ps.executeUpdate();
-                        success = true;
-                        response = "Thêm thông báo thành công!";
-                    }
-                    if (success) {
-                        reloadNotify();
-                    }
-                }
-            } catch (Exception e) {
-                response = "Lỗi: " + e.getMessage();
-            }
-            sendResponse(exchange, response, "text/plain; charset=UTF-8", 200);
-        }
-    }
-
-    static class UpdateNotifyHandler implements HttpHandler {
-        @Override
-        public void handle(HttpExchange exchange) throws IOException {
-            String response = "";
-            try {
-                Map<String, String> params = parseParams(exchange);
-                int id = Integer.parseInt(params.get("id"));
-                String name = params.get("name");
-                String text = params.get("text");
-
-                if (name == null || text == null || name.trim().isEmpty() || text.trim().isEmpty()) {
-                    response = "Lỗi: Tiêu đề và nội dung không được để trống!";
-                } else {
-                    boolean success = false;
-                    try (Connection conn = LocalManager.getConnection();
-                            PreparedStatement ps = conn
-                                    .prepareStatement("UPDATE notify SET name = ?, text = ? WHERE id = ?")) {
-                        ps.setString(1, name.trim());
-                        ps.setString(2, text.trim());
-                        ps.setInt(3, id);
-                        int updated = ps.executeUpdate();
-                        if (updated > 0) {
-                            success = true;
-                            response = "Cập nhật thông báo #" + id + " thành công!";
-                        } else {
-                            response = "Lỗi: Không tìm thấy thông báo ID " + id;
-                        }
-                    }
-                    if (success) {
-                        reloadNotify();
-                    }
-                }
-            } catch (Exception e) {
-                response = "Lỗi: " + e.getMessage();
-            }
-            sendResponse(exchange, response, "text/plain; charset=UTF-8", 200);
-        }
-    }
-
-    static class DeleteNotifyHandler implements HttpHandler {
-        @Override
-        public void handle(HttpExchange exchange) throws IOException {
-            String response = "";
-            try {
-                Map<String, String> params = parseParams(exchange);
-                int id = Integer.parseInt(params.get("id"));
-
-                boolean success = false;
-                try (Connection conn = LocalManager.getConnection();
-                        PreparedStatement ps = conn.prepareStatement("DELETE FROM notify WHERE id = ?")) {
-                    ps.setInt(1, id);
-                    int deleted = ps.executeUpdate();
-                    if (deleted > 0) {
-                        success = true;
-                        response = "Xóa thông báo #" + id + " thành công!";
-                    } else {
-                        response = "Lỗi: Không tìm thấy thông báo ID " + id;
-                    }
-                }
-                if (success) {
-                    reloadNotify();
-                }
-            } catch (Exception e) {
-                response = "Lỗi: " + e.getMessage();
-            }
-            sendResponse(exchange, response, "text/plain; charset=UTF-8", 200);
         }
     }
 
