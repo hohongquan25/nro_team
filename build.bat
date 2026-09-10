@@ -1,14 +1,14 @@
 @echo off
 echo Đang bien dich ma nguon Java...
-if not exist "build\classes" mkdir "build\classes"
+if exist "build\classes" rmdir /s /q "build\classes"
+mkdir "build\classes"
 dir /s /B src\*.java > sources.txt
-javac -encoding UTF-8 -cp "lib/*" -d build/classes @sources.txt
+"C:\Program Files\Java\jdk-21.0.11\bin\javac.exe" -encoding UTF-8 -cp "lib/*" -d build/classes @sources.txt
 
 if %errorlevel% neq 0 (
     echo.
-    echo [LOI] Bien dich that bai! Vui long kiem tra loi code o tren.
+    echo [LOI] Bien dich that bai!
     del sources.txt
-    pause
     exit /b %errorlevel%
 )
 
@@ -18,5 +18,4 @@ echo Đang dong goi file 20.jar...
 
 del sources.txt
 echo.
-echo [THANH CONG] Đa build xong file 20.jar moi! Ban co the chay run.bat de bat server.
-pause
+echo [THANH CONG] Đa build xong file 20.jar moi!
