@@ -344,8 +344,11 @@ public final class Manager {
             while (rs.next()) {
                 ArrHead2Frames arrHead2Frames = new ArrHead2Frames();
                 dataArray = (JSONArray) JSONValue.parse(rs.getString("data"));
-                for (int i = 0; i < dataArray.size(); i++) {
-                    arrHead2Frames.frames.add(Integer.valueOf(dataArray.get(i).toString()));
+                if (dataArray != null) {
+                    for (int i = 0; i < dataArray.size(); i++) {
+                        arrHead2Frames.frames.add(Integer.valueOf(dataArray.get(i).toString()));
+                    }
+                    dataArray.clear();
                 }
                 ARR_HEAD_2_FRAMES.add(arrHead2Frames);
             }
@@ -368,36 +371,46 @@ public final class Manager {
                 if (clan.level < 1) {
                     clan.level = 1;
                 }
-                clan.createTime = (int) (rs.getTimestamp("create_time").getTime() / 1000);
-                dataArray = (JSONArray) JSONValue.parse(rs.getString("members"));
-                for (int i = 0; i < dataArray.size(); i++) {
-                    dataObject = (JSONObject) JSONValue.parse(String.valueOf(dataArray.get(i)));
-                    ClanMember cm = new ClanMember();
-                    cm.clan = clan;
-                    cm.id = Integer.parseInt(String.valueOf(dataObject.get("id")));
-                    cm.name = String.valueOf(dataObject.get("name"));
-                    cm.head = Short.parseShort(String.valueOf(dataObject.get("head")));
-                    cm.body = Short.parseShort(String.valueOf(dataObject.get("body")));
-                    cm.leg = Short.parseShort(String.valueOf(dataObject.get("leg")));
-                    cm.role = Byte.parseByte(String.valueOf(dataObject.get("role")));
-                    cm.donate = Integer.parseInt(String.valueOf(dataObject.get("donate")));
-                    cm.receiveDonate = Integer.parseInt(String.valueOf(dataObject.get("receive_donate")));
-                    cm.memberPoint = Integer.parseInt(String.valueOf(dataObject.get("member_point")));
-                    cm.clanPoint = Integer.parseInt(String.valueOf(dataObject.get("clan_point")));
-                    cm.joinTime = Integer.parseInt(String.valueOf(dataObject.get("join_time")));
-                    cm.timeAskPea = Long.parseLong(String.valueOf(dataObject.get("ask_pea_time")));
-                    try {
-                        cm.powerPoint = Long.parseLong(String.valueOf(dataObject.get("power")));
-                    } catch (NumberFormatException e) {
+                String membersStr = rs.getString("members");
+                if (membersStr != null) {
+                    dataArray = (JSONArray) JSONValue.parse(membersStr);
+                    if (dataArray != null) {
+                        for (int i = 0; i < dataArray.size(); i++) {
+                            dataObject = (JSONObject) JSONValue.parse(String.valueOf(dataArray.get(i)));
+                            if (dataObject != null) {
+                                ClanMember cm = new ClanMember();
+                                cm.clan = clan;
+                                cm.id = Integer.parseInt(String.valueOf(dataObject.get("id")));
+                                cm.name = String.valueOf(dataObject.get("name"));
+                                cm.head = Short.parseShort(String.valueOf(dataObject.get("head")));
+                                cm.body = Short.parseShort(String.valueOf(dataObject.get("body")));
+                                cm.leg = Short.parseShort(String.valueOf(dataObject.get("leg")));
+                                cm.role = Byte.parseByte(String.valueOf(dataObject.get("role")));
+                                cm.donate = Integer.parseInt(String.valueOf(dataObject.get("donate")));
+                                cm.receiveDonate = Integer.parseInt(String.valueOf(dataObject.get("receive_donate")));
+                                cm.memberPoint = Integer.parseInt(String.valueOf(dataObject.get("member_point")));
+                                cm.clanPoint = Integer.parseInt(String.valueOf(dataObject.get("clan_point")));
+                                cm.joinTime = Integer.parseInt(String.valueOf(dataObject.get("join_time")));
+                                cm.timeAskPea = Long.parseLong(String.valueOf(dataObject.get("ask_pea_time")));
+                                try {
+                                    cm.powerPoint = Long.parseLong(String.valueOf(dataObject.get("power")));
+                                } catch (NumberFormatException e) {
+                                }
+                                clan.addClanMember(cm);
+                            }
+                        }
+                        dataArray.clear();
                     }
-                    clan.addClanMember(cm);
                 }
-                dataArray = (JSONArray) JSONValue.parse(rs.getString("thanhTichBDKB"));
-                if (!dataArray.isEmpty()) {
-                    clan.levelDoneBanDoKhoBau = Integer.parseInt(String.valueOf(dataArray.get(0)));
-                    clan.thoiGianHoanThanhBDKB = Long.parseLong(String.valueOf(dataArray.get(1)));
+                String thanhTichBDKBStr = rs.getString("thanhTichBDKB");
+                if (thanhTichBDKBStr != null) {
+                    dataArray = (JSONArray) JSONValue.parse(thanhTichBDKBStr);
+                    if (dataArray != null && !dataArray.isEmpty()) {
+                        clan.levelDoneBanDoKhoBau = Integer.parseInt(String.valueOf(dataArray.get(0)));
+                        clan.thoiGianHoanThanhBDKB = Long.parseLong(String.valueOf(dataArray.get(1)));
+                        dataArray.clear();
+                    }
                 }
-                dataArray.clear();
                 CLANS.add(clan);
             }
 
