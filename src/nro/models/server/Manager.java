@@ -405,7 +405,7 @@ public final class Manager {
                 String thanhTichBDKBStr = rs.getString("thanhTichBDKB");
                 if (thanhTichBDKBStr != null) {
                     dataArray = (JSONArray) JSONValue.parse(thanhTichBDKBStr);
-                    if (dataArray != null && !dataArray.isEmpty()) {
+                    if (dataArray != null && dataArray.size() >= 2) {
                         clan.levelDoneBanDoKhoBau = Integer.parseInt(String.valueOf(dataArray.get(0)));
                         clan.thoiGianHoanThanhBDKB = Long.parseLong(String.valueOf(dataArray.get(1)));
                         dataArray.clear();
