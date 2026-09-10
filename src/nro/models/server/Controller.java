@@ -847,11 +847,10 @@ public class Controller implements IMessageHandler {
     }
 
     private void sendThongBaoServer(Player player) {
-        Service.gI().sendThongBaoFromAdmin(player, "X3 Kinh nghiệm đến hết ngày 11/5."
-                + "\nSự kiện Goku Day."
-                + "\nĐua TOP nhận quà cực khủng."
-                + "\nTích điềm đổi quà."
-                + "\nChi tiết xem tại diễn đàn, fanpage.");
+        String notice = AdminWebServer.getLoginNotice();
+        if (notice != null && !notice.trim().isEmpty()) {
+            Service.gI().sendThongBaoFromAdmin(player, notice);
+        }
     }
 
     public void createChar(MySession session, Message msg) {

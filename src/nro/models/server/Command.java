@@ -65,6 +65,17 @@ public class Command {
                 + "\nThreads: " + Thread.activeCount()
                 + " luồng" + "\n" + SystemMetrics.ToString(),
                 "Ngọc rồng", "Đệ tử", "Bảo trì", "Tìm kiếm\nngười chơi", "Boss", "Đóng"));
+        Consumer<Player> openAdminWeb = player -> {
+            try {
+                if (java.awt.Desktop.isDesktopSupported() && java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)) {
+                    java.awt.Desktop.getDesktop().browse(new java.net.URI("http://localhost:8080/admin"));
+                }
+            } catch (Exception ignored) {
+            }
+            Service.gI().sendThongBaoOK(player, "Trang quản trị Web:\nhttp://localhost:8080/admin");
+        };
+        adminCommands.put("admin", openAdminWeb);
+        adminCommands.put("/admin", openAdminWeb);
     }
 
     private void initParameterizedCommands() {
@@ -79,6 +90,18 @@ public class Command {
 
         parameterizedCommands.put("toado", (player, text) -> {
             Service.gI().sendThongBaoOK(player, "x: " + player.location.x + " - y: " + player.location.y);
+        });
+
+        parameterizedCommands.put("tb ", (player, text) -> {
+            try {
+                String msg = text.substring(3).trim();
+                if (!msg.isEmpty()) {
+                    ServerNotify.gI().notify(msg);
+                    Service.gI().sendThongBao(player, "Đã phát thông báo toàn server!");
+                }
+            } catch (Exception e) {
+                Service.gI().sendThongBao(player, "Cú pháp: tb <nội dung>");
+            }
         });
 
         parameterizedCommands.put("1", (player, text) -> {

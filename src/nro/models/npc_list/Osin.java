@@ -66,11 +66,11 @@ public class Osin extends Npc {
                     } else {
                         if (hasEnergyJar) {
                             this.createOtherMenu(player, ConstNpc.MENU_NOT_OPEN_MMB_WITH_JAR,
-                                    "Vào lúc 12h và 22h tôi sẽ bí mật...\nđuổi theo 2 tên đồ tể...\nQuý vị nào muốn đi theo thì xin mời !",
+                                    "Vào lúc 12h, 22h và 24h (12h đêm) tôi sẽ bí mật...\nđuổi theo 2 tên đồ tể...\nQuý vị nào muốn đi theo thì xin mời !",
                                     "Ok", "Bình hút năng lượng");
                         } else {
                             this.createOtherMenu(player, ConstNpc.MENU_NOT_OPEN_MMB_NO_JAR,
-                                    "Vào lúc 12h và 22h tôi sẽ bí mật...\nđuổi theo 2 tên đồ tể...\nQuý vị nào muốn đi theo thì xin mời !",
+                                    "Vào lúc 12h, 22h và 24h (12h đêm) tôi sẽ bí mật...\nđuổi theo 2 tên đồ tể...\nQuý vị nào muốn đi theo thì xin mời !",
                                     "Ok");
                         }
                     }
