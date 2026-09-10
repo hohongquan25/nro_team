@@ -3,7 +3,7 @@ echo Đang bien dich ma nguon Java...
 if exist "build\classes" rmdir /s /q "build\classes"
 mkdir "build\classes"
 dir /s /B src\*.java > sources.txt
-"C:\Program Files\Java\jdk-21.0.11\bin\javac.exe" -encoding UTF-8 -cp "lib/*" -d build/classes @sources.txt
+"C:\Program Files\Java\jdk-21.0.11\bin\javac.exe" --release 17 -encoding UTF-8 -cp "lib/*" -d build/classes @sources.txt
 
 if %errorlevel% neq 0 (
     echo.
