@@ -974,7 +974,7 @@ public class ItemService {
             idTempTL = giay[Util.nextInt(3)];
         }
 
-        int tiLe = Util.nextInt(150, 200);
+        int tiLe = Util.nextInt(130, 150);
         List<ItemOption> itemoptions = new ArrayList<>();
 
         // Tùy chỉnh chỉ số cho từng ID trang bị cụ thể
@@ -1106,7 +1106,7 @@ public class ItemService {
             idTempTS = giay[Util.nextInt(3)];
         }
 
-        int tiLe = Util.nextInt(150, 200);
+        int tiLe = Util.nextInt(130, 150);
         List<ItemOption> itemoptions = new ArrayList<>();
 
         switch (idTempTS) {
@@ -1188,7 +1188,7 @@ public class ItemService {
         ItemMap goldMap = new ItemMap(zone, dropGold, goldQty, x, dropY, plKill.id);
         Service.gI().dropItemMap(zone, goldMap);
 
-        // Rơi Đồ Thiên Sứ (chỉ số 150%-200%)
+        // Rơi Đồ Thiên Sứ (chỉ số 130%-150%)
         if (Util.isTrue(rateTS, 100)) {
             ItemMap itTS = randDoTSBoss(zone, 1, x, dropY, plKill.id);
             if (itTS != null) {
@@ -1196,7 +1196,7 @@ public class ItemService {
             }
         }
 
-        // Rơi Đồ Thần Linh (chỉ số 150%-200%)
+        // Rơi Đồ Thần Linh (chỉ số 130%-150%)
         if (Util.isTrue(rateTL, 100)) {
             ItemMap itTL = randDoTLBoss(zone, 1, x, dropY, plKill.id);
             if (itTL != null) {
