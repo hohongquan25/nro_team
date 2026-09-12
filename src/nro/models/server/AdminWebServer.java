@@ -468,8 +468,7 @@ public class AdminWebServer {
                     "            const itemId = document.getElementById('itemId').value;\n" +
                     "            const quantity = document.getElementById('quantity').value;\n" +
                     "            if(!player || !itemId) return showToast('Vui lòng nhập đủ thông tin!', false);\n" +
-                    "            fetch('/api/add-item?player=' + encodeURIComponent(player) + '&itemId=' + itemId + '&quantity=' + quantity)\n"
-                    +
+                    "            fetch('/api/add-item?player=' + encodeURIComponent(player) + '&itemId=' + itemId + '&quantity=' + quantity)\n" +
                     "            .then(r => r.text())\n" +
                     "            .then(text => showToast(text, text.includes('thành công')))\n" +
                     "            .catch(e => showToast('Lỗi kết nối!', false));\n" +
@@ -621,7 +620,10 @@ public class AdminWebServer {
                             if (dots != null && dots.itemOptions != null) {
                                 item.itemOptions.addAll(dots.itemOptions);
                             }
+                        } else {
+                            applyDefaultSpecialOptions(item);
                         }
+
                         InventoryService.gI().addItemBag(player, item);
                         InventoryService.gI().sendItemBags(player);
                         Service.gI().sendThongBao(player,
@@ -634,6 +636,91 @@ public class AdminWebServer {
                 response = "Lỗi: " + e.getMessage();
             }
             sendResponse(exchange, response, "text/plain; charset=UTF-8", 200);
+        }
+    }
+
+    public static void applyDefaultSpecialOptions(Item item) {
+        if (item == null || item.template == null) {
+            return;
+        }
+        int id = item.template.id;
+        // Sao pha lê Cấp 1 (441 -> 447)
+        if (id >= 441 && id <= 447) {
+            int optId = switch (id) {
+                case 441 -> 95;  // Biến 5% sát thương cận chiến thành HP
+                case 442 -> 96;  // Biến 5% sát thương cận chiến thành KI
+                case 443 -> 97;  // Biến 5% sát thương chưởng thành HP
+                case 444 -> 98;  // Biến 3% sát thương chưởng thành KI
+                case 445 -> 99;  // Phản 3% sát thương cận chiến
+                case 446 -> 100; // Tăng 5% vàng rơi từ quái
+                case 447 -> 101; // Tăng 5% tiềm năng, sức mạnh
+                default -> -1;
+            };
+            int param = (id == 444 || id == 445) ? 3 : 5;
+            if (optId != -1) {
+                item.itemOptions.add(new Item.ItemOption(optId, param));
+            }
+        }
+        // Sao pha lê Cấp 2 (1416 -> 1422)
+        else if (id >= 1416 && id <= 1422) {
+            int optId = switch (id) {
+                case 1416 -> 95;
+                case 1417 -> 96;
+                case 1418 -> 97;
+                case 1419 -> 98;
+                case 1420 -> 99;
+                case 1421 -> 100;
+                case 1422 -> 101;
+                default -> -1;
+            };
+            int param = (id == 1419 || id == 1420) ? 3 : 5;
+            if (optId != -1) {
+                item.itemOptions.add(new Item.ItemOption(optId, param));
+            }
+        }
+        // Sao pha lê Cấp 3 / Lấp lánh (1426 -> 1434)
+        else if (id >= 1426 && id <= 1434) {
+            int optId = switch (id) {
+                case 1426 -> 95;
+                case 1427 -> 96;
+                case 1428 -> 97;
+                case 1429 -> 98;
+                case 1430 -> 99;
+                case 1431 -> 100;
+                case 1432 -> 101;
+                case 1433 -> 153;
+                case 1434 -> 160;
+                default -> -1;
+            };
+            int param = (id == 1429 || id == 1430) ? 4 : (id == 1433 || id == 1434 ? 5 : 6);
+            if (optId != -1) {
+                item.itemOptions.add(new Item.ItemOption(optId, param));
+            }
+        }
+        // Đá pha lê (14 -> 20)
+        else if (id >= 14 && id <= 20) {
+            int optId = switch (id) {
+                case 14 -> 108; // Chí mạng +2%
+                case 15 -> 94;  // Giáp +2%
+                case 16 -> 50;  // Sức đánh +3%
+                case 17 -> 81;  // Hút KI +5%
+                case 18 -> 80;  // Hút HP +5%
+                case 19 -> 103; // HP +5%
+                case 20 -> 77;  // KI +5%
+                default -> -1;
+            };
+            int param = switch (id) {
+                case 14, 15 -> 2;
+                case 16 -> 3;
+                default -> 5;
+            };
+            if (optId != -1) {
+                item.itemOptions.add(new Item.ItemOption(optId, param));
+            }
+        }
+        // Đá nâng cấp (220 -> 224: Cấp 1 đến cấp 5)
+        else if (id >= 220 && id <= 224) {
+            item.itemOptions.add(new Item.ItemOption(71 - (id - 220), 0));
         }
     }
 
