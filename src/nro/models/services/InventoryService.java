@@ -994,12 +994,12 @@ public class InventoryService {
 
     public boolean findItemBongTaiCap2(Player player) {
         for (Item item : player.inventory.itemsBag) {
-            if (item.isNotNullItem() && item.template.id == 921) {
+            if (item != null && item.isNotNullItem() && item.template != null && item.template.id == 921) {
                 return true;
             }
         }
         for (Item item : player.inventory.itemsBox) {
-            if (item.isNotNullItem() && item.template.id == 921) {
+            if (item != null && item.isNotNullItem() && item.template != null && item.template.id == 921) {
                 return true;
             }
         }
@@ -1007,12 +1007,12 @@ public class InventoryService {
     }
     public boolean findItemBongTaiCap3(Player player) {
         for (Item item : player.inventory.itemsBag) {
-            if (item.isNotNullItem() && item.template.id == 1819) {
+            if (item != null && item.isNotNullItem() && item.template != null && item.template.id == 1819) {
                 return true;
             }
         }
         for (Item item : player.inventory.itemsBox) {
-            if (item.isNotNullItem() && item.template.id == 1819) {
+            if (item != null && item.isNotNullItem() && item.template != null && item.template.id == 1819) {
                 return true;
             }
         }
@@ -1021,12 +1021,12 @@ public class InventoryService {
 
     public boolean findItemBongTai(Player player) {
         for (Item item : player.inventory.itemsBag) {
-            if (item.isNotNullItem() && (item.template.id == 921 || item.template.id == 454)) {
+            if (item != null && item.isNotNullItem() && item.template != null && (item.template.id == 921 || item.template.id == 454)) {
                 return true;
             }
         }
         for (Item item : player.inventory.itemsBox) {
-            if (item.isNotNullItem() && (item.template.id == 921 || item.template.id == 454)) {
+            if (item != null && item.isNotNullItem() && item.template != null && (item.template.id == 921 || item.template.id == 454)) {
                 return true;
             }
         }
