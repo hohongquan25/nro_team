@@ -13,6 +13,7 @@ dist/
 # Logs
 logs/
 *.log
+*.jar
 
 # Database backups
 # *.sql
