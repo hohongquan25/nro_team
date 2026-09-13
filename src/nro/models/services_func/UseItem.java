@@ -1868,15 +1868,28 @@ public class UseItem {
         }
         if (pea != null) {
             int hpKiHoiPhuc = 0;
-            int lvPea = Integer.parseInt(pea.template.name.substring(13));
+            int lvPea = 1;
+            try {
+                lvPea = Integer.parseInt(pea.template.name.replaceAll("[^0-9]", ""));
+            } catch (Exception ignored) {
+            }
             for (Item.ItemOption io : pea.itemOptions) {
-                if (io.optionTemplate.id == 2) {
+                if (io.optionTemplate != null && io.optionTemplate.id == 2) {
                     hpKiHoiPhuc = io.param * 1000;
                     break;
                 }
-                if (io.optionTemplate.id == 48) {
+                if (io.optionTemplate != null && io.optionTemplate.id == 48) {
                     hpKiHoiPhuc = io.param;
                     break;
+                }
+            }
+            if (hpKiHoiPhuc == 0) {
+                if (lvPea == 1) {
+                    hpKiHoiPhuc = 100;
+                } else if (lvPea == 2) {
+                    hpKiHoiPhuc = 500;
+                } else {
+                    hpKiHoiPhuc = (int) Math.pow(2, lvPea - 2) * 1000;
                 }
             }
             player.nPoint.setHp(player.nPoint.hp + hpKiHoiPhuc);

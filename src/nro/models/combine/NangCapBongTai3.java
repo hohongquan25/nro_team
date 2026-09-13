@@ -134,7 +134,7 @@ public class NangCapBongTai3 {
                 if (Util.isTrue(RATIO_BONG_TAI, 100)) {
                     // Thành công: nâng template + set option cấp 3
                     bongTai.template = ItemService.gI().getTemplate(ITEM_ID_BONG_TAI_C3);
-                    bongTai.itemOptions.clear();
+                    bongTai.itemOptions.removeIf(opt -> opt != null && opt.optionTemplate != null && opt.optionTemplate.id == ITEM_OPTION_ID_CAP);
                     bongTai.itemOptions.add(new Item.ItemOption(ITEM_OPTION_ID_CAP, ITEM_OPTION_VALUE_CAP_3));
 
                     // Trừ mảnh vỡ
