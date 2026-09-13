@@ -258,6 +258,8 @@ public class Pet extends Player {
     public void unFusion() {
         master.fusion.typeFusion = 0;
         this.status = PROTECT;
+        master.nPoint.calPoint();
+        master.nPoint.setFullHpMp();
         Service.gI().point(master);
         joinMapMaster();
         fusionEffect(master.fusion.typeFusion);

@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import nro.models.data.LocalManager;
 import nro.models.item.Item;
 import nro.models.player.Player;
@@ -213,13 +215,24 @@ public class AdminWebServer {
             }
 
             String itemTabClass = isSecret ? "tab-content" : "tab-content active";
+            String pageTitle = isSecret ? "NRO Root Admin Panel" : "NRO Player Panel";
+            String brandTitle = isSecret ? "⚡ NRO ROOT ADMIN" : "🐲 NRO PLAYER PORTAL";
+
+            String optionInputHtml = isSecret ?
+                    "                    <div class=\"form-group\">\n" +
+                    "                        <label>Chỉ số (Option) - <b style=\"color: #60a5fa;\">(Dành riêng cho Admin Root)</b>:</label>\n" +
+                    "                        <input type=\"text\" id=\"itemOptions\" placeholder=\"Ví dụ: 50-15, 77-20 hoặc [50,15],[77,20]\">\n" +
+                    "                        <small style=\"color: var(--text-muted); font-size: 12px; margin-top: 4px; line-height: 1.5;\">\n" +
+                    "                            Định dạng: <b>id-param</b> (cách nhau dấu phẩy hoặc khoảng trắng). Ví dụ: <code>50-15, 77-20</code>. Để trống sẽ dùng chỉ số mặc định.\n" +
+                    "                        </small>\n" +
+                    "                    </div>\n" : "";
 
             String html = "<!DOCTYPE html>\n" +
                     "<html lang=\"vi\">\n" +
                     "<head>\n" +
                     "    <meta charset=\"UTF-8\">\n" +
                     "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                    "    <title>NRO Admin Control Panel</title>\n" +
+                    "    <title>" + pageTitle + "</title>\n" +
                     "    <link href=\"https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap\" rel=\"stylesheet\">\n"
                     +
                     "    <style>\n" +
@@ -315,7 +328,7 @@ public class AdminWebServer {
                     "</head>\n" +
                     "<body>\n" +
                     "    <div class=\"navbar\">\n" +
-                    "        <div class=\"brand\">🐲 NRO ADMIN PORTAL</div>\n" +
+                    "        <div class=\"brand\">" + brandTitle + "</div>\n" +
                     "        <div class=\"nav-tabs\">\n" +
                     navButtons.toString() +
                     "        </div>\n" +
@@ -348,6 +361,7 @@ public class AdminWebServer {
                     "                            <input type=\"number\" id=\"quantity\" value=\"1\">\n" +
                     "                        </div>\n" +
                     "                    </div>\n" +
+                    optionInputHtml +
                     "                    <button class=\"btn btn-primary\" style=\"width: 100%;\" onclick=\"addItem()\">Gửi Vật Phẩm</button>\n"
                     +
                     "                </div>\n" +
@@ -467,8 +481,14 @@ public class AdminWebServer {
                     "            const player = document.getElementById('player').value;\n" +
                     "            const itemId = document.getElementById('itemId').value;\n" +
                     "            const quantity = document.getElementById('quantity').value;\n" +
+                    "            const optElem = document.getElementById('itemOptions');\n" +
+                    "            const options = optElem ? optElem.value.trim() : '';\n" +
                     "            if(!player || !itemId) return showToast('Vui lòng nhập đủ thông tin!', false);\n" +
-                    "            fetch('/api/add-item?player=' + encodeURIComponent(player) + '&itemId=' + itemId + '&quantity=' + quantity)\n" +
+                    "            let url = '/api/add-item?player=' + encodeURIComponent(player) + '&itemId=' + itemId + '&quantity=' + quantity;\n" +
+                    "            if(options) {\n" +
+                    "                url += '&options=' + encodeURIComponent(options);\n" +
+                    "            }\n" +
+                    "            fetch(url)\n" +
                     "            .then(r => r.text())\n" +
                     "            .then(text => showToast(text, text.includes('thành công')))\n" +
                     "            .catch(e => showToast('Lỗi kết nối!', false));\n" +
@@ -592,6 +612,24 @@ public class AdminWebServer {
         }
     }
 
+    public static List<Item.ItemOption> parseCustomOptions(String input) {
+        List<Item.ItemOption> options = new ArrayList<>();
+        if (input == null || input.trim().isEmpty()) {
+            return options;
+        }
+        Pattern pattern = Pattern.compile("(?:\\[?\\s*(\\d+)\\s*(?:[,\\s:]+|-)\\s*(-?\\d+)\\s*\\]?)");
+        Matcher matcher = pattern.matcher(input.trim());
+        while (matcher.find()) {
+            try {
+                int optId = Integer.parseInt(matcher.group(1));
+                int param = Integer.parseInt(matcher.group(2));
+                options.add(new Item.ItemOption(optId, param));
+            } catch (Exception ignored) {
+            }
+        }
+        return options;
+    }
+
     static class AddItemHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
@@ -601,6 +639,12 @@ public class AdminWebServer {
                 String playerName = query.get("player");
                 int itemId = Integer.parseInt(query.get("itemId"));
                 int quantity = Integer.parseInt(query.get("quantity"));
+                String optionsStr = query.get("options");
+                String referer = exchange.getRequestHeaders().getFirst("Referer");
+                boolean isRoot = referer != null && referer.contains("admin11");
+                if (!isRoot) {
+                    optionsStr = null;
+                }
 
                 Player player = Client.gI().getPlayer(playerName);
                 if (player == null) {
@@ -610,18 +654,23 @@ public class AdminWebServer {
                     if (item == null || item.template == null) {
                         response = "Lỗi: ID vật phẩm không hợp lệ!";
                     } else {
-                        List<Item.ItemOption> defaultOptions = ItemService.gI().getListOptionItemShop((short) itemId);
-                        if (defaultOptions != null && !defaultOptions.isEmpty()) {
-                            for (Item.ItemOption option : defaultOptions) {
-                                item.itemOptions.add(new Item.ItemOption(option));
-                            }
-                        } else if (item.isDTS()) {
-                            Item dots = ItemService.gI().DoThienSu(itemId, player.gender);
-                            if (dots != null && dots.itemOptions != null) {
-                                item.itemOptions.addAll(dots.itemOptions);
-                            }
+                        List<Item.ItemOption> customOptions = parseCustomOptions(optionsStr);
+                        if (!customOptions.isEmpty()) {
+                            item.itemOptions.addAll(customOptions);
                         } else {
-                            applyDefaultSpecialOptions(item);
+                            List<Item.ItemOption> defaultOptions = ItemService.gI().getListOptionItemShop((short) itemId);
+                            if (defaultOptions != null && !defaultOptions.isEmpty()) {
+                                for (Item.ItemOption option : defaultOptions) {
+                                    item.itemOptions.add(new Item.ItemOption(option));
+                                }
+                            } else if (item.isDTS()) {
+                                Item dots = ItemService.gI().DoThienSu(itemId, player.gender);
+                                if (dots != null && dots.itemOptions != null) {
+                                    item.itemOptions.addAll(dots.itemOptions);
+                                }
+                            } else {
+                                applyDefaultSpecialOptions(item);
+                            }
                         }
 
                         InventoryService.gI().addItemBag(player, item);
@@ -721,6 +770,59 @@ public class AdminWebServer {
         // Đá nâng cấp (220 -> 224: Cấp 1 đến cấp 5)
         else if (id >= 220 && id <= 224) {
             item.itemOptions.add(new Item.ItemOption(71 - (id - 220), 0));
+        }
+        // Bông tai Porata cấp 3 (1819)
+        else if (id == 1819) {
+            item.itemOptions.add(new Item.ItemOption(72, 3));
+        }
+        // Bông tai Porata cấp 2 (921)
+        else if (id == 921) {
+            item.itemOptions.add(new Item.ItemOption(72, 2));
+        }
+        // Đậu thần (type == 6 hoặc các ID đậu thần: 13, 60-65, 352, 523, 595, 1715)
+        else if (item.template.type == 6 || id == 13 || (id >= 60 && id <= 65) || id == 352 || id == 523 || id == 595 || id == 1715) {
+            int optId = 2;
+            int param = 0;
+            switch (id) {
+                case 13 -> { // Cấp 1
+                    optId = 48;
+                    param = 100;
+                }
+                case 60 -> { // Cấp 2
+                    optId = 48;
+                    param = 500;
+                }
+                case 61 -> param = 2;    // Cấp 3 (2.000 HP, KI)
+                case 62 -> param = 4;    // Cấp 4 (4.000 HP, KI)
+                case 63 -> param = 8;    // Cấp 5 (8.000 HP, KI)
+                case 64 -> param = 16;   // Cấp 6 (16.000 HP, KI)
+                case 65 -> param = 32;   // Cấp 7 (32.000 HP, KI)
+                case 352 -> param = 64;  // Cấp 8 (64.000 HP, KI)
+                case 523 -> param = 128; // Cấp 9 (128.000 HP, KI)
+                case 595 -> param = 256; // Cấp 10 (256.000 HP, KI)
+                case 1715 -> param = 512;// Cấp 11 (512.000 HP, KI)
+                default -> {
+                    try {
+                        if (item.template.name != null && item.template.name.contains("Đậu thần cấp ")) {
+                            int lv = Integer.parseInt(item.template.name.replaceAll("[^0-9]", ""));
+                            if (lv == 1) {
+                                optId = 48;
+                                param = 100;
+                            } else if (lv == 2) {
+                                optId = 48;
+                                param = 500;
+                            } else {
+                                optId = 2;
+                                param = (int) Math.pow(2, lv - 2);
+                            }
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+            }
+            if (param > 0) {
+                item.itemOptions.add(new Item.ItemOption(optId, param));
+            }
         }
     }
 

@@ -418,35 +418,44 @@ public class NPoint {
 
         // Bông tai cấp 2
         if (this.player.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA2) {
-            this.player.inventory.itemsBag.stream()
-                    .filter(it -> it.isNotNullItem() && it.template.id == 921)
+            Item btc2 = this.player.inventory.itemsBag.stream()
+                    .filter(it -> it != null && it.isNotNullItem() && it.template != null && it.template.id == 921)
                     .findFirst()
-                    .ifPresent(btc2 -> {
-                        for (ItemOption io : btc2.itemOptions) {
-                            addOption(io);
-                            if (io.optionTemplate.id == 72) {
-                                this.levelBT = io.param;
-                            }
-                        }
-                    });
+                    .orElseGet(() -> this.player.inventory.itemsBody.stream()
+                            .filter(it -> it != null && it.isNotNullItem() && it.template != null && it.template.id == 921)
+                            .findFirst()
+                            .orElse(null));
+            if (btc2 != null) {
+                for (ItemOption io : btc2.itemOptions) {
+                    addOption(io);
+                    if (io != null && io.optionTemplate != null && io.optionTemplate.id == 72) {
+                        this.levelBT = io.param;
+                    }
+                }
+            }
         }
+        // Bông tai cấp 3
         if (this.player.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA3) {
-            this.player.inventory.itemsBag.stream()
-                    .filter(it -> it.isNotNullItem() && it.template.id == 1819)
+            Item btc3 = this.player.inventory.itemsBag.stream()
+                    .filter(it -> it != null && it.isNotNullItem() && it.template != null && it.template.id == 1819)
                     .findFirst()
-                    .ifPresent(btc3 -> {
-                        for (ItemOption io : btc3.itemOptions) {
-                            addOption(io);
-                            if (io.optionTemplate.id == 72) {
-                                this.levelBT = io.param;
-                            }
-                        }
-                    });
+                    .orElseGet(() -> this.player.inventory.itemsBody.stream()
+                            .filter(it -> it != null && it.isNotNullItem() && it.template != null && it.template.id == 1819)
+                            .findFirst()
+                            .orElse(null));
+            if (btc3 != null) {
+                for (ItemOption io : btc3.itemOptions) {
+                    addOption(io);
+                    if (io != null && io.optionTemplate != null && io.optionTemplate.id == 72) {
+                        this.levelBT = io.param;
+                    }
+                }
+            }
         }
 
         this.player.setClothes.worldcup = 0;
         for (Item item : this.player.inventory.itemsBody) {
-            if (item.isNotNullItem()) {
+            if (item != null && item.isNotNullItem() && item.template != null) {
                 switch (item.template.id) {
                     case 966:
                     case 982:
@@ -470,6 +479,9 @@ public class NPoint {
     }
 
     private void addOption(ItemOption io) {
+        if (io == null || io.optionTemplate == null) {
+            return;
+        }
         switch (io.optionTemplate.id) {
             case 0: //Tấn công +#
                 this.dameAdd += io.param;
@@ -824,7 +836,7 @@ public class NPoint {
         }
         // Xử lý pet mabư
         if (this.player.isPet && ((Pet) this.player).typePet == 1 && (((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA || ((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA2 || ((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA3)) {
-            hpMax += (hpMax * 0 / 100L);
+            hpMax += (hpMax * 20 / 100L);
         }
 
         // Xử lý pet Uub
@@ -945,14 +957,14 @@ public class NPoint {
         }
 
         // Xử lý set worldcup
-        if (this.player.setClothes.worldcup
-                == 2) {
+        if (this.player.setClothes.worldcup == 2) {
             mpMax += (this.mpMax * 10 / 100L);
-            // xử lý pet mabu
-            if (this.player.isPet && ((Pet) this.player).typePet == 1
-                    && (((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA || ((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA2 || ((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA3)) {
-                mpMax += (this.mpMax * 0 / 100L);
-            }
+        }
+
+        // xử lý pet mabu
+        if (this.player.isPet && ((Pet) this.player).typePet == 1
+                && (((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA || ((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA2 || ((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA3)) {
+            mpMax += (this.mpMax * 20 / 100L);
         }
 
         // Xử lý pet Uub
@@ -1071,7 +1083,7 @@ public class NPoint {
 
         // Xử lý pet mabư
         if (this.player.isPet && ((Pet) this.player).typePet == 1 && (((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA || ((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA2 || ((Pet) this.player).master.fusion.typeFusion == ConstPlayer.HOP_THE_PORATA3)) {
-            dame += (dame * 0 / 100L);
+            dame += (dame * 20 / 100L);
         }
 
         // Xử lý pet Uub
@@ -1216,6 +1228,10 @@ public class NPoint {
     private void setDef() {
         this.def = this.defg * 4;
         this.def += this.defAdd;
+
+        if (this.tlGiap > 0) {
+            this.def += (this.def * this.tlGiap / 100);
+        }
 
         if (this.player.itemTime != null && this.player.itemTime.isUseNuocMia3) {
             this.def += this.def * 10 / 100;
