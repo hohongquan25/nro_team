@@ -69,7 +69,7 @@ public final class Sender implements Runnable {
 
     public void sendMessage(Message msg) {
         try {
-            if (this.session.isConnected()) {
+            if (this.session != null && this.session.isConnected() && this.messages != null) {
                 this.messages.add(msg);
             }
         } catch (Exception exception) {
@@ -81,11 +81,13 @@ public final class Sender implements Runnable {
     }
 
     public int getNumMessages() {
-        return this.messages.size();
+        return this.messages != null ? this.messages.size() : 0;
     }
 
     public void close() {
-        this.messages.clear();
+        if (this.messages != null) {
+            this.messages.clear();
+        }
         if (this.dos != null) {
             try {
                 this.dos.close();

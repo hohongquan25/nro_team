@@ -95,7 +95,7 @@ public class Session implements ISession {
 
     @Override
     public void sendMessage(Message msg) {
-        if (this.isConnected() && msg != null) {
+        if (this.isConnected() && msg != null && this.sender != null) {
             this.sender.sendMessage(msg);
         }
     }
@@ -148,11 +148,14 @@ public class Session implements ISession {
 
     @Override
     public int getNumMessages() {
-        return this.isConnected() ? this.sender.getNumMessages() : -1;
+        return (this.isConnected() && this.sender != null) ? this.sender.getNumMessages() : -1;
     }
 
     @Override
-    public void disconnect() {
+    public synchronized void disconnect() {
+        if (!this.connected) {
+            return;
+        }
         this.connected = false;
         this.sentKey = false;
 
@@ -172,18 +175,20 @@ public class Session implements ISession {
     }
 
     @Override
-    public void dispose() {
+    public synchronized void dispose() {
         if (this.sender != null) {
             this.sender.dispose();
+            this.sender = null;
         }
         if (this.collector != null) {
             this.collector.dispose();
+            this.collector = null;
         }
 
-        if (this.tSender.isAlive()) {
+        if (this.tSender != null && this.tSender.isAlive()) {
             this.tSender.interrupt();
         }
-        if (this.tCollector.isAlive()) {
+        if (this.tCollector != null && this.tCollector.isAlive()) {
             this.tCollector.interrupt();
         }
 
