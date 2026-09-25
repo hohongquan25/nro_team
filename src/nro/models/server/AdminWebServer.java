@@ -30,9 +30,19 @@ import nro.models.services.ItemService;
 import nro.models.services.Service;
 
 public class AdminWebServer {
-    private HttpServer server;
+    private static final int DEFAULT_PORT = 8080;
+    private static final int LAST_FALLBACK_PORT = 8090;
+    private static final long RETRY_INTERVAL_MS = 30_000L;
+    private static volatile int activePort = -1;
+
+    private volatile HttpServer server;
     private static final String LOGIN_NOTICE_FILE = "data/login_notice.txt";
     private static String loginNotice = "";
+
+    public static String getAdminUrl() {
+        int port = activePort;
+        return port > 0 ? "http://localhost:" + port + "/admin" : null;
+    }
 
     public static String getLoginNotice() {
         if (loginNotice == null || loginNotice.isEmpty()) {
@@ -71,25 +81,72 @@ public class AdminWebServer {
     }
 
     public void start() {
-        try {
-            loadLoginNotice();
-            server = HttpServer.create(new InetSocketAddress(8080), 0);
-            server.createContext("/", new RootHandler());
-            server.createContext("/admin", new UIHandler());
-            server.createContext("/admin11", new UIHandler());
-            server.createContext("/api/broadcast", new BroadcastHandler());
-            server.createContext("/api/login-notice", new LoginNoticeHandler());
-            server.createContext("/api/add-item", new AddItemHandler());
-            server.createContext("/api/add-money", new AddMoneyHandler());
-            server.createContext("/api/register", new RegisterHandler());
-            server.createContext("/api/items", new ItemsHandler());
-            server.setExecutor(null);
-            server.start();
-            System.out
-                    .println("Admin Web Server started on port 8080. Truy cap http://localhost:8080/admin de su dung.");
-        } catch (IOException e) {
-            e.printStackTrace();
+        loadLoginNotice();
+        if (tryStartServer(true)) {
+            return;
         }
+
+        System.err.println("Admin Web Server is unavailable; retrying every "
+                + (RETRY_INTERVAL_MS / 1000) + " seconds.");
+        Thread retryThread = new Thread(this::retryUntilStarted, "AdminWebServer-Retry");
+        retryThread.setDaemon(true);
+        retryThread.start();
+    }
+
+    private void retryUntilStarted() {
+        while (server == null) {
+            try {
+                Thread.sleep(RETRY_INTERVAL_MS);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+            if (tryStartServer(false)) {
+                return;
+            }
+        }
+    }
+
+    private synchronized boolean tryStartServer(boolean logFailure) {
+        if (server != null) {
+            return true;
+        }
+
+        IOException lastError = null;
+        for (int port = DEFAULT_PORT; port <= LAST_FALLBACK_PORT; port++) {
+            try {
+                HttpServer candidate = HttpServer.create(new InetSocketAddress(port), 0);
+                candidate.createContext("/", new RootHandler());
+                candidate.createContext("/admin", new UIHandler());
+                candidate.createContext("/admin11", new UIHandler());
+                candidate.createContext("/api/broadcast", new BroadcastHandler());
+                candidate.createContext("/api/login-notice", new LoginNoticeHandler());
+                candidate.createContext("/api/add-item", new AddItemHandler());
+                candidate.createContext("/api/add-money", new AddMoneyHandler());
+                candidate.createContext("/api/register", new RegisterHandler());
+                candidate.createContext("/api/items", new ItemsHandler());
+                candidate.setExecutor(null);
+                candidate.start();
+
+                server = candidate;
+                activePort = port;
+                System.out.println("Admin Web Server started on port " + port
+                        + ". Truy cap http://localhost:" + port + "/admin de su dung.");
+                if (port != DEFAULT_PORT) {
+                    System.err.println("Port " + DEFAULT_PORT + " was unavailable; using fallback port " + port + ".");
+                }
+                return true;
+            } catch (IOException e) {
+                lastError = e;
+            }
+        }
+
+        if (logFailure) {
+            System.err.println("Admin Web Server could not bind to ports " + DEFAULT_PORT + "-"
+                    + LAST_FALLBACK_PORT + ". Last error: "
+                    + (lastError == null ? "unknown" : lastError.getMessage()));
+        }
+        return false;
     }
 
 

@@ -66,13 +66,19 @@ public class Command {
                 + " luồng" + "\n" + SystemMetrics.ToString(),
                 "Ngọc rồng", "Đệ tử", "Bảo trì", "Tìm kiếm\nngười chơi", "Boss", "Đóng"));
         Consumer<Player> openAdminWeb = player -> {
+            String adminUrl = AdminWebServer.getAdminUrl();
+            if (adminUrl == null) {
+                Service.gI().sendThongBaoOK(player,
+                        "Web admin chưa khởi động được. Hãy kiểm tra log máy chủ.");
+                return;
+            }
             try {
                 if (java.awt.Desktop.isDesktopSupported() && java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)) {
-                    java.awt.Desktop.getDesktop().browse(new java.net.URI("http://localhost:8080/admin"));
+                    java.awt.Desktop.getDesktop().browse(new java.net.URI(adminUrl));
                 }
             } catch (Exception ignored) {
             }
-            Service.gI().sendThongBaoOK(player, "Trang quản trị Web:\nhttp://localhost:8080/admin");
+            Service.gI().sendThongBaoOK(player, "Trang quản trị Web:\n" + adminUrl);
         };
         adminCommands.put("admin", openAdminWeb);
         adminCommands.put("/admin", openAdminWeb);
