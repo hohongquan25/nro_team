@@ -10,6 +10,7 @@ import nro.models.shop.TabShop;
 import nro.models.network.Message;
 import nro.models.item.Item.ItemOption;
 import java.util.ArrayList;
+import java.util.Comparator;
 import nro.models.server.Manager;
 import nro.models.services.InventoryService;
 import nro.models.utils.Logger;
@@ -36,6 +37,9 @@ import nro.models.utils.TimeUtil;
  *
  */
 public class ShopService {
+
+    private static final String FREE_ITEM_SHOP_TAG = "FREE_ITEM_NPC";
+    private static final int FREE_ITEM_TAB_CAPACITY = 100;
 
     private static final byte COST_GOLD = 0;
     private static final byte COST_GEM = 1;
@@ -95,6 +99,94 @@ public class ShopService {
             ex.printStackTrace();
             Service.gI().sendThongBao(player, ex.getMessage());
         }
+    }
+
+    /** Opens the free item catalog using the regular tabbed shop client UI. */
+    public void openFreeItemShop(Player player) {
+        Shop shop = new Shop();
+        shop.id = -1;
+        shop.npcId = 82;
+        shop.tagName = FREE_ITEM_SHOP_TAG;
+        shop.typeShop = NORMAL_SHOP;
+
+        String[] categoryNames = {"Trang bị", "Tiêu hao", "Tiền tệ", "Vật phẩm khác"};
+        for (int category = 0; category < categoryNames.length; category++) {
+            List<nro.models.player_system.Template.ItemTemplate> items = new ArrayList<>();
+            for (nro.models.player_system.Template.ItemTemplate item : Manager.ITEM_TEMPLATES) {
+                if (item != null && item.name != null && !item.name.isBlank()
+                        && matchesFreeItemCategory(item.type, category)) {
+                    items.add(item);
+                }
+            }
+            items.sort(Comparator.comparingInt(item -> item.id));
+
+            int pageCount = (items.size() + FREE_ITEM_TAB_CAPACITY - 1) / FREE_ITEM_TAB_CAPACITY;
+            for (int page = 0; page < pageCount; page++) {
+                TabShop tab = new TabShop();
+                tab.shop = shop;
+                tab.id = 200 + shop.tabShops.size();
+                tab.index = shop.tabShops.size();
+                tab.name = pageCount > 1 ? categoryNames[category] + " " + (page + 1) : categoryNames[category];
+
+                int start = page * FREE_ITEM_TAB_CAPACITY;
+                int end = Math.min(start + FREE_ITEM_TAB_CAPACITY, items.size());
+                for (int i = start; i < end; i++) {
+                    var template = items.get(i);
+                    ItemShop itemShop = new ItemShop();
+                    itemShop.id = template.id;
+                    itemShop.temp = template;
+                    itemShop.tabShop = tab;
+                    itemShop.typeSell = COST_GOLD;
+                    itemShop.cost = 0;
+                    itemShop.options.addAll(getFreeItemOptions(template.id, player.gender));
+                    tab.itemShops.add(itemShop);
+                }
+                shop.tabShops.add(tab);
+            }
+        }
+
+        if (shop.tabShops.isEmpty()) {
+            Service.gI().sendThongBao(player, "Hiện chưa có vật phẩm trong cửa hàng");
+            return;
+        }
+        openShopType0(player, shop);
+    }
+
+    private boolean matchesFreeItemCategory(byte type, int category) {
+        return switch (category) {
+            case 0 -> type >= 0 && type <= 5;
+            case 1 -> type >= 6 && type <= 8;
+            case 2 -> type == 9 || type == 10 || type == 34;
+            case 3 -> !(type >= 0 && type <= 8 || type == 9 || type == 10 || type == 34);
+            default -> false;
+        };
+    }
+
+    private List<ItemOption> getFreeItemOptions(short itemId, int gender) {
+        List<ItemOption> options = ItemService.gI().getListOptionItemShop(itemId);
+        if (options == null || options.isEmpty()) {
+            Item item = ItemService.gI().createNewItem(itemId);
+            if (item == null || item.template == null) {
+                return new ArrayList<>();
+            }
+            if (item.isDTS()) {
+                Item divineItem = ItemService.gI().DoThienSu(itemId, gender);
+                if (divineItem != null && divineItem.itemOptions != null) {
+                    options = divineItem.itemOptions;
+                }
+            } else {
+                nro.models.server.AdminWebServer.applyDefaultSpecialOptions(item);
+                options = item.itemOptions;
+            }
+        }
+
+        List<ItemOption> copies = new ArrayList<>();
+        if (options != null) {
+            for (ItemOption option : options) {
+                copies.add(new ItemOption(option));
+            }
+        }
+        return copies;
     }
 
     private Shop getShop(String tagName) throws Exception {
@@ -664,6 +756,17 @@ public class ShopService {
 
         if (is == null) {
             Service.gI().sendThongBao(player, "Không thể thực hiện");
+            return;
+        }
+
+        if (FREE_ITEM_SHOP_TAG.equals(shop.tagName)) {
+            Item item = ItemService.gI().createItemFromItemShop(is);
+            if (InventoryService.gI().addItemBag(player, item)) {
+                InventoryService.gI().sendItemBags(player);
+                Service.gI().sendThongBao(player, "Đã nhận miễn phí " + item.template.name);
+            } else {
+                Service.gI().sendThongBao(player, "Hành trang đã đầy");
+            }
             return;
         }
 

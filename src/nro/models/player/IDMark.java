@@ -130,10 +130,6 @@ public class IDMark {
     private long lastTimeCombine;
     public long tempId;
 
-    private int npcItemCategory;
-    private int npcItemPage;
-    private int npcItemId;
-
     public boolean isBaseMenu() {
         return this.indexMenu == ConstNpc.BASE_MENU;
     }
