@@ -6,6 +6,7 @@ import nro.models.radar.RadarCard;
 import nro.models.data.LocalManager;
 import nro.models.consts.ConstPlayer;
 import nro.models.consts.ConstMap;
+import nro.models.consts.ConstNpc;
 import nro.models.data.DataGame;
 import nro.models.database.ShopDAO;
 import nro.models.player_system.Template.*;
@@ -20,6 +21,7 @@ import nro.models.item.Item.ItemOption;
 import nro.models.map.WayPoint;
 import nro.models.npc.Npc;
 import nro.models.npc.NpcFactory;
+import nro.models.npc_list.ItemGrantNpc;
 import nro.models.shop.Shop;
 import nro.models.skill.NClass;
 import nro.models.skill.Skill;
@@ -193,6 +195,20 @@ public final class Manager {
             MAPS.add(map);
             map.initMob(mapTemp.mobTemp, mapTemp.mobLevel, mapTemp.mobHp, mapTemp.mobX, mapTemp.mobY);
             map.initNpc(mapTemp.npcId, mapTemp.npcX, mapTemp.npcY);
+            if (mapTemp.id == ConstMap.SIEU_THI
+                    && Manager.NPC_TEMPLATES.size() > ConstNpc.RUONG_SUU_TAM) {
+                Npc existingItemNpc = map.npcs.stream()
+                        .filter(npc -> npc.tempId == ConstNpc.RUONG_SUU_TAM)
+                        .findFirst().orElse(null);
+                int x = existingItemNpc == null ? map.mapWidth / 2 : existingItemNpc.cx;
+                int y = existingItemNpc == null ? map.mapHeight - 100 : existingItemNpc.cy;
+                if (existingItemNpc != null) {
+                    map.npcs.remove(existingItemNpc);
+                    Manager.NPCS.remove(existingItemNpc);
+                }
+                int avatar = Manager.NPC_TEMPLATES.get(ConstNpc.RUONG_SUU_TAM).avatar;
+                map.addNpc(new ItemGrantNpc(map.mapId, 1, x, y, ConstNpc.RUONG_SUU_TAM, avatar));
+            }
         }
         new NonInteractiveNPC().initNonInteractiveNPC();
 
